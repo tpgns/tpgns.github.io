@@ -218,8 +218,7 @@
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <h1><span id="소프트웨어-합성composing을-합성이라-번역했습니다-~composing~-~software~-개요">소프트웨어 합성^[composing을 합성이라 번역했습니다.] ~Composing~ ~software~ : 개요</span></h1>
-<blockquote>
+                <blockquote>
 <p>이 글은  <a href="https://medium.com/@_ericelliott?source=post_header_lockup" target="_blank" rel="noopener">Eric Elliott</a> 이 <strong>medium</strong>에서 연재하는 Composing Software 시리즈를 저자의 동의하에 번역한  것입니다.  <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea" target="_blank" rel="noopener">[원문보기]</a></p>
 </blockquote>
 <p><img src="https://cdn-images-1.medium.com/max/1600/1*uVpU7iruzXafhU2VLeH4lw.jpeg" alt="main image"></p>
@@ -235,18 +234,18 @@ Dictionary .com</p>
 <p>제 인생에서 가장 후회되는 것 중 하나는 그 교훈의 중요성을 일찍이 깨닫지 못 했던 것입니다.  전 너무 늦게 소프트웨어 설계의 본질을 깨달았습니다.</p>
 <p>수백 명의 개발자들을 인터뷰하며 나만 그런 것이 아님을 알게됐습니다.  아주 소수의 개발자만이 소프트웨어 개발의 본질에 대해 잘 알고 있었습니다.  대부분의 경우에는 우리가 활용 할 수있는 가장 중요한 개념과 그것을 잘 적용하는 방법을 몰랐습니다.  다음은 소프트웨어 개발에서 가장 중요한 두가지 질문입니다.</p>
 <ul>
-<li>함수 합성 ^function^ ^composition^ 이란 무엇인가?</li>
-<li>객체 합성 ^object^ ^composition^이란 무엇인가?</li>
+<li>함수 합성 <sup>function</sup> <sup>composition</sup> 이란 무엇인가?</li>
+<li>객체 합성 <sup>object</sup> <sup>composition</sup>이란 무엇인가?</li>
 </ul>
 <p>문제는 당신이 단지 잘 모른다고해서 객체 및 함수 합성을 사용하지 않을 수는 없다는 것입니다.  당신은 여전히 합성을 합니다 -하지만 나쁘게합니다. 그렇기에 버그가 넘쳐나고 다른 개발자가 이해하기 어려운 코드를 작성하게 됩니다.  이는 큰 문제이며 적지않은 대가를 지불하고 있습니다.  우리는 소프트웨어를 만드는 것보다 소프트웨어를 유지 보수하는 데 더 많은 시간을 투자하며, 버그는 전 세계 수십억 명의 사람들에게 영향을줍니다.</p>
 <p>오늘날 전 세계 어디에든 소프트웨어가 있습니다.  모든 자동차는 바퀴가 달린 미니 수퍼 컴퓨터이며 소프트웨어 설계상의 문제점으로 인해 실제 사고가 발생하고 사람이 목숨을 잃습니다.  2013년, 배심원단은 사고 조사하는 과정에서 Toyota의 소프트웨어 개발팀이 10,000 개의 글로벌 변수가있는 스파게티 코드를 작성한 것을 발견했습니다.</p>
 <p><a href="https://www.technologyreview.com/s/607875/should-the-government-keep-stockpiling-software-bugs/" target="_blank" rel="noopener">해커 및 정부</a>는  버그를 활용해 사람들을 감시하고, 신용 카드를 훔치고, DDoS 공격을 하고 , 암호를 해독하고,  심지어 <a href="https://www.technologyreview.com/s/604138/the-fbi-shut-down-a-huge-botnet-but-there-are-plenty-more-left/" target="_blank" rel="noopener">선거를 조작</a>  합니다.</p>
 <p>우리가 더 잘해야합니다.</p>
-<h2><span id="사실-당신은-매일-소프트웨어를-합성합니다">사실 당신은 매일 소프트웨어를 합성합니다</span></h2>
-<p>여러분이 소프트웨어 개발자라면 의식하든 하지 못하든 매일매일 함수와 데이터 구조를 합성합니다.  조금만 신경을 쓰면 더 잘 할 수 있지만, 그렇지 않고 덕트 테이프와 미친 접착제^crazy^ ^glue^로 모든걸 망쳐버릴 수도 있습니다.</p>
+<h1 id="사실-당신은-매일-소프트웨어를-합성합니다">사실 당신은 매일 소프트웨어를 합성합니다</h1>
+<p>여러분이 소프트웨어 개발자라면 의식하든 하지 못하든 매일매일 함수와 데이터 구조를 합성합니다.  조금만 신경을 쓰면 더 잘 할 수 있지만, 그렇지 않고 덕트 테이프와 미친 접착제<sup>crazy</sup> <sup>glue</sup>로 모든걸 망쳐버릴 수도 있습니다.</p>
 <p>소프트웨어 개발 프로세스란 큰 문제를 작은 문제로 분해하여 작은 문제를 해결하는 요소를 만들고 이러한 구성 요소들을 합성하여 완전한 응용 프로그램을 구성하는 것입니다.</p>
-<h2><span id="함수-합성">함수 합성</span></h2>
-<p>함수 합성은 다른 함수의 출력에 함수를 적용하는 과정입니다.  대수학에서  <code>f</code>  와  <code>g</code> 두 함수, 그리고 합성 함수   <code>(f ∘ g)(x) = f(g(x))</code> 를 본적 있을 겁니다.  조그마한 원 기호는 합성 연산자입니다.  일반적으로 &quot;composed with&quot;또는 &quot;after&quot;로 발음^[한국에서는 보통 ~와 ~를 합성한다고 하거나 ~에 ~ 처럼생략합니다 ]됩니다.    <code>f</code> 와 <code>g</code>를 합성하는 것은  <code>f</code>에  <code>g</code>에 <code>x</code> 와 같이 부를 수 있습니다 . 이 때  <code>g</code>  가 먼저 평가되기 때문에  <code>g</code>  를 계산하고  그 결과를  <code>f</code>의  인수로 전달합니다.</p>
+<h1 id="함수-합성">함수 합성</h1>
+<p>함수 합성은 다른 함수의 출력에 함수를 적용하는 과정입니다.  대수학에서  <code>f</code>  와  <code>g</code> 두 함수, 그리고 합성 함수   <code>(f ∘ g)(x) = f(g(x))</code> 를 본적 있을 겁니다.  조그마한 원 기호는 합성 연산자입니다.  일반적으로 &quot;composed with&quot;또는 &quot;after&quot;로 발음<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup>됩니다.    <code>f</code> 와 <code>g</code>를 합성하는 것은  <code>f</code>에  <code>g</code>에 <code>x</code> 와 같이 부를 수 있습니다 . 이 때  <code>g</code>  가 먼저 평가되기 때문에  <code>g</code>  를 계산하고  그 결과를  <code>f</code>의  인수로 전달합니다.</p>
 <p>다음과 같은 방식의 코드를 작성할 때마다 함수를 합성하고 있는 것입니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> g = <span class="function"><span class="params">n</span> =&gt;</span> n + <span class="number">1</span>;   </span><br><span class="line"><span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> n * <span class="number">2</span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doStuff = <span class="function"><span class="params">x</span> =&gt;</span> &#123;   </span><br><span class="line">	<span class="keyword">const</span> afterG = g (x);   </span><br><span class="line">	<span class="keyword">const</span> afterF = f (afterG);   </span><br><span class="line">	<span class="keyword">return</span> afterF;   </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">doStuff (<span class="number">20</span>);  <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
 <p>ES6의 promise chain은  합성함수입니다.</p>
@@ -260,7 +259,7 @@ Dictionary .com</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> g = <span class="function"><span class="params">n</span> =&gt;</span> n + <span class="number">1</span>;   </span><br><span class="line"><span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> n * <span class="number">2</span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doStuffBetter = <span class="function"><span class="params">x</span> =&gt;</span> f (g (x)); </span><br><span class="line"></span><br><span class="line">doStuffBetter (<span class="number">20</span>);  <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
 <p>이러한 방법은 종종 디버깅이 어렵다는 얘기를 듣습니다.  그러나 다음 코드를 함수 합성으로 재작성 해보겠습니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> doStuff = <span class="function"><span class="params">x</span> =&gt;</span> &#123;  </span><br><span class="line">  <span class="keyword">const</span> afterG = g(x);  </span><br><span class="line">  <span class="built_in">console</span>.log(\<span class="string">`after g: <span class="subst">$&#123; afterG &#125;</span>\`);  </span></span><br><span class="line"><span class="string">  const afterF = f(afterG);  </span></span><br><span class="line"><span class="string">  console.log(\`after f: <span class="subst">$&#123; afterF &#125;</span>\`);  </span></span><br><span class="line"><span class="string">  return afterF;  </span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">doStuff(20); // =&gt;  </span></span><br><span class="line"><span class="string">/*  </span></span><br><span class="line"><span class="string">"after g: 21"  </span></span><br><span class="line"><span class="string">"after f: 42"  </span></span><br><span class="line"><span class="string">*/</span></span><br></pre></td></tr></table></figure>
-<p>먼저, <code>afterF</code>,  <code>afterG</code>를 추상화할 수 있는 <code>trace()</code> 라는 간단한 로거^logger^를 만들어 보겠습니다.</p>
+<p>먼저, <code>afterF</code>,  <code>afterG</code>를 추상화할 수 있는 <code>trace()</code> 라는 간단한 로거<sup>logger</sup>를 만들어 보겠습니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> trace = <span class="function"><span class="params">label</span> =&gt;</span> value =&gt; &#123;  </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123; label &#125;</span>: <span class="subst">$&#123; value &#125;</span>`</span>);  </span><br><span class="line">  <span class="keyword">return</span> value;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>이제 다음과 같이 사용할 수 있습니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> doStuff = <span class="function"><span class="params">x</span> =&gt;</span> &#123;  </span><br><span class="line">  <span class="keyword">const</span> afterG = g(x);  </span><br><span class="line">  trace(<span class="string">'after g'</span>)(afterG);  </span><br><span class="line">  <span class="keyword">const</span> afterF = f(afterG);  </span><br><span class="line">  trace(<span class="string">'after f'</span>)(afterF);  </span><br><span class="line">  <span class="keyword">return</span> afterF;  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">doStuff(<span class="number">20</span>); <span class="comment">// =&gt;  </span></span><br><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment">"after g: 21"  </span></span><br><span class="line"><span class="comment">"after f: 42"  </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
@@ -268,22 +267,22 @@ Dictionary .com</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pipe <span class="keyword">from</span> <span class="string">'lodash/fp/flow'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doStuffBetter = pipe(  </span><br><span class="line">  g,  </span><br><span class="line">  trace(<span class="string">'after g'</span>),  </span><br><span class="line">  f,  </span><br><span class="line">  trace(<span class="string">'after f'</span>)  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">doStuffBetter(<span class="number">20</span>); <span class="comment">// =&gt;  </span></span><br><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment">"after g: 21"  </span></span><br><span class="line"><span class="comment">"after f: 42"  </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
 <p>라이브러리를 사용하지 않고 다음과 같이 pipe를 직접 정의 할 수도 있습니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pipe(...fns: [...Function]) =&gt; x =&gt; y  </span></span><br><span class="line"><span class="keyword">const</span> pipe = <span class="function">(<span class="params">...fns</span>) =&gt;</span> x =&gt; fns.reduce(<span class="function">(<span class="params">y, f</span>) =&gt;</span> f(y), x);</span><br></pre></td></tr></table></figure>
-<p>아직은 어떻게 작동하는지 몰라도 괜찮습니다.  나중에 훨씬 더 자세하게 알아볼 것입니다.  사실 매우 중요한 코드이기에 문서 전체에 걸쳐 반복해서 정의되고 시연 될 겁니다.  중요한 건 당신이 그 의미와 사용법을 자동적으로 떠올릴 수 있을 만큼 익숙해지는 것입니다.  <strong>합성</strong>^composition^과 한 몸이 되십시오.</p>
-<p><code>pipe()</code> 유틸리티는 한 함수의 출력을 다른 함수의 입력으로 전달하여 함수 파이프 라인을 생성합니다.  <code>pipe()</code>  (그리고 쌍둥이라고 할 수 있는  <code>compose()</code>  )를 사용하면 중간 변수^intermediary^ ^variables^가 필요 없습니다.  인수를 언급하지 않고 함수를 작성하는 것을  <strong>포인트없는 스타일</strong>^point-free^ ^style^ 혹은 <strong>무인수 방식</strong>이라고  <strong>합니다.</strong>  이를 위해 함수를 명시적으로 선언하는 대신 다른 함수를 반환하는 함수를 호출합니다.  즉,  <code>function</code>  키워드 나 화살표 구문 (  <code>=&gt;</code>  )이 필요하지 않습니다.</p>
-<p>무인수 방식으로 전체 로직을 구성할 수도 있지만, 중간 변수들이 여러분의 기능에 불필요한 복잡성^complexity^을 더하기 때문에 여기 저기 조금씩 사용하는 것도 좋습니다.</p>
+<p>아직은 어떻게 작동하는지 몰라도 괜찮습니다.  나중에 훨씬 더 자세하게 알아볼 것입니다.  사실 매우 중요한 코드이기에 문서 전체에 걸쳐 반복해서 정의되고 시연 될 겁니다.  중요한 건 당신이 그 의미와 사용법을 자동적으로 떠올릴 수 있을 만큼 익숙해지는 것입니다.  <strong>합성</strong><sup>composition</sup>과 한 몸이 되십시오.</p>
+<p><code>pipe()</code> 유틸리티는 한 함수의 출력을 다른 함수의 입력으로 전달하여 함수 파이프 라인을 생성합니다.  <code>pipe()</code>  (그리고 쌍둥이라고 할 수 있는  <code>compose()</code>  )를 사용하면 중간 변수<sup>intermediary</sup> <sup>variables</sup>가 필요 없습니다.  인수를 언급하지 않고 함수를 작성하는 것을  <strong>포인트없는 스타일</strong><sup>point-free</sup> <sup>style</sup> 혹은 <strong>무인수 방식</strong>이라고  <strong>합니다.</strong>  이를 위해 함수를 명시적으로 선언하는 대신 다른 함수를 반환하는 함수를 호출합니다.  즉,  <code>function</code>  키워드 나 화살표 구문 (  <code>=&gt;</code>  )이 필요하지 않습니다.</p>
+<p>무인수 방식으로 전체 로직을 구성할 수도 있지만, 중간 변수들이 여러분의 기능에 불필요한 복잡성<sup>complexity</sup>을 더하기 때문에 여기 저기 조금씩 사용하는 것도 좋습니다.</p>
 <p>복잡성 감소에는 몇 가지 이점이 있습니다.</p>
-<h3><span id="작업-메모리">작업 메모리</span></h3>
+<h2 id="작업-메모리">작업 메모리</h2>
 <p>인간의 두뇌는  <a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=ko&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com&amp;sl=en&amp;sp=nmt4&amp;tl=ko&amp;u=http://www.nature.com/neuro/journal/v17/n3/fig_tab/nn.3655_F2.html&amp;xid=17259,15700022,15700043,15700105,15700124,15700149,15700168,15700173,15700201&amp;usg=ALkJrhgDhXVLb2vKDM5FVpbdu4JkwchxmA" target="_blank" rel="noopener">작업 메모리</a>  에서 이산 양자 (discrete quanta)를위한 공유 자원을 거의 가지고 있지 않으며, 각 변수는 잠재적으로 그 양자 중 하나를 소비합니다.  변수를 더 추가하면 각 변수의 의미를 정확히 불러 낼 수있는 능력이 떨어집니다.  작업 메모리 모델은 일반적으로 4-7 개의 이산 퀀텀을 포함합니다.이 수치보다 크면 오류율이 급격히 증가합니다.</p>
 <p>파이프 형식을 사용하여 다른 변수에 사용할 수있는 작업 메모리의 거의 절반을 확보하여 3 가지 변수를 제거했습니다.  그것은인지 부하를 상당히 줄입니다.  소프트웨어 개발자는 평균적인 사람보다 작업 메모리에 데이터를 청크하는 경향이 있지만 보존의 중요성을 약화시키는 것은 아닙니다.</p>
-<h3><span id="신호-대-잡음비">신호 대 잡음비</span></h3>
+<h2 id="신호-대-잡음비">신호 대 잡음비</h2>
 <p>간결한 코드는 또한 코드의 신호 대 잡음 비율을 향상시킵니다.  라디오를 청취하는 것과 같습니다. 라디오가 방송국에 제대로 맞춰져 있지 않으면 많은 소음이 발생하며 음악을 듣기가 더 어려워집니다.  정확한 방송국으로 튜닝하면 소음이 사라지고 음악 신호가 강해집니다.</p>
 <p>코드는 같은 방법입니다.  보다 간결한 코드 표현은 이해력을 향상시킵니다.일부 코드는 유용한 정보를 제공하고 일부 코드는 공간을 차지합니다.  전송되는 의미를 줄이지 않고 사용하는 코드의 양을 줄이면 코드를 읽고 이해해야하는 다른 사람들이 코드를 더 쉽게 이해할 수 있습니다.</p>
-<h3><span id="벌레의-표면적">벌레의 표면적</span></h3>
+<h2 id="벌레의-표면적">벌레의 표면적</h2>
 <p>전후 기능을 살펴보십시오.  기능이 다이어트를하고 무게가 많이 나가는 것처럼 보입니다.  이것은 여분의 코드가 버그를 숨길 수있는 추가 표면적을 의미하기 때문에 중요합니다. 즉 더 많은 버그가 숨어 버릴 수 있음을 의미합니다.</p>
 <blockquote>
 <p><em>적은 코드 = 버그가 적은 표면 = 버그가 적습니다.</em></p>
 </blockquote>
-<h2><span id="객체-작성">객체 작성</span></h2>
+<h2 id="객체-작성">객체 작성</h2>
 <blockquote>
 <p>“클래스 상속보다는 객체 합성을 우선해라”, Gang of Four,  <a href="http://todo.com" target="_blank" rel="noopener">“디자인 패턴 : 재사용 가능한 객체 지향 소프트웨어의 요소”</a></p>
 </blockquote>
@@ -322,7 +321,7 @@ Dictionary .com</p>
 <li>어떤 방법은 다른 방법보다 낫습니다.</li>
 <li>가장 가까이에있는 작업을위한 가장 단순하고 유연한 솔루션을 선택하려고합니다.</li>
 </ol>
-<h2><span id="결론">결론</span></h2>
+<h1 id="결론">결론</h1>
 <p>이것은 FP (Functional Programming)와 OOP (Object-Oriented Programming) 또는 다른 언어에 대한 것이 아닙니다.  구성 요소는 함수, 데이터 구조, 클래스 등의 형태를 취할 수 있습니다. 다른 프로그래밍 언어는 구성 요소에 대해 서로 다른 원자 요소를 제공하는 경향이 있습니다.  자바는 클래스를 제공하고, 하스켈은 함수를 제공한다. 그러나 어떤 언어와 어떤 패러다임을 선호하든 관계없이 함수와 데이터 구조를 구성 할 수 없다.  결국, 그것이 모두 뒤죽박죽이다.</p>
 <p>함수 프로그래밍은 JavaScript로 작성하는 것이 가장 간단하기 때문에 함수 프로그래밍 커뮤니티는 함수 작성 기술을 공식화하는 데 많은 시간과 노력을 투자했습니다.</p>
 <p>우리가하지 못하는 것은 함수형 프로그래밍이 객체 지향 프로그래밍보다 낫다는 것입니다. 그렇지 않으면 하나를 선택해야합니다.  OOP 대 FP는 잘못된 이분법입니다.  최근 몇 년 동안 본 모든 실제 Javascript 애플리케이션은 FP와 OOP를 광범위하게 혼합합니다.</p>
@@ -335,6 +334,13 @@ Dictionary .com</p>
 <p>이제는 단순화 할 때가되었으며, 단순화하는 가장 좋은 방법은 본질에 도달하는 것입니다.  문제는, 업계의 거의 아무도 본질에 대한 좋은 핸들을 가지고 있지 않다는 것입니다.  우리 업계는 소프트웨어 개발자 인 당신에게 실패했습니다.  개발자를 더 잘 훈련시키는 것은 업계의 책임입니다.  우리는 향상시켜야합니다.  우리는 책임을 져야합니다.  모든 것이 경제에서 의료 장비에 이르기까지 오늘날 소프트웨어에서 실행됩니다.  이 행성에는 소프트웨어의 품질에 영향을받지 않는 인간 삶의 구석이 있습니다.  우리가하는 일을 알아야합니다.</p>
 <p>이제는 소프트웨어 작성 방법을 배우십시오.</p>
 <p><a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=ko&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com&amp;sl=en&amp;sp=nmt4&amp;tl=ko&amp;u=https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c&amp;xid=17259,15700022,15700043,15700105,15700124,15700149,15700168,15700173,15700201&amp;usg=ALkJrhjq_QYhDiB7b24DBFhXChk_1QumBg" target="_blank" rel="noopener">“함수 프로그래밍의 상승과 하강 및 상승”</a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>한국에서는 보통 ~와 ~를 합성한다고 하거나 ~에 ~ 처럼생략합니다  <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
 
                 
 
@@ -374,7 +380,7 @@ Dictionary .com</p>
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">소프트웨어 합성^[composing을 합성이라 번역했습니다.] ~Composing~ ~software~ : 개요</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">사실 당신은 매일 소프트웨어를 합성합니다</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">함수 합성</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">작업 메모리</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">신호 대 잡음비</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">벌레의 표면적</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">객체 작성</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">결론</span></a></li></ol></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#사실-당신은-매일-소프트웨어를-합성합니다"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">사실 당신은 매일 소프트웨어를 합성합니다</span></a></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#함수-합성"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">함수 합성</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#작업-메모리"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">작업 메모리</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#신호-대-잡음비"><span class="toc-nav-number">2.2.</span> <span class="toc-nav-text">신호 대 잡음비</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#벌레의-표면적"><span class="toc-nav-number">2.3.</span> <span class="toc-nav-text">벌레의 표면적</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#객체-작성"><span class="toc-nav-number">2.4.</span> <span class="toc-nav-text">객체 작성</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#결론"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">결론</span></a></li></ol>
         
         </div>
       </aside>
@@ -500,16 +506,10 @@ Dictionary .com</p>
                 <p class="copyright text-muted">
                     Copyright &copy; mido 2018 
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Powered by <a href="https://hexo.io/">Hexo</a>
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
                     </span> 
-                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
-                    </iframe>
                 </p>
             </div>
         </div>
