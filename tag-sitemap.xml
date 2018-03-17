@@ -2,6 +2,27 @@
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
     <url>
+        <loc>http://midojeong.github.io/tags/%EC%9E%90%EB%B0%94%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8/</loc>
+        <lastmod>2018-03-17T11:06:18.105Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://midojeong.github.io/tags/%ED%95%A8%EC%88%98%ED%98%95/</loc>
+        <lastmod>2018-03-17T11:06:18.105Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
+        <loc>http://midojeong.github.io/tags/%EB%B2%88%EC%97%AD/</loc>
+        <lastmod>2018-03-17T11:06:18.105Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.2</priority>
+    </url>
+
+    <url>
         <loc>http://midojeong.github.io/tags/Hexo/</loc>
         <lastmod>2018-03-17T13:09:40.293Z</lastmod>
         <changefreq>weekly</changefreq>

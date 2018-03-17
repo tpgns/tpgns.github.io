@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mido&#39;s IT blog github page">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          소프트웨어 합성: 개요 - mido
+        
+    </title>
+
+    <link rel="canonical" href="http://midojeong.github.io/2018/03/16/composing-software-intro/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/rocket.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <script></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('Demo.png')
+            /*post*/
+        
+    }
+    
+    #signature{
+        background-image: url('/img/signature/BeanTechSign-white.png');
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                            
+                              <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                            
+                              <a class="tag" href="/tags/#번역" title="번역">번역</a>
+                            
+                        </div>
+                        <h1>소프트웨어 합성: 개요</h1>
+                        <h2 class="subheading">This is hexo theme Demo.</h2>
+                        <span class="meta">
+                            Posted by mido on
+                            2018-03-16
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">mido&#39;s log</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1><span id="소프트웨어-합성composing을-합성이라-번역했습니다-~composing~-~software~-개요">소프트웨어 합성^[composing을 합성이라 번역했습니다.] ~Composing~ ~software~ : 개요</span></h1>
+<blockquote>
+<p>이 글은  <a href="https://medium.com/@_ericelliott?source=post_header_lockup" target="_blank" rel="noopener">Eric Elliott</a> 이 <strong>medium</strong>에서 연재하는 Composing Software 시리즈를 저자의 동의하에 번역한  것입니다.  <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea" target="_blank" rel="noopener">[원문보기]</a></p>
+</blockquote>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*uVpU7iruzXafhU2VLeH4lw.jpeg" alt="main image"></p>
+<blockquote>
+<p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈에 대한 소개입니다.  앞으로 계속하여 연재될 것입니다.<br>
+<a href="https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c" target="_blank" rel="noopener"><em>다음편 &gt;</em></a></p>
+</blockquote>
+<blockquote>
+<p>합성 : 전체를 구성하기 위해 부분이나 요소를 결합하는 행위<br>
+Dictionary .com</p>
+</blockquote>
+<p>고등학교 프로그래밍 수업 첫 시간에 소프트웨어 개발이란 복잡한 문제를 작은 문제들로 분해하고 작은 문제들의 해법들을 다시 조합해 복잡한 문제를 해결 할 수 있는 솔루션을 만드는 행위라고 배웠습니다.</p>
+<p>제 인생에서 가장 후회되는 것 중 하나는 그 교훈의 중요성을 일찍이 깨닫지 못 했던 것입니다.  전 너무 늦게 소프트웨어 설계의 본질을 깨달았습니다.</p>
+<p>수백 명의 개발자들을 인터뷰하며 나만 그런 것이 아님을 알게됐습니다.  아주 소수의 개발자만이 소프트웨어 개발의 본질에 대해 잘 알고 있었습니다.  대부분의 경우에는 우리가 활용 할 수있는 가장 중요한 개념과 그것을 잘 적용하는 방법을 몰랐습니다.  다음은 소프트웨어 개발에서 가장 중요한 두가지 질문입니다.</p>
+<ul>
+<li>함수 합성 ^function^ ^composition^ 이란 무엇인가?</li>
+<li>객체 합성 ^object^ ^composition^이란 무엇인가?</li>
+</ul>
+<p>문제는 당신이 단지 잘 모른다고해서 객체 및 함수 합성을 사용하지 않을 수는 없다는 것입니다.  당신은 여전히 합성을 합니다 -하지만 나쁘게합니다. 그렇기에 버그가 넘쳐나고 다른 개발자가 이해하기 어려운 코드를 작성하게 됩니다.  이는 큰 문제이며 적지않은 대가를 지불하고 있습니다.  우리는 소프트웨어를 만드는 것보다 소프트웨어를 유지 보수하는 데 더 많은 시간을 투자하며, 버그는 전 세계 수십억 명의 사람들에게 영향을줍니다.</p>
+<p>오늘날 전 세계 어디에든 소프트웨어가 있습니다.  모든 자동차는 바퀴가 달린 미니 수퍼 컴퓨터이며 소프트웨어 설계상의 문제점으로 인해 실제 사고가 발생하고 사람이 목숨을 잃습니다.  2013년, 배심원단은 사고 조사하는 과정에서 Toyota의 소프트웨어 개발팀이 10,000 개의 글로벌 변수가있는 스파게티 코드를 작성한 것을 발견했습니다.</p>
+<p><a href="https://www.technologyreview.com/s/607875/should-the-government-keep-stockpiling-software-bugs/" target="_blank" rel="noopener">해커 및 정부</a>는  버그를 활용해 사람들을 감시하고, 신용 카드를 훔치고, DDoS 공격을 하고 , 암호를 해독하고,  심지어 <a href="https://www.technologyreview.com/s/604138/the-fbi-shut-down-a-huge-botnet-but-there-are-plenty-more-left/" target="_blank" rel="noopener">선거를 조작</a>  합니다.</p>
+<p>우리가 더 잘해야합니다.</p>
+<h2><span id="사실-당신은-매일-소프트웨어를-합성합니다">사실 당신은 매일 소프트웨어를 합성합니다</span></h2>
+<p>여러분이 소프트웨어 개발자라면 의식하든 하지 못하든 매일매일 함수와 데이터 구조를 합성합니다.  조금만 신경을 쓰면 더 잘 할 수 있지만, 그렇지 않고 덕트 테이프와 미친 접착제^crazy^ ^glue^로 모든걸 망쳐버릴 수도 있습니다.</p>
+<p>소프트웨어 개발 프로세스란 큰 문제를 작은 문제로 분해하여 작은 문제를 해결하는 요소를 만들고 이러한 구성 요소들을 합성하여 완전한 응용 프로그램을 구성하는 것입니다.</p>
+<h2><span id="함수-합성">함수 합성</span></h2>
+<p>함수 합성은 다른 함수의 출력에 함수를 적용하는 과정입니다.  대수학에서  <code>f</code>  와  <code>g</code> 두 함수, 그리고 합성 함수   <code>(f ∘ g)(x) = f(g(x))</code> 를 본적 있을 겁니다.  조그마한 원 기호는 합성 연산자입니다.  일반적으로 &quot;composed with&quot;또는 &quot;after&quot;로 발음^[한국에서는 보통 ~와 ~를 합성한다고 하거나 ~에 ~ 처럼생략합니다 ]됩니다.    <code>f</code> 와 <code>g</code>를 합성하는 것은  <code>f</code>에  <code>g</code>에 <code>x</code> 와 같이 부를 수 있습니다 . 이 때  <code>g</code>  가 먼저 평가되기 때문에  <code>g</code>  를 계산하고  그 결과를  <code>f</code>의  인수로 전달합니다.</p>
+<p>다음과 같은 방식의 코드를 작성할 때마다 함수를 합성하고 있는 것입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> g = <span class="function"><span class="params">n</span> =&gt;</span> n + <span class="number">1</span>;   </span><br><span class="line"><span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> n * <span class="number">2</span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doStuff = <span class="function"><span class="params">x</span> =&gt;</span> &#123;   </span><br><span class="line">	<span class="keyword">const</span> afterG = g (x);   </span><br><span class="line">	<span class="keyword">const</span> afterF = f (afterG);   </span><br><span class="line">	<span class="keyword">return</span> afterF;   </span><br><span class="line">&#125;; </span><br><span class="line"></span><br><span class="line">doStuff (<span class="number">20</span>);  <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
+<p>ES6의 promise chain은  합성함수입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> g = <span class="function"><span class="params">n</span> =&gt;</span> n + <span class="number">1</span>;  </span><br><span class="line"><span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> n * <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> wait = <span class="function"><span class="params">time</span> =&gt;</span> <span class="keyword">new</span> <span class="built_in">Promise</span>(  </span><br><span class="line">  (resolve, reject) =&gt; setTimeout(  </span><br><span class="line">    resolve,  </span><br><span class="line">    time  </span><br><span class="line">  )  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">wait(<span class="number">300</span>)  </span><br><span class="line">  .then(<span class="function"><span class="params">()</span> =&gt;</span> <span class="number">20</span>)  </span><br><span class="line">  .then(g)  </span><br><span class="line">  .then(f)  </span><br><span class="line">  .then(<span class="function"><span class="params">value</span> =&gt;</span> <span class="built_in">console</span>.log(value)) <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
+<p>마찬가지로, 배열 메소드 호출, lodash 메소드, observables (RxJS, etc …)를 체인 할 때마다 함수를 합성하게 됩니다.  체이닝은 합성입니다.  반환 값을 다른 함수에 전달하는 것도 합성입니다.  <code>this</code>를  입력으로하여 두 개의 메소드를 순차적으로 호출하는 것 역시 합성입니다.</p>
+<blockquote>
+<p>당신이 체이닝을 한다면 합성중입니다.</p>
+</blockquote>
+<p>함수를 합성하고있다는 사실을 인지해야 합니다.</p>
+<p>의도적으로 함수를 합성하여  <code>doStuff()</code>  함수를 한줄로 고칠 수 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> g = <span class="function"><span class="params">n</span> =&gt;</span> n + <span class="number">1</span>;   </span><br><span class="line"><span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> n * <span class="number">2</span>; </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doStuffBetter = <span class="function"><span class="params">x</span> =&gt;</span> f (g (x)); </span><br><span class="line"></span><br><span class="line">doStuffBetter (<span class="number">20</span>);  <span class="comment">// 42</span></span><br></pre></td></tr></table></figure>
+<p>이러한 방법은 종종 디버깅이 어렵다는 얘기를 듣습니다.  그러나 다음 코드를 함수 합성으로 재작성 해보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> doStuff = <span class="function"><span class="params">x</span> =&gt;</span> &#123;  </span><br><span class="line">  <span class="keyword">const</span> afterG = g(x);  </span><br><span class="line">  <span class="built_in">console</span>.log(\<span class="string">`after g: <span class="subst">$&#123; afterG &#125;</span>\`);  </span></span><br><span class="line"><span class="string">  const afterF = f(afterG);  </span></span><br><span class="line"><span class="string">  console.log(\`after f: <span class="subst">$&#123; afterF &#125;</span>\`);  </span></span><br><span class="line"><span class="string">  return afterF;  </span></span><br><span class="line"><span class="string">&#125;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">doStuff(20); // =&gt;  </span></span><br><span class="line"><span class="string">/*  </span></span><br><span class="line"><span class="string">"after g: 21"  </span></span><br><span class="line"><span class="string">"after f: 42"  </span></span><br><span class="line"><span class="string">*/</span></span><br></pre></td></tr></table></figure>
+<p>먼저, <code>afterF</code>,  <code>afterG</code>를 추상화할 수 있는 <code>trace()</code> 라는 간단한 로거^logger^를 만들어 보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> trace = <span class="function"><span class="params">label</span> =&gt;</span> value =&gt; &#123;  </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123; label &#125;</span>: <span class="subst">$&#123; value &#125;</span>`</span>);  </span><br><span class="line">  <span class="keyword">return</span> value;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>이제 다음과 같이 사용할 수 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> doStuff = <span class="function"><span class="params">x</span> =&gt;</span> &#123;  </span><br><span class="line">  <span class="keyword">const</span> afterG = g(x);  </span><br><span class="line">  trace(<span class="string">'after g'</span>)(afterG);  </span><br><span class="line">  <span class="keyword">const</span> afterF = f(afterG);  </span><br><span class="line">  trace(<span class="string">'after f'</span>)(afterF);  </span><br><span class="line">  <span class="keyword">return</span> afterF;  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">doStuff(<span class="number">20</span>); <span class="comment">// =&gt;  </span></span><br><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment">"after g: 21"  </span></span><br><span class="line"><span class="comment">"after f: 42"  </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>Lodash 및 Ramda와 같은 인기있는 함수 프로그래밍 라이브러리에는 함수를 쉽게 구성 할 수있는 유틸리티가 포함되어 있습니다.  위의 함수를 다음과 같이 다시 작성할 수 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pipe <span class="keyword">from</span> <span class="string">'lodash/fp/flow'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> doStuffBetter = pipe(  </span><br><span class="line">  g,  </span><br><span class="line">  trace(<span class="string">'after g'</span>),  </span><br><span class="line">  f,  </span><br><span class="line">  trace(<span class="string">'after f'</span>)  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">doStuffBetter(<span class="number">20</span>); <span class="comment">// =&gt;  </span></span><br><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment">"after g: 21"  </span></span><br><span class="line"><span class="comment">"after f: 42"  </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>라이브러리를 사용하지 않고 다음과 같이 pipe를 직접 정의 할 수도 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// pipe(...fns: [...Function]) =&gt; x =&gt; y  </span></span><br><span class="line"><span class="keyword">const</span> pipe = <span class="function">(<span class="params">...fns</span>) =&gt;</span> x =&gt; fns.reduce(<span class="function">(<span class="params">y, f</span>) =&gt;</span> f(y), x);</span><br></pre></td></tr></table></figure>
+<p>아직은 어떻게 작동하는지 몰라도 괜찮습니다.  나중에 훨씬 더 자세하게 알아볼 것입니다.  사실 매우 중요한 코드이기에 문서 전체에 걸쳐 반복해서 정의되고 시연 될 겁니다.  중요한 건 당신이 그 의미와 사용법을 자동적으로 떠올릴 수 있을 만큼 익숙해지는 것입니다.  <strong>합성</strong>^composition^과 한 몸이 되십시오.</p>
+<p><code>pipe()</code> 유틸리티는 한 함수의 출력을 다른 함수의 입력으로 전달하여 함수 파이프 라인을 생성합니다.  <code>pipe()</code>  (그리고 쌍둥이라고 할 수 있는  <code>compose()</code>  )를 사용하면 중간 변수^intermediary^ ^variables^가 필요 없습니다.  인수를 언급하지 않고 함수를 작성하는 것을  <strong>포인트없는 스타일</strong>^point-free^ ^style^ 혹은 <strong>무인수 방식</strong>이라고  <strong>합니다.</strong>  이를 위해 함수를 명시적으로 선언하는 대신 다른 함수를 반환하는 함수를 호출합니다.  즉,  <code>function</code>  키워드 나 화살표 구문 (  <code>=&gt;</code>  )이 필요하지 않습니다.</p>
+<p>무인수 방식으로 전체 로직을 구성할 수도 있지만, 중간 변수들이 여러분의 기능에 불필요한 복잡성^complexity^을 더하기 때문에 여기 저기 조금씩 사용하는 것도 좋습니다.</p>
+<p>복잡성 감소에는 몇 가지 이점이 있습니다.</p>
+<h3><span id="작업-메모리">작업 메모리</span></h3>
+<p>인간의 두뇌는  <a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=ko&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com&amp;sl=en&amp;sp=nmt4&amp;tl=ko&amp;u=http://www.nature.com/neuro/journal/v17/n3/fig_tab/nn.3655_F2.html&amp;xid=17259,15700022,15700043,15700105,15700124,15700149,15700168,15700173,15700201&amp;usg=ALkJrhgDhXVLb2vKDM5FVpbdu4JkwchxmA" target="_blank" rel="noopener">작업 메모리</a>  에서 이산 양자 (discrete quanta)를위한 공유 자원을 거의 가지고 있지 않으며, 각 변수는 잠재적으로 그 양자 중 하나를 소비합니다.  변수를 더 추가하면 각 변수의 의미를 정확히 불러 낼 수있는 능력이 떨어집니다.  작업 메모리 모델은 일반적으로 4-7 개의 이산 퀀텀을 포함합니다.이 수치보다 크면 오류율이 급격히 증가합니다.</p>
+<p>파이프 형식을 사용하여 다른 변수에 사용할 수있는 작업 메모리의 거의 절반을 확보하여 3 가지 변수를 제거했습니다.  그것은인지 부하를 상당히 줄입니다.  소프트웨어 개발자는 평균적인 사람보다 작업 메모리에 데이터를 청크하는 경향이 있지만 보존의 중요성을 약화시키는 것은 아닙니다.</p>
+<h3><span id="신호-대-잡음비">신호 대 잡음비</span></h3>
+<p>간결한 코드는 또한 코드의 신호 대 잡음 비율을 향상시킵니다.  라디오를 청취하는 것과 같습니다. 라디오가 방송국에 제대로 맞춰져 있지 않으면 많은 소음이 발생하며 음악을 듣기가 더 어려워집니다.  정확한 방송국으로 튜닝하면 소음이 사라지고 음악 신호가 강해집니다.</p>
+<p>코드는 같은 방법입니다.  보다 간결한 코드 표현은 이해력을 향상시킵니다.일부 코드는 유용한 정보를 제공하고 일부 코드는 공간을 차지합니다.  전송되는 의미를 줄이지 않고 사용하는 코드의 양을 줄이면 코드를 읽고 이해해야하는 다른 사람들이 코드를 더 쉽게 이해할 수 있습니다.</p>
+<h3><span id="벌레의-표면적">벌레의 표면적</span></h3>
+<p>전후 기능을 살펴보십시오.  기능이 다이어트를하고 무게가 많이 나가는 것처럼 보입니다.  이것은 여분의 코드가 버그를 숨길 수있는 추가 표면적을 의미하기 때문에 중요합니다. 즉 더 많은 버그가 숨어 버릴 수 있음을 의미합니다.</p>
+<blockquote>
+<p><em>적은 코드 = 버그가 적은 표면 = 버그가 적습니다.</em></p>
+</blockquote>
+<h2><span id="객체-작성">객체 작성</span></h2>
+<blockquote>
+<p>“클래스 상속보다는 객체 합성을 우선해라”, Gang of Four,  <a href="http://todo.com" target="_blank" rel="noopener">“디자인 패턴 : 재사용 가능한 객체 지향 소프트웨어의 요소”</a></p>
+</blockquote>
+<blockquote>
+<p>&quot;컴퓨터 과학에서 복합 데이터 유형 또는 복합 데이터 유형은 프로그래밍 언어의 원시 데이터 유형 및 기타 복합 유형을 사용하여 프로그램에서 구성 할 수있는 모든 데이터 유형입니다.  […] 합성 유형을 구성하는 행위는 구성으로 알려져 있습니다. &quot;~ Wikipedia</p>
+</blockquote>
+<p>다음은 프리미티브입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> firstName = <span class="string">'Claude'</span>;  </span><br><span class="line"><span class="keyword">const</span> lastName = <span class="string">'Debussy'</span>;</span><br></pre></td></tr></table></figure>
+<p>그리고 이것은 복합체입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fullName = &#123;  </span><br><span class="line">  firstName,  </span><br><span class="line">  lastName  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>마찬가지로 모든 배열, 집합, 맵, 약식 맵, 형식화 된 배열 등은 복합 데이터 유형입니다.  비 기본 데이터 구조를 작성할 때마다 어떤 종류의 오브젝트 구성을 수행합니다.</p>
+<p>Gang of Four는 개별 구성 요소와 집계 된 복합 요소를 동일하게 처리 할 수있는 재귀 개체 구성의 특정 유형 인  <strong>복합</strong>  패턴이라는 패턴을 정의합니다.  일부 개발자는 복합 패턴이  <em>오브젝트 합성의 유일한 형태</em>  라고 생각하면서 혼란스러워  <em>합니다.</em>  혼동하지 마십시오.  객체 구성에는 여러 가지 종류가 있습니다.</p>
+<p>Gang of Four는 계속해서 &quot;디자인 패턴에 반복해서 적용된 오브젝트 구성을 보게 될 것입니다&quot;라고 말한 다음  <strong>위임</strong>  (state, strategy 및 visitor 패턴에서 사용 된),  <strong>지인</strong>  (객체가 참조로 다른 객체를 알고있을 때 일반적으로 매개 변수로 전달됨 : 네트워크 요청 처리기가 로거에 대한 참조를 전달하여 요청을 기록 - 요청 처리기  <em>가</em>  로거를  <em>사용함</em>  ) 및  <strong>집계</strong>  (자식 객체가 부모 객체의 일부를 형성하는 경우 : a - a 관계, 예를 들어 DOM 하위는 DOM 노드의 구성 요소 - DOM 노드  <em>는</em>  하위를 가짐).</p>
+<p>클래스 상속은 복합 객체를 구성하는 데 사용할 수 있지만 제한적이고 취약한 방법입니다.  Gang of Four는 &quot;클래스 상속에 대한 객체 구성 선호&quot;라고 말하면서 클래스 상속의 강고하고 단단히 결합 된 접근 방식보다는 객체를 복합하는 데 유연한 접근 방식을 사용하도록 조언합니다.</p>
+<p><a href="https://www.amazon.com/Categorical-Methods-Computer-Science-Topology/dp/0387517227/ref%3Das_li_ss_tl%3Fie%3DUTF8%26qid%3D1495077930%26sr%3D8-3%26keywords%3DCategorical%2BMethods%2Bin%2BComputer%2BScience:%2BWith%2BAspects%2Bfrom%2BTopology%26linkCode%3Dll1%26tag%3Deejs-20%26linkId%3D095afed5272832b74357f63b41410cb7&amp;xid=17259,15700022,15700043,15700105,15700124,15700149,15700168,15700173,15700201&amp;usg=ALkJrhiTUQNkNmQ3jFpmn5dP-nYQt0GzKQ" target="_blank" rel="noopener">“컴퓨터 과학의 범주 형 방법 : 토폴로지의 측면에서”</a>  (1989)의 개체 구성에 대한보다 일반적인 정의를 사용합니다.</p>
+<blockquote>
+<p>“복합 물체는 물체들을 합쳐서 만들어 지는데, 각각의 물체는 이전 물의 일부분이된다.”</p>
+</blockquote>
+<p>또 다른 좋은 참고 자료는 “Composite Design을 통한 신뢰할 수있는 소프트웨어”(Glenford J Myers, 1975)입니다. 두 책 모두 절판되었지만 Amazon에서의 판매 인이나 이베이에서 여전히 책을 찾을 수 있습니다. 기술적 인 깊이.</p>
+<p><em>클래스 상속은 복합 객체 생성의 한 종류에 불과합니다.</em>  모든 클래스는 복합 객체를 생성하지만 모든 복합 객체가 클래스 또는 클래스 상속에 의해 생성되는 것은 아닙니다.  &quot;클래스 상속에 대한 객체 합성 우선&quot;은 클래스 계층의 조상 (ancestor)에서 모든 속성을 상속하지 않고 작은 구성 요소 부분에서 복합 객체를 형성해야한다는 것을 의미합니다.  후자는 객체 지향 설계에서 다양한 잘 알려진 문제를 일으 킵니다.</p>
+<ul>
+<li><strong>밀 결합 문제 :</strong>  자식 클래스는 부모 클래스의 구현에 의존하기 때문에 클래스 상속은 객체 지향 디자인에서 사용할 수있는 가장 조밀 한 결합입니다.</li>
+<li><strong>깨지기 쉬운 기본 클래스 문제 :</strong>  긴밀한 결합으로 인해  <strong>기본 클래스가</strong>  변경되면 잠재적으로 제 3자가 관리하는 코드에서 많은 수의 클래스가 손상 될 수 있습니다.  작성자는 알지 못하는 코드를 깨뜨릴 수 있습니다.</li>
+<li><strong>유연하지 못한 계층 구조 문제 :</strong>  단일 조상 분류법으로 충분한 시간과 진화가 이루어지면 모든 클래스 분류가 새로운 사용 사례에 대해 결국 잘못된 것입니다.</li>
+<li><strong>필요성에 의한 중복 문제 :</strong>  유연하지 않은 계층 구조로 인해 새로운 유스 케이스가 종종 확장이 아닌 복제에 의해 구현되어 예기치 않게 분기되는 유사한 클래스로 이어집니다.  복제가 설정되면 어떤 클래스의 새 클래스가 내려야하는지 또는 그 이유가 명확하지 않습니다.</li>
+<li><strong>고릴라 / 바나나 문제 :</strong>  &quot;… 객체 지향 언어의 문제점은 그들이 가지고 다니는 모든 암묵적인 환경을 가지고 있다는 것입니다.  당신은 바나나를 원했지만 바나나와 전체 정글을 들고있는 고릴라가있었습니다. &quot;~ Joe Armstrong,  <a href="http://www.amazon.com/gp/product/1430219483%3Fie%3DUTF8%26camp%3D213733%26creative%3D393185%26creativeASIN%3D1430219483%26linkCode%3Dshr%26tag%3Deejs-20%26linkId%3D3MNWRRZU3C4Q4BDN&amp;xid=17259,15700022,15700043,15700105,15700124,15700149,15700168,15700173,15700201&amp;usg=ALkJrhgmQ2rXXwKtbKOVZ_NIf3FwRN1Kqg" target="_blank" rel="noopener">&quot;Coders at Work &quot;</a></li>
+</ul>
+<p>JavaScript에서 객체 합성의 가장 일반적인 형태는  <strong>객체 연결</strong>  (mixin composition이라고도 함)이라고합니다.  그것은 아이스크림처럼 작동합니다.먼저 바닐라 아이스크림과 같은 객체로 시작한 다음 원하는 기능을 믹스합니다.  견과류, 캐러멜, 초콜릿 소용돌이를 추가하면 너트 카라멜 초콜릿 소용돌이 아이스크림으로 감칠 것입니다.</p>
+<p>클래스 상속을 사용하여 컴포지트 만들기 :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Foo</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">constructor</span> () &#123;  </span><br><span class="line">    <span class="keyword">this</span>.a = <span class="string">'a'</span>  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Bar</span> <span class="keyword">extends</span> <span class="title">Foo</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">constructor</span> (options) &#123;  </span><br><span class="line">    <span class="keyword">super</span>(options);  </span><br><span class="line">    <span class="keyword">this</span>.b = <span class="string">'b'</span>  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> myBar = <span class="keyword">new</span> Bar(); <span class="comment">// &#123;a: 'a', b: 'b'&#125;</span></span><br></pre></td></tr></table></figure>
+<p>믹스 인 성분으로 복합 재료 만들기 :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> a = &#123;  </span><br><span class="line">  a: <span class="string">'a'</span>  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> b = &#123;  </span><br><span class="line">  b: <span class="string">'b'</span>  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> c = &#123;...a, ...b&#125;; <span class="comment">// &#123;a: 'a', b: 'b'&#125;</span></span><br></pre></td></tr></table></figure>
+<p>나중에 다른 스타일의 오브젝트 구성을 탐구합니다.  당분간 귀하의 이해는 다음과 같아야합니다.</p>
+<ol>
+<li>이를 수행하는 데는 한 가지 이상의 방법이 있습니다.</li>
+<li>어떤 방법은 다른 방법보다 낫습니다.</li>
+<li>가장 가까이에있는 작업을위한 가장 단순하고 유연한 솔루션을 선택하려고합니다.</li>
+</ol>
+<h2><span id="결론">결론</span></h2>
+<p>이것은 FP (Functional Programming)와 OOP (Object-Oriented Programming) 또는 다른 언어에 대한 것이 아닙니다.  구성 요소는 함수, 데이터 구조, 클래스 등의 형태를 취할 수 있습니다. 다른 프로그래밍 언어는 구성 요소에 대해 서로 다른 원자 요소를 제공하는 경향이 있습니다.  자바는 클래스를 제공하고, 하스켈은 함수를 제공한다. 그러나 어떤 언어와 어떤 패러다임을 선호하든 관계없이 함수와 데이터 구조를 구성 할 수 없다.  결국, 그것이 모두 뒤죽박죽이다.</p>
+<p>함수 프로그래밍은 JavaScript로 작성하는 것이 가장 간단하기 때문에 함수 프로그래밍 커뮤니티는 함수 작성 기술을 공식화하는 데 많은 시간과 노력을 투자했습니다.</p>
+<p>우리가하지 못하는 것은 함수형 프로그래밍이 객체 지향 프로그래밍보다 낫다는 것입니다. 그렇지 않으면 하나를 선택해야합니다.  OOP 대 FP는 잘못된 이분법입니다.  최근 몇 년 동안 본 모든 실제 Javascript 애플리케이션은 FP와 OOP를 광범위하게 혼합합니다.</p>
+<p>객체 합성을 사용하여 함수 프로그래밍을위한 데이터 유형을 생성하고 OOP를위한 객체를 생성하는 함수 프로그래밍을 생성합니다.</p>
+<p><em>소프트웨어를 작성하는 방법에 상관없이 잘 작성해야합니다.</em></p>
+<blockquote>
+<p>소프트웨어 개발의 핵심은 구성입니다.</p>
+</blockquote>
+<p>구성을 이해하지 못하는 소프트웨어 개발자는 볼트 나 못에 대해 모르는 주택 건설업자와 같습니다.  구성을 의식하지 않고 소프트웨어를 제작하는 것은 집 빌더가 덕트 테이프와 미친 접착제로 벽을 붙이는 것과 같습니다.</p>
+<p>이제는 단순화 할 때가되었으며, 단순화하는 가장 좋은 방법은 본질에 도달하는 것입니다.  문제는, 업계의 거의 아무도 본질에 대한 좋은 핸들을 가지고 있지 않다는 것입니다.  우리 업계는 소프트웨어 개발자 인 당신에게 실패했습니다.  개발자를 더 잘 훈련시키는 것은 업계의 책임입니다.  우리는 향상시켜야합니다.  우리는 책임을 져야합니다.  모든 것이 경제에서 의료 장비에 이르기까지 오늘날 소프트웨어에서 실행됩니다.  이 행성에는 소프트웨어의 품질에 영향을받지 않는 인간 삶의 구석이 있습니다.  우리가하는 일을 알아야합니다.</p>
+<p>이제는 소프트웨어 작성 방법을 배우십시오.</p>
+<p><a href="https://translate.googleusercontent.com/translate_c?act=url&amp;depth=1&amp;hl=ko&amp;ie=UTF8&amp;prev=_t&amp;rurl=translate.google.com&amp;sl=en&amp;sp=nmt4&amp;tl=ko&amp;u=https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c&amp;xid=17259,15700022,15700043,15700105,15700124,15700149,15700168,15700173,15700201&amp;usg=ALkJrhjq_QYhDiB7b24DBFhXChk_1QumBg" target="_blank" rel="noopener">“함수 프로그래밍의 상승과 하강 및 상승”</a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/03/18/hexo-theme-beantech/" data-toggle="tooltip" data-placement="top" title="[Hexo] Theme BeanTech">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-1"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">소프트웨어 합성^[composing을 합성이라 번역했습니다.] ~Composing~ ~software~ : 개요</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.1.</span> <span class="toc-nav-text">사실 당신은 매일 소프트웨어를 합성합니다</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.</span> <span class="toc-nav-text">함수 합성</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.1.</span> <span class="toc-nav-text">작업 메모리</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.2.</span> <span class="toc-nav-text">신호 대 잡음비</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.2.3.</span> <span class="toc-nav-text">벌레의 표면적</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.3.</span> <span class="toc-nav-text">객체 작성</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#undefined"><span class="toc-nav-number">1.4.</span> <span class="toc-nav-text">결론</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                        
+                          <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                        
+                          <a class="tag" href="/tags/#번역" title="번역">번역</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "midojeong";
+    var disqus_identifier = "http://midojeong.github.io/2018/03/16/composing-software-intro/";
+    var disqus_url = "http://midojeong.github.io/2018/03/16/composing-software-intro/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/midojeong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; mido 2018 
+                    <br>
+                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                    re-Ported by <a href="http://beantech.org">BeanTech</a> | 
+                    <iframe
+                        style="margin-left: 2px; margin-bottom:-5px;"
+                        frameborder="0" scrolling="0" width="91px" height="20px"
+                        src="https://ghbtns.com/github-btn.html?user=YenYuHsuan&repo=hexo-theme-beantech&type=star&count=true" >
+                    </iframe>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://midojeong.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<a id="rocket" href="#top" class=""></a>
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+<!-- Image to hack wechat -->
+<img src="http://midojeong.github.io/img/icon_wechat.png" width="0" height="0" />
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
