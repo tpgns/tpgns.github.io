@@ -22,7 +22,7 @@
   display: block;
   margin-top: 48px;
   height: 14px;
-  background: url("images/ironman.png") no-repeat 50% -20px;
+  background: url("images/rocket.png") no-repeat 50% -20px;
   opacity: 0.5;
   -webkit-transition: -webkit-transform 0.2s;
   -moz-transition: -moz-transform 0.2s;
