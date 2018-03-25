@@ -265,7 +265,7 @@ Dictionary .com</p>
 <p>무인수 방식으로 전체 로직을 구성할 수도 있지만, 중간 변수들이 여러분의 기능에 불필요한 복잡성<sup>complexity</sup>을 더하기 때문에 여기 저기 조금씩 사용하는 것도 좋습니다.</p>
 <p>복잡성 감소에는 몇 가지 이점이 있습니다.</p>
 <h2 id="단기-기억">단기 기억</h2>
-<p>인간 두뇌의  <a href="http://www.nature.com/neuro/journal/v17/n3/fig_tab/nn.3655_F2.html&amp;xid=17259,15700022,15700043,15700105,15700124,15700149,15700168,15700173,15700201&amp;usg=ALkJrhgDhXVLb2vKDM5FVpbdu4JkwchxmA" target="_blank" rel="noopener">단기 기억력</a>은 서로 다른 항목을 저장하기 위한 공간이 한정되어있으며, 함수의 인자와 변수는 잠재적으로 그 공간 중 하나를 소비합니다.  변수가 늘어날 수록 각 변수의 의미를 기억하기 힘들어 집니다. 단기 기억 모형에 따르면 우리의 두뇌는 일반적으로 4-7 개의 항목을 단기 기억 공간에 저장할 수 있으며 이 보다 크면 오류율이 급격히 증가합니다.</p>
+<p>인간 두뇌의  <a href="http://www.nature.com/neuro/journal/v17/n3/fig_tab/nn.3655_F2.html" target="_blank" rel="noopener">단기 기억력</a>은 서로 다른 항목을 저장하기 위한 공간이 한정되어있으며, 함수의 인자와 변수는 잠재적으로 그 공간 중 하나를 소비합니다.  변수가 늘어날 수록 각 변수의 의미를 기억하기 힘들어 집니다. 단기 기억 모형에 따르면 우리의 두뇌는 일반적으로 4-7 개의 항목을 단기 기억 공간에 저장할 수 있으며 이 보다 크면 오류율이 급격히 증가합니다.</p>
 <p>우리는 함수 파이프라이닝을 사용해 변수 3개를 소거하였고 다른 변수를 기억하는데 사용할 수  있게 됐습니다.  단기 기억 공간의 거의 절반을 확보한 것입니다. 이는 인지 부하를 상당히 줄여줍니다.  소프트웨어 개발자는 데이터를 묶어 기억하는 경향이 있지만 그렇다고 이 개념의 중요성이 약해지는 것은 아닙니다.</p>
 <h2 id="신호-대-잡음비">신호 대 잡음비</h2>
 <p>간결함은 코드의 신호 대 잡음 비율<sup>Signal</sup> <sup>to</sup> <sup>Noise</sup> <sup>Ratio</sup>을 향상시킵니다.  라디오를 듣는 것과 같습니다. 라디오의 주파수가 제대로 맞춰져 있지 않으면 소음이 발생하며 음악을 듣기가 어려워집니다.  방송국 주파수로 정확하게 튜닝하면 소음이 사라지고 음악 신호가 강해집니다.</p>
@@ -306,7 +306,7 @@ Dictionary .com</p>
 <li><strong>깨지기 쉬운 기초 클래스 문제</strong><sup>The</sup> <sup>fragile</sup> <sup>base</sup> <sup>class</sup> <sup>problem</sup>  : 긴밀한 결합으로 인해  기초 클래스가  변경되면 잠재적으로 제 3자가 관리하는 코드에서 많은 수의 클래스가 손상 될 수 있습니다.  작성자는 알지 못하는 코드를 깨뜨릴 수 있습니다.</li>
 <li><strong>경직된 계층 구조 문제</strong><sup>The</sup> <sup>inflexible</sup> <sup>hierarchy</sup> <sup>problem</sup> :  단일 조상으로 시작해 충분한 시간과 진화가 이루어진 후에는 사실상 새로운 유스 케이스에 대해  잘못된 클래스 이름을 가지게 될 것입니다.</li>
 <li><strong>중복 필요성 문제</strong><sup>The</sup> <sup>duplication</sup> <sup>by</sup> <sup>necessity</sup> <sup>problem</sup> : 경직된 계층 구조로 인해 새로운 유스 케이스가 종종 확장이 아닌 복제에 의해 구현되고 이로 인해 불필요한 유사한 클래스들이 나타나게 됩니다. 유사한 클래스들이 존재하면 상속의 기준을 무엇으로 잡을지 불투명해 집니다.</li>
-<li><strong>고릴라 / 바나나 문제</strong><sup>The</sup> <sup>gorilla/banana</sup> <sup>problem</sup> :  &quot;… 객체 지향 언어의 문제점은 객체가 모든 암묵적인 환경을 함께 가질 수 있다는 것입니다.  당신은 바나나를 원했지만 바나나와 정글 전체를 들고있는 고릴라가있었습니다. &quot;~ Joe Armstrong,  <a href="http://www.amazon.com/gp/product/1430219483%3Fie%3DUTF8%26camp%3D213733%26creative%3D393185%26creativeASIN%3D1430219483%26linkCode%3Dshr%26tag%3Deejs-20%26linkId%3D3MNWRRZU3C4Q4BDN&amp;xid=17259,15700022,15700043,15700105,15700124,15700149,15700168,15700173,15700201&amp;usg=ALkJrhgmQ2rXXwKtbKOVZ_NIf3FwRN1Kqg" target="_blank" rel="noopener">&quot;Coders at Work &quot;</a></li>
+<li><strong>고릴라 / 바나나 문제</strong><sup>The</sup> <sup>gorilla/banana</sup> <sup>problem</sup> :  &quot;… 객체 지향 언어의 문제점은 객체가 모든 암묵적인 환경을 함께 가질 수 있다는 것입니다.  당신은 바나나를 원했지만 바나나와 정글 전체를 들고있는 고릴라가있었습니다. &quot;~ Joe Armstrong,  <a href="http://www.amazon.com/gp/product/1430219483%3Fie%3DUTF8%26camp%3D213733%26creative%3D393185%26creativeASIN%3D1430219483%26linkCode%3Dshr%26tag%3Deejs-20%26linkId%3D3MNWRRZU3C4Q4BDN" target="_blank" rel="noopener">&quot;Coders at Work &quot;</a></li>
 </ul>
 <p>JavaScript에서 객체 합성의 가장 일반적인 형태는  <strong>객체 연결</strong>  (mixin composition이라고도 함)이라고합니다.  마치 아이스크림처럼 작동합니다. 먼저 바닐라 아이스크림과 같은 객체로 시작한 다음 원하는 기능을 믹스합니다.  견과류, 캐러멜, 초콜릿 소용돌이를 추가하면 너트 카라멜 초콜릿 소용돌이 아이스크림이 됩니다.</p>
 <p>클래스 상속을 사용하여 복합 객체 만들기 :</p>
@@ -331,7 +331,7 @@ Dictionary .com</p>
 <p>합성을 이해하지 못하는 소프트웨어 개발자는 볼트나 못에 대해 모르는 주택 건설업자와 같습니다.  어떻게 합성될지 신경쓰지 않고 소프트웨어를 제작하는 것은 집을 건설할 때 덕트 테이프와 미친 접착제로 벽을 붙이는 것과 같습니다.</p>
 <p>이제는 단순하게 생각할 때입니다. 어떤 것을 단순화하는 가장 좋은 방법은 본질에 도달하는 것입니다.  문제는, 소프트웨어 산업에 있는 대부분의 사람들이 본질에 대해 무관심하다는 것입니다.  우리 업계는 소프트웨어 개발자인 당신을 제대로 가르치지 못했습니다.  업계는 개발자를 더 잘 훈련시켜야할 책임이 있습니다. 우리는 이를 고쳐야 합니다.  우리가 책임을 져야합니다.  경제에서 의료 장비에 이르기까지 모든 것에서 소프트웨어가 실행됩니다.  이 행성의 모든 인간의 삶은 소프트웨어 품질에 영향을받고 있습니다.  우리가 뭘 하고있는지 알아야합니다.</p>
 <p>지금부터 소프트웨어 합성 방법을 배우면 됩니다.</p>
-<p><a href="https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c&amp;xid=17259,15700022,15700043,15700105,15700124,15700149,15700168,15700173,15700201&amp;usg=ALkJrhjq_QYhDiB7b24DBFhXChk_1QumBg" target="_blank" rel="noopener">“함수형 프로그래밍의 역사”</a></p>
+<p><a href="https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c" target="_blank" rel="noopener">“함수 프로그래밍 패러다임의 우여곡절”</a></p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">

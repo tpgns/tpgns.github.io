@@ -213,13 +213,13 @@
                 <blockquote>
 <p>이 글은  <a href="https://medium.com/@_ericelliott?source=post_header_lockup" target="_blank" rel="noopener">Eric Elliott</a> 이 <strong>medium</strong>에서 연재하는 Composing Software 시리즈를 저자의 동의하에 번역한  것입니다.  <a href="https://medium.com/javascript-scene/the-rise-and-fall-and-rise-of-functional-programming-composable-software-c2d91b424c8c" target="_blank" rel="noopener">[원문보기]</a></p>
 </blockquote>
-<p><img src="https://cdn-images-1.medium.com/max/1600/1*uVpU7iruzXafhU2VLeH4lw.jpeg" alt="main image"></p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*uVpU7iruzXafhU2VLeH4lw.jpeg" alt=""></p>
 <p><em>Smoke Art Cubes to Smoke — MattysFlicks — (CC BY 2.0)</em></p>
 <blockquote>
 <p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈의 제 1 부입니다.  앞으로 계속하여 연재될 것입니다.<br>
 <a href="http://next" target="_blank" rel="noopener"><em>&lt;&lt; Part 1에서 다시 시작</em></a>  <em>|</em>  <a href="http://next" target="_blank" rel="noopener"><em>다음&gt;</em></a></p>
 </blockquote>
-<p>전 6 살 때 가장 친했던 친구와 컴퓨터 게임을 하며 많은 시간을 보냈습니다.  그의 집에는  저를 유혹하는 컴퓨터로 가득 찬 방이 하나 있었고 우리는 많은 시간을 들여 거의 대부분의 게임을 탐험했습니다.  어느 날 나는 친구에게 &quot;우리가 게임을 만드려면 어떻게 해야 할까?&quot;라고 물었습다.</p>
+<p>전 6 살 때 가장 친했던 친구와 컴퓨터 게임을 하며 많은 시간을 보냈습니다.  그의 집에는  저를 유혹하는 컴퓨터로 가득 찬 방이 하나 있었고 우리는 많은 시간을 들여 거의 대부분의 게임을 탐험했습니다.  어느날 저는 친구에게 &quot;게임을 만드려면 어떻게 해야 할까?&quot;라고 물었습니다.</p>
 <p>둘다 게임 개발에 전혀 아는게 없었고 친구의 아버지에게 여쭤보았습니다. 그러자 그분은 높은 선반에 올라가 BASIC으로 쓰여진 게임에 관한 책을 꺼내주셨 습니다.  그 때부터 프로그래밍이라는 기나긴 여정을 시작했습니다. 학교에서 대수학을  배우기도 전에 프로그래밍을 통해 주제를 다 익힐 수 있을 정도였습니다.</p>
 <h2 id="합성-가능한-소프트웨어의-부상">합성 가능한 소프트웨어의 부상</h2>
 <p>컴퓨터 과학의 초기, 대부분의 연구가 실제 컴퓨터에서 이루어지기 전 Alonzo Church와 Alan Turing이라는 두 명의 위대한 컴퓨터 과학자가 있었습니다.  그들은 서로 다른 동시에 동등한 두가지 보편적인<sup>universal</sup> 계산 모델을 만들었는데, 두 모델 모두 계산가능한 모든 것을 계산할 수 있었습니다.</p>
@@ -252,8 +252,8 @@
 <p>소프트웨어가 합성되면 합성 함수 그래프로 나타낼 수 있습니다.</p>
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">append = s1 =&gt; s2 =&gt; s1 + s2  </span><br><span class="line"><span class="function"><span class="title">append</span><span class="params">(<span class="string">'Hello, '</span>)</span><span class="params">(<span class="string">'world!'</span>)</span></span></span><br></pre></td></tr></table></figure>
 <p>위 코드를 시각적으로 표현한 것입니다.</p>
-<p><img src="1_LSXnRbKzQ4yhq1fjZjvq6Q.png" alt=""></p>
-<p>람다 대수는 소프트웨어 설계에 엄청난 영향을 주었고 1980년 이전 컴퓨터 과학에 영향력있는 사람들은 함수 합성을 사용하여 소프트웨어를 작성했습니다.  Lisp은 1958 년에 만들어졌고 람다 계산법의 영향을 많이 받았습니다.  오늘날, Lisp은 여전히 ​​널리 쓰이는 두 번째로 오래된 언어입니다.</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*LSXnRbKzQ4yhq1fjZjvq6Q.png" alt=""></p>
+<p>람다 대수는 소프트웨어 설계에 엄청난 영향을 주었고 1980년 이전 컴퓨터 과학분야에서 영향력있는 많은 사람들은 함수를 합성하며 소프트웨어를 작성했습니다.  Lisp은 1958 년에 만들어졌고 람다 대수의 영향을 많이 받았습니다.  오늘날, Lisp은 여전히 ​​널리 쓰이는 두 번째로 오래된 언어입니다.</p>
 <p>저는 AutoLISP으로 Lisp을 처음 접했습니다. 이는 CAD 소프트웨어 인 AutoCAD에서 사용하는 스크립트 언어입니다.  AutoCAD는 인기가 높으며, 거의 모든 CAD 응용 프로그램이 AutoLISP를 지원하므로 호환성이 좋습니다. 또한 Lisp은 컴퓨터 과학 커리큘럼에서 인기있는 교육용 언어이기도합니다.</p>
 <ol>
 <li>Lisp은 매우 단순해서 하루 만에 기본 문법과 의미를 배울 수 있습니다.</li>
@@ -261,14 +261,14 @@
 <li>제가 아는 최고의 컴퓨터 과학 교과서는 Lisp 을 사용합니다 :  <a href="https://www.amazon.com/Structure-Interpretation-Computer-Programs-Engineering/dp/0262510871/ref=as_li_ss_tl?ie=UTF8&amp;linkCode=ll1&amp;tag=eejs-20&amp;linkId=4896ed63eee8657b6379c2acd99dd3f3" target="_blank" rel="noopener">컴퓨터 프로그램의 구조와 해석</a></li>
 </ol>
 <h2 id="합성-가능한-소프트웨어의-몰락">합성 가능한 소프트웨어의 몰락</h2>
-<p>1970 년에서 1980 년 사이에 소프트웨어 작성 방법이 단순히 합성하는 것에서 벗어나 컴퓨터에게 일련의 명령<sup>Instruction</sup>을 내리는 방식으로 바뀌었습니다.  그리고 객체지향 프로그래밍(OOP)이 등장했습니다.  구성 요소를 캡슐화 하고 메세지를 전달한다는 위대한 아이디어는 대중적인 프로그래밍 언어들에 의해 왜곡되었습니다. 이들은 기능을 재사용하기 위해 상속 계층 구조와 is-a관계라는 끔찍한 아이디어를 생각해냈습니다.</p>
+<p>1970 년에서 1980 년 사이에 소프트웨어 작성 방법이 단순히 합성하는 것에서 벗어나 컴퓨터에게 일련의 명령<sup>Instruction</sup>을 내리는 방식으로 바뀌었습니다.  그리고 객체지향 프로그래밍(OOP)이 등장했습니다.  구성 요소를 캡슐화 하고 메세지를 전달한다는 위대한 아이디어는 대중적인 프로그래밍 언어들에 의해 왜곡되었습니다. 이들은 기능을 재사용하기 위해 상속에 의한 계층 구조와 is-a관계라는 끔찍한 아이디어를 생각해냈습니다.</p>
 <p>결국 함수형 프로그래밍은 학계로 밀려났습니다. 괴짜 중의 괴짜 프로그래머들, 아이비 리그의 교수들, 그리고 1990 ~ 2010년대의 <strong>강제 자바 수용 메타</strong>에서 탈출 한 일부 운 좋은 학생들만이 사용하게 되었습니다.</p>
-<p>30년의 암흑기 동안 대부분의 사람들에게 소프트웨어를 만드는 것은 마치 악몽이었습니다.</p>
+<p>30년의 암흑기 동안 대부분의 사람들에게 소프트웨어를 만드는 것은 마치 악몽과 같았습니다.</p>
 <h2 id="합성-가능한-소프트웨어의-부상">합성 가능한 소프트웨어의 부상</h2>
 <p>2010년 경 JavaScript의 사용이 폭발적으로 증가했습니다.  2006년 이전 JavaScript는 웹 브라우저에서 귀여운 애니메이션을 만드는 데 사용되는 장난감 언어로 취급받았지만 사실 강력한 기능이 숨겨져있었습니다.  즉,  람다 대수의 중요한 특징들이 포함되어 있었습니다.  사람들은 &quot;함수형 프로그래밍&quot;이라는 새롭고 멋진 무언가에 대해 그림자 속에서 속삭이기 시작했습니다.</p>
-<p>2015년, 함수 합성으로 소프트웨어를 개발하려는 아이디어가 다시 인기를 얻었습니다.  JavaScript는 10년 만의 첫 번째 주요 업그레이드에서 화살표 함수를 추가하여 함수, currying 및 lambda 표현을 쉽게 읽고 만들 수 있게 했습니다.</p>
-<p>JavaScript의 함수형 프로그래밍 붐에서 화살표 함수는 로켓 연료나 마찬가지였습니다. 오늘날 널리 쓰이는 응용 프로그램들 중에서 함수형 프로그래밍 기술을 적용하지 않은 경우는 거의 없습니다.</p>
-<p>합성은 소프트웨어의 동작을 명료하게 모델링하는 간단하고 우아한 표현 방법입니다.  작은 소프트웨어 구성 요소들을 합성하여 더 큰 구성 요소와 기능을 만드는 프로세스는 조직화, 이해, 디버그, 확장, 테스트 및 유지 관리가 더 쉬운 소프트웨어를 생성합니다.</p>
+<p>2015년, 함수 합성으로 소프트웨어를 개발하려는 아이디어가 다시 인기를 얻었습니다.  JavaScript는 10년 만에 이루어진 첫 번째 주요 업그레이드에서 화살표 함수를 추가하여 함수, currying 및 lambda 표현을 쉽게 읽고 만들 수 있게 했습니다.</p>
+<p>함수형 프로그래밍 붐에서 JavaScript의 화살표 함수는 로켓 연료와 같았습니다. 오늘날 널리 쓰이는 응용 프로그램들 중에서 함수형 프로그래밍 기술이 사용되지 않은 경우는 거의 없습니다.</p>
+<p>합성은 소프트웨어의 동작을 명료하게 모델링하는 간단하고 우아한 표현 방법입니다.  작은 소프트웨어 구성 요소들을 합성하여 더 큰 구성 요소와 기능을 만드는 프로세스는 조직화, 이해, 디버그, 확장, 테스트 및 유지 관리가 더 쉬운 소프트웨어를 만듭니다.</p>
 <p>다음 글 부터는 여러 예제들을 함께 실습해 볼 것입니다.  어린 시절 우리는 사물들을 가지고 놀며 학습했습니다.  발견의 즐거움을 재발견하십시오.  마술을 부려 볼 시간입니다.</p>
 <p><a href="next">2 부 : “왜 JavaScript로 함수형 프로그래밍을 배우는가?”</a></p>
 
