@@ -8,15 +8,7 @@
 
     <url>
         <loc>http://midojeong.github.io/2018/03/16/composing-software-intro/</loc>
-        <lastmod>2018-03-25T14:04:06.687Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>http://midojeong.github.io/2018/03/20/the-rise-and-fall-and-rise-of-functional-programming-composable-software/</loc>
-        <lastmod>2018-03-25T13:51:58.123Z</lastmod>
+        <lastmod>2018-03-26T13:52:45.279Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -24,7 +16,15 @@
 
     <url>
         <loc>http://midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/</loc>
-        <lastmod>2018-03-25T05:55:18.086Z</lastmod>
+        <lastmod>2018-03-26T13:52:43.727Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>http://midojeong.github.io/2018/03/20/the-rise-and-fall-and-rise-of-functional-programming-composable-software/</loc>
+        <lastmod>2018-03-26T13:52:41.999Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
