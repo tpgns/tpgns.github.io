@@ -7,16 +7,16 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/</loc>
-        <lastmod>2018-03-28T14:27:33.359Z</lastmod>
+        <loc>midojeong.github.io/2018/03/28/a-functional-programmers-introduction-to-javascript/</loc>
+        <lastmod>2018-03-29T13:52:59.646Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/03/28/a-functional-programmers-introduction-to-javascript/</loc>
-        <lastmod>2018-03-28T14:27:32.235Z</lastmod>
+        <loc>midojeong.github.io/2018/03/29/higher-order-functions/</loc>
+        <lastmod>2018-03-29T13:52:57.698Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -24,7 +24,15 @@
 
     <url>
         <loc>midojeong.github.io/2018/03/16/composing-software-intro/</loc>
-        <lastmod>2018-03-28T14:25:48.497Z</lastmod>
+        <lastmod>2018-03-28T14:51:29.622Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/</loc>
+        <lastmod>2018-03-28T14:27:33.359Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
