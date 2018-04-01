@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mido&#39;s IT blog github page">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          Reduce - mido
+        
+    </title>
+
+    <link rel="canonical" href="midojeong.github.io/2018/03/31/reduce/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116376595-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-116376595-1');
+    </script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                            
+                              <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                            
+                        </div>
+                        <h1>Reduce</h1>
+                        <h2 class="subheading">함수형 프로그래밍의 강력한 도구</h2>
+                        <span class="meta">
+                            Posted by mido on
+                            2018-03-31
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">mido</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>이 글은  <a href="https://medium.com/@_ericelliott?source=post_header_lockup" target="_blank" rel="noopener">Eric Elliott</a> 이 <strong>medium</strong>에서 연재하는 Composing Software 시리즈를 번역한 것입니다.  <a href="https://medium.com/javascript-scene/reduce-composing-software-fe22f0c39a1d" target="_blank" rel="noopener">[원문보기]</a></p>
+</blockquote>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*uVpU7iruzXafhU2VLeH4lw.jpeg" alt=""></p>
+<p><em>Smoke Art Cubes to Smoke — MattysFlicks — (CC BY 2.0)</em></p>
+<blockquote>
+<p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈의 일부 입니다.  앞으로 계속하여 연재될 것입니다.<br>
+<a href="https://medium.com/javascript-scene/a-functional-programmers-introduction-to-javascript-composing-software-d670d14ede30" target="_blank" rel="noopener">&lt;이전</a>  |  <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea" target="_blank" rel="noopener">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://medium.com/javascript-scene/reduce-composing-software-fe22f0c39a1d" target="_blank" rel="noopener">다음&gt;</a></p>
+</blockquote>
+<p>함수형 프로그래밍에서 자주 보이는  <strong>Reduce</strong>  (일명 : fold, accumulate)는 배열을 순회하며 각 항목을 누적해서 리턴하는 함수입니다. 이 때 누적된 값을 변수로 저장해놓고 배열의 항목과 누적 값을 어떤 함수에 반복해서 전달합니다. 그 함수는 새로운 누적 값을 리턴하는 임의의 함수입니다. reduce를 사용하여 유용한 기능들을 구현할 수 있는데, 이는 보통 어떤 아이템 콜렉션을 가지고 중요한 계산을 수행하는 가장 우아한 방법입니다.</p>
+<p>reduce는 reducer 함수와 초기 값을 인자로 받고 누적 값을 리턴합니다. <code>Array.prototype.reduce()</code>에서 배열은  <code>this</code>로 참조할 수 있기 때문에 인자로 넣어줄 필요가 없습니다.</p>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">array.reduce(  </span><br><span class="line">  reducer: (accumulator: <span class="built_in">Any</span>, current: <span class="built_in">Any</span>) =&gt; <span class="built_in">Any</span>,  </span><br><span class="line">  initialValue: <span class="built_in">Any</span>  </span><br><span class="line">) =&gt; accumulator: <span class="built_in">Any</span></span><br></pre></td></tr></table></figure>
+<p>배열의 총합을 구해보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>].reduce(<span class="function">(<span class="params">acc, n</span>) =&gt;</span> acc + n, <span class="number">0</span>); <span class="comment">// 12</span></span><br></pre></td></tr></table></figure>
+<p>배열의 각 요소가 현재 값이 되어 누적 값과 함께 reducer에 전달됩니다. reducer의 역할은 어떻게든 현재 값을 누적 값으로 &quot;폴드&quot;하는 것입니다.  reducer 함수의 역할은 누적되는 방식을 정의하는 것 입니다.  reducer가 새 누적 값을 리턴한 후  <code>reduce()</code>는 배열의 다음 값으로 이동합니다.  reducer는 누적될 초기 값이 필요하며 이는 매개 변수로 전달됩니다.</p>
+<p>위 코드에서 총합을 계산하는 reducer가 처음 호출되면  <code>acc</code>에  <code>0</code>  (두 번째 매개 변수로  <code>.reduce()</code>  전달 된 값)이 할당됩니다.  reducer는  <code>0</code>  +  <code>2</code> (배열의 첫 번째 요소)를 계산하여  <code>2</code>를 리턴합니다.  다음 호출에는  <code>acc = 2, n = 4</code>가 되며 reducer는  <code>2 + 4</code>( <code>6</code> )를 리턴합니다.  마지막 반복에서는  <code>acc = 6, n = 6</code>이 되고 reducer는  <code>12</code>반환합니다.  반복이 완료되면  <code>.reduce()</code>는 최종 누적 값  <code>12</code>리턴합니다.</p>
+<p>이 경우 익명 함수를 전달했지만 기명 함수를 전달 할 수도 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> summingReducer = <span class="function">(<span class="params">acc, n</span>) =&gt;</span> acc + n;   </span><br><span class="line">[<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>].reduce(summingReducer, <span class="number">0</span>);  <span class="comment">// 12</span></span><br></pre></td></tr></table></figure>
+<p>일반적으로  <code>reduce()</code>는 왼쪽에서 오른쪽으로 작동합니다.  JavaScript에는 그 반대로 작동하는  <code>[].reduceRight()</code>도 있습니다.  즉,  <code>[2, 4, 6]</code>에  <code>.reduceRight()</code>을 적용하면 <code>n</code>은  <code>6</code>으로 시작해서  <code>2</code>로 끝납니다.</p>
+<h2 id="다양한-용도로-사용할-수-있습니다">다양한 용도로 사용할 수 있습니다.</h2>
+<p>Reduce는 다재다능합니다.  reduce로  <code>map()</code>  ,  <code>filter()</code>  ,  <code>forEach()</code> 등 다양한 함수들을 쉽게 정의 할 수 있습니다.</p>
+<p><strong>Map:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> map = <span class="function">(<span class="params">fn, arr</span>) =&gt;</span> arr.reduce(<span class="function">(<span class="params">acc, item, index, arr</span>) =&gt;</span> &#123;   </span><br><span class="line"><span class="keyword">return</span> acc.concat(fn(item, index, arr));   </span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+<p>map의 누적 값은 새로운 배열이 됩니다.  새 값은 <code>arr</code>의 각 요소에 맵핑 함수 (<code>fn</code>)을 적용한 값입니다. 즉, 현재 요소에  <code>fn</code>을 적용한 결과를 새 배열 <code>acc</code>에 추가하는 방식으로 누적합니다.</p>
+<p><strong>Filter:</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">  <span class="keyword">const</span> filter = <span class="function">(<span class="params">fn, arr</span>) =&gt;</span> arr.reduce(<span class="function">(<span class="params">newArr, item</span>) =&gt;</span> &#123;  </span><br><span class="line">  <span class="keyword">return</span> fn(item) ? newArr.concat([item]) : newArr;  </span><br><span class="line">&#125;, []);</span><br></pre></td></tr></table></figure>
+<p>필터는 predicate함수를 사용하고 요소가 조건에 맞을경우 (<code>fn(item)</code>이  <code>true</code>를 리턴 함) 새 배열에 추가합니다. 맵과 거의 동일하게 작동합니다.</p>
+<p>여러분에게 임의의 데이터 리스트가 주어진다면 위 예제들을 활용해서 데이터들을 필터링하고 함수를 적용하고 결과를 특정한 값으로 누적할 수 있습니다. 수많은 응용 프로그램애플리케이션들이 이러한 방식으로 데이터를 다룹니다. 만약 데이터가 값이 아닌 함수일 경우는 어떻게 해야 할까요?</p>
+<p><strong>Compose:</strong></p>
+<p>Reduce를 사용하면 손쉽게 함수를 합성할 수도 있습니다.  함수 합성 :  <code>x</code>에  <code>g</code>를 적용하고 다시 그 결과에 함수  <code>f</code>  를 적용하는 것을  <code>f . g</code>라고 하며 JavaScript에서 다음처럼 표현됩니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(g(x))</span><br></pre></td></tr></table></figure>
+<p>Reduce를 사용하면 합성 과정을 추상화해서 다음과 같은 함수를 쉽게 정의할 수 있는데,</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">f(g(h(x)))</span><br></pre></td></tr></table></figure>
+<p>그렇게하기 위해서는 reduce를 역으로 실행해야합니다.  즉, 왼쪽에서 오른쪽 방향이 아닌 오른쪽에서 왼쪽 방향입니다.  다행히 JavaScript에는  <code>.reduceRight()</code>메소드가 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> compose = <span class="function">(<span class="params">...fns</span>) =&gt;</span> </span><br><span class="line">                x =&gt; fns.reduceRight (<span class="function">(<span class="params">v, f</span>) =&gt;</span> f (v), x);</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>참고 : JavaScript엔진 버전이  <code>[].reduceRight()</code>를  지원하지 않을 경우  <code>reduce()</code>를  사용하여  <code>reduceRight()</code>를  구현할 수 있습니다.  그 방법은 찾아내는 것은 여러분들에게 맡기겠습니다.</p>
+</blockquote>
+<p><strong>Pipe:</strong></p>
+<p><code>compose()</code>는 안에서-밖으로 즉 수학 표기법으로 함수를 합성하려는 경우 유용합니다.  그러나 당신이 함수가 순서대로 적용되는 것을 일련의 사건들로 생각하고 싶다면 어떨까요?</p>
+<p>어떤 숫자에  <code>1</code>을 더한 다음 두 배로하고 싶다고 상상해보십시오를 하려면 어떻게 해야 할까요. <code>compose()</code>를 사용하면 다음처럼 됩니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> add1 = <span class="function"><span class="params">n</span> =&gt;</span> n + <span class="number">1</span>;  </span><br><span class="line"><span class="keyword">const</span> double = <span class="function"><span class="params">n</span> =&gt;</span> n * <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> add1ThenDouble = compose(  </span><br><span class="line">  double,  </span><br><span class="line">  add1  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">add1ThenDouble(<span class="number">2</span>); <span class="comment">// 6  </span></span><br><span class="line"><span class="comment">// ((2 + 1 = 3) * 2 = 6)</span></span><br></pre></td></tr></table></figure>
+<p>문제점이 보입니까?  첫 번째 단계가 마지막에 나열되므로 함수가 적용되는 순서를 이해하려면 목록의 맨 아래에서 시작하여 위쪽으로 읽어야합니다.</p>
+<p>따라서 이 문제를 해결하려면 오른쪽에서 왼쪽으로 reduce하지 않고 평소처럼 왼쪽에서 오른쪽으로하면 됩니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pipe = <span class="function">(<span class="params">...fns</span>) =&gt;</span> x =&gt; fns.reduce(<span class="function">(<span class="params">v, f</span>) =&gt;</span> f(v), x);</span><br></pre></td></tr></table></figure>
+<p>이제 다시  <code>add1ThenDouble()</code>를 만들어 보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> add1ThenDouble = pipe(  </span><br><span class="line">  add1,  </span><br><span class="line">  double  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">add1ThenDouble(<span class="number">2</span>); <span class="comment">// 6  </span></span><br><span class="line"><span class="comment">// ((2 + 1 = 3) * 2 = 6)</span></span><br></pre></td></tr></table></figure>
+<p>합성의 순서가 달라지면에 따라 다른 결과가 나올 수 있기 때문에 중요합니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> doubleThenAdd1 = pipe(  </span><br><span class="line">  double,  </span><br><span class="line">  add1  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line">doubleThenAdd1(<span class="number">2</span>); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<p>나중에  <code>compose()</code>및  <code>pipe()</code>에 대해 자세히 설명하겠습니다.  지금 당장은 <code>reduce()</code>가 매우 강력한 도구이며, 실제로 그것을 잘 익혀야 한다는 것만 이해하면 됩니다. reduce가 매우 까다로울 수 있습니다.  하지만 어떤 사람들은 전혀 따라 가지도 못한다는 것을 명심하십시오.</p>
+<h2 id="redux에-관하여">Redux에 관하여</h2>
+<p>Redux에서 중요 상태 업데이트 비트를 설명하는 데 &quot;reducer&quot;라는 용어를 사용합니다.  이 글을 쓰는 시점에서, Redux는 React와 Angular(<code>ngrx/store</code>의 후속작)를 사용하여 구축 된 웹 어애플리케이션을 위한 가장 인기있는 상태 관리 라이브러리 / 아키텍처입니다.</p>
+<p>Redux는 reducer함수를 사용하여 애플리케이션 상태를 관리합니다.  Redux 스타일 reducer는 현재 상태와 액션 오브젝트를 받아서 새 상태를 리턴합니다.</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">reducer</span>(<span class="attribute">state</span>: Any, <span class="attribute">action</span>: &#123; <span class="attribute">type</span>: String, <span class="attribute">payload</span>: Any&#125;) </span><br><span class="line">   =&gt; (<span class="attribute">newState</span>: Any)</span><br></pre></td></tr></table></figure>
+<p>Redux에는 다음과 같은 몇 가지 reduce 규칙이 있습니다.</p>
+<ol>
+<li>매개 변수없이 호출 된 reducer는 초기 상태를 그대로 리턴해야합니다.</li>
+<li>reducer가 액션을 처리하지 않으면 상태를 리턴해야합니다.</li>
+<li>Redux reducer는 <strong>순수 함수</strong>여야합니다.</li>
+</ol>
+<p>덧셈 reducer를 Redux 스타일 reducer로 다시 작성해 보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ADD_VALUE = <span class="string">'ADD_VALUE'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> summingReducer = <span class="function">(<span class="params">state = <span class="number">0</span>, action = &#123;&#125;</span>) =&gt;</span> &#123;  </span><br><span class="line">  <span class="keyword">const</span> &#123; type, payload &#125; = action;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">switch</span> (type) &#123;  </span><br><span class="line">    <span class="keyword">case</span> ADD_VALUE:  </span><br><span class="line">      <span class="keyword">return</span> state + payload.value;  </span><br><span class="line">    <span class="keyword">default</span>: <span class="keyword">return</span> state;  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>Redux의 reducer는  또한 <code>[].reduce()</code>포함하여 reducer 함수의 서명를 잘 따르는  <code>reduce()</code> 구현에 연결할 수 있습니다. 즉, 일련의 액션 오브젝트 배열을 만들어 reduce하면 상태의 스냅샷을 확보 할 수 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> actions = [  </span><br><span class="line">  &#123; <span class="attr">type</span>: <span class="string">'ADD_VALUE'</span>, <span class="attr">payload</span>: &#123; <span class="attr">value</span>: <span class="number">1</span> &#125; &#125;,  </span><br><span class="line">  &#123; <span class="attr">type</span>: <span class="string">'ADD_VALUE'</span>, <span class="attr">payload</span>: &#123; <span class="attr">value</span>: <span class="number">1</span> &#125; &#125;,  </span><br><span class="line">  &#123; <span class="attr">type</span>: <span class="string">'ADD_VALUE'</span>, <span class="attr">payload</span>: &#123; <span class="attr">value</span>: <span class="number">1</span> &#125; &#125;,  </span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">actions.reduce(summingReducer, <span class="number">0</span>); <span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+<p>따라서 Redux 스타일 reducer는 유닛테스트가 매우 쉽습니다.</p>
+<h2 id="결론">결론</h2>
+<p>당신은 reduce가 매우 유용하고 다재다능한 추상화라는 것을 알아야합니다. 맵이나 필터보다 이해하기가 약간 까다롭긴 해도 함수형 프로그래밍의 필수 도구입니다. 다른 많은 훌륭한 도구를 만드는 데 사용할 수 있습니다.</p>
+<p><a href="#"><strong>다음 : Functor &amp; Categories&gt;</strong></a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/03/29/higher-order-functions/" data-toggle="tooltip" data-placement="top" title="고차 함수">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#다양한-용도로-사용할-수-있습니다"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">다양한 용도로 사용할 수 있습니다.</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#redux에-관하여"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">Redux에 관하여</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#결론"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">결론</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                        
+                          <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "midojeong";
+    var disqus_identifier = "midojeong.github.io/2018/03/31/reduce/";
+    var disqus_url = "midojeong.github.io/2018/03/31/reduce/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/midojeong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; mido 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("midojeong.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-116376595-1';
+    var _gaDomain = 'https://midojeong.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
