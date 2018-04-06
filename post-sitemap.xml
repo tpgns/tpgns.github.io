@@ -7,40 +7,8 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/03/31/reduce/</loc>
-        <lastmod>2018-04-01T06:59:58.820Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
         <loc>midojeong.github.io/2018/03/29/higher-order-functions/</loc>
-        <lastmod>2018-03-31T14:50:56.486Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>midojeong.github.io/2018/03/28/a-functional-programmers-introduction-to-javascript/</loc>
-        <lastmod>2018-03-29T13:52:59.646Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>midojeong.github.io/2018/03/16/composing-software-intro/</loc>
-        <lastmod>2018-03-28T14:51:29.622Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/</loc>
-        <lastmod>2018-03-28T14:27:33.359Z</lastmod>
+        <lastmod>2018-04-06T10:37:13.043Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -48,7 +16,39 @@
 
     <url>
         <loc>midojeong.github.io/2018/03/20/the-rise-and-fall-and-rise-of-functional-programming-composable-software/</loc>
-        <lastmod>2018-03-28T14:25:46.377Z</lastmod>
+        <lastmod>2018-04-06T10:29:46.614Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>midojeong.github.io/2018/03/31/reduce/</loc>
+        <lastmod>2018-04-06T09:33:37.184Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>midojeong.github.io/2018/03/28/a-functional-programmers-introduction-to-javascript/</loc>
+        <lastmod>2018-04-06T09:33:13.338Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/</loc>
+        <lastmod>2018-04-06T09:32:58.437Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>midojeong.github.io/2018/03/16/composing-software-intro/</loc>
+        <lastmod>2018-04-06T09:32:20.398Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
