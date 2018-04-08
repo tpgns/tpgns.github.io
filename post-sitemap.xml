@@ -7,8 +7,16 @@
     </url>
 
     <url>
+        <loc>midojeong.github.io/2018/04/08/javaScript-factory-function-with-es6/</loc>
+        <lastmod>2018-04-08T09:18:57.568Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>midojeong.github.io/2018/04/07/functional-mixins/</loc>
-        <lastmod>2018-04-08T02:18:04.116Z</lastmod>
+        <lastmod>2018-04-08T02:24:16.766Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +24,7 @@
 
     <url>
         <loc>midojeong.github.io/2018/04/07/functors-and-categories/</loc>
-        <lastmod>2018-04-08T02:11:17.183Z</lastmod>
+        <lastmod>2018-04-08T02:24:16.754Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
