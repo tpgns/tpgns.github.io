@@ -7,8 +7,16 @@
     </url>
 
     <url>
+        <loc>midojeong.github.io/2018/04/14/composable-datatype-with-functions/</loc>
+        <lastmod>2018-04-15T00:25:23.248Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>midojeong.github.io/2018/04/12/Why-Composition-is-Harder-with-Classes/</loc>
-        <lastmod>2018-04-12T13:45:28.720Z</lastmod>
+        <lastmod>2018-04-12T13:54:23.946Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
