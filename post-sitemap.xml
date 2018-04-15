@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>midojeong.github.io/2018/04/07/functors-and-categories/</loc>
+        <lastmod>2018-04-15T00:30:41.402Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>midojeong.github.io/2018/04/14/composable-datatype-with-functions/</loc>
         <lastmod>2018-04-15T00:26:00.236Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -33,14 +41,6 @@
     <url>
         <loc>midojeong.github.io/2018/04/07/functional-mixins/</loc>
         <lastmod>2018-04-08T02:24:16.766Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>midojeong.github.io/2018/04/07/functors-and-categories/</loc>
-        <lastmod>2018-04-08T02:24:16.754Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
