@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mido&#39;s IT blog github page">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          객체 합성이라는 숨겨진 보물 - mido
+        
+    </title>
+
+    <link rel="canonical" href="midojeong.github.io/2018/04/17/the-hidden-treasures-of-object-composition/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116376595-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-116376595-1');
+    </script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                            
+                              <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                            
+                        </div>
+                        <h1>객체 합성이라는 숨겨진 보물</h1>
+                        <h2 class="subheading">The Hidden Treasures of Object Composition</h2>
+                        <span class="meta">
+                            Posted by mido on
+                            2018-04-17
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">mido</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>이 글은  <a href="https://medium.com/@_ericelliott?source=post_header_lockup" target="_blank" rel="noopener">Eric Elliott</a> 이 <strong>medium</strong>에서 연재하는 Composing Software 시리즈를 번역한 것입니다.  <a href="https://medium.com/javascript-scene/the-hidden-treasures-of-object-composition-60cd89480381" target="_blank" rel="noopener">[원문보기]</a></p>
+</blockquote>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*uVpU7iruzXafhU2VLeH4lw.jpeg" alt=""></p>
+<p><em>Smoke Art Cubes to Smoke — MattysFlicks — (CC BY 2.0)</em></p>
+<blockquote>
+<p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈의 일부 입니다.  앞으로 계속하여 연재될 것입니다.<br>
+<a href="https://medium.com/javascript-scene/a-functional-programmers-introduction-to-javascript-composing-software-d670d14ede30" target="_blank" rel="noopener">&lt;이전</a>  |  <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea" target="_blank" rel="noopener">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://medium.com/javascript-scene/reduce-composing-software-fe22f0c39a1d" target="_blank" rel="noopener">다음&gt;</a></p>
+</blockquote>
+<blockquote>
+<p>“객체 합성, 보다 복잡한 동작을 하기 위해 객체를 조립 또는 합성하는 것”~ 4 강  <a href="https://www.amazon.com/Design-Patterns-Elements-Reusable-Object-Oriented/dp/0201633612/ref=as_li_ss_tl?ie=UTF8&amp;qid=1494993475&amp;sr=8-1&amp;keywords=design+patterns&amp;linkCode=ll1&amp;tag=eejs-20&amp;linkId=6c553f16325f3939e5abadd4ee04e8b4" target="_blank" rel="noopener">“디자인 패턴 : 재사용 가능한 객체 지향 소프트웨어의 요소”</a></p>
+</blockquote>
+<blockquote>
+<p>“클래스 상속보다는 객체 합성을 우선해라”, Gang of Four,</p>
+</blockquote>
+<p>소프트웨어를 개발하는 과정에서 가장 흔히 볼 수 있는 실수 중 하나는 클래스 상속을 과도하게 사용하는 경향입니다.  클래스 상속은 기본 클래스와 하위 클래스 사이에 <strong>는-이다(is-a)</strong>  관계를 만들어 코드를 재사용하는 메커니즘입니다.   <em>is-a</em>  관계 (e.g. 오리는 새이다)를 사용하여 도메인을 모델링하는 과정에서 문제가 발생할 수 있습니다.  그 이유는 클래스 상속이 객체 지향 디자인에서 사용할 수 있는 가장 단단한 형태의 결합이기 때문입니다. 결국 다음과 같은(그 외에도) 많은 문제들을 일으킵니다 :</p>
+<ul>
+<li>깨지기 쉬운 기본 클래스 문제</li>
+<li>고릴라 / 바나나 문제</li>
+<li>중복 필요성 문제</li>
+</ul>
+<p>상속은 하위 클래스가 상속, 추가 및 오버라이딩할 수 있는 기본 클래스를 공용 인터페이스로 추상화하여 코드를 재사용합니다.  <strong>추상화</strong>에는 두 가지 중요한 특징이 있습니다.</p>
+<ul>
+<li><strong>일반화<sup>Generalization</sup></strong>  일반적인 사용사례에 해당하는 공유 속성 및 동작들을 추출하는 과정</li>
+<li><strong>전문화<sup>Specialization</sup></strong>  특수한 경우를 처리하는 데 필요한 구현 세부 사항을 제공하는 과정</li>
+</ul>
+<p>코드를 일반화 및 전문화하는데는 여러 가지 방법이 있습니다.  클래스 상속대신 사용할 수 있는 좋은 대안으로는 단순 함수, 고차 함수 및  <strong>객체 합성</strong>이있습니다.</p>
+<p>불행히도, 많은 사람들이 객체 합성에 대해 오해하고 있으며 이러한 관점으로 생각하기 어려워 합니다.  주제에 대해 좀 더 깊이 알아봐야 할 필요가 있습니다.</p>
+<h2 id="객체-합성object-composition이란-무엇입니까">객체 합성<sup>Object</sup> <sup>Composition</sup>이란 무엇입니까?</h2>
+<blockquote>
+<p>&quot;컴퓨터 과학에서의 복합 자료형<sup>Composite</sup> <sup>datatype</sup>이란 프로그래밍 언어의 원시 자료형 및 기타 복합 유형을 사용하여 구성 할 수있는 모든 데이터 유형입니다.  […] 복합 유형을 구성하는 행위는 합성<sup>Composition</sup>으로 알려져 있습니다. &quot;~ Wikipedia</p>
+</blockquote>
+<p>기본형들을 조립해 복합 객체를 만드는 모든 행위가 객체 합성입니다. 그러나 상속은 마치 객체 합성과는 전혀 관련이 없으며 심지어 정반대의 기술인 것처럼 논의되고 있습니다. 이러한 편견이 생기는 이유는 객체 합성의 문법과 의미간에 차이가 있기 때문입니다.</p>
+<p>지금부터 알아볼 객체 합성과 클래스 상속에 관한 논의는 특정 기법에 관한 것이 아닙니다.  구성 요소들 사이의  <em>의미론적</em>  관계와   <em>결합 정도에</em>  대한 것입니다.  우리는  <em>문법</em> 이 아니라 <em>의미</em> 에 대해 말하고 있습니다. 사람들은 종종 이 둘을 구별하지 못하고 세부적인 문법에만 집중합니다.  숲을 보지 못하고 나무만 보고있는 셈입니다.</p>
+<p>객체는 여러가지 다른 방법으로 합성됩니다.  합성 형태에 따라 복합체의 구조와 객체간의 관계가 달라집니다. 어떤 객체가 다른 객체에 종속되면 한 객체가 변경되었을 때 다른 객체가 손상 될 수 있습니다.</p>
+<p>&quot;클래스 상속보다는 객체 합성을 우선해라&quot;라는 조언은 우리가 객체를 바라보는 방식을 거대한 기본 클래스로부터 상속받는 것이 아닌 작고 느슨하게 결합 된 요소들의 합성으로 생각하라는 뜻입니다.  GoF는 단단히 결합 된 객체를 &quot;모놀리틱<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> 시스템&quot;이라고 설명합니다. 이 시스템에서 어떤 클래스를 변경하거나 제거하려면 다른 수많은 클래스를 이해하고 변경해야 합니다. 결국 이러한 시스템은 이해하고, 이식하고, 유지하기 힘든 조밀한 덩어리가 됩니다. &quot;</p>
+<h2 id="객체-합성의-세-가지-다른-형태">객체 합성의 세 가지 다른 형태</h2>
+<p>&quot;Design Patterns&quot;에서 Gang of Four는 &quot;객체 합성은 여러 디자인 패턴에 다양하게 적용될 것 입니다&quot;라고 말하고 계속해서  <em>집합</em>  및  <em>위임</em> 을 포함한 다양한 유형의 구성 관계를 설명합니다.</p>
+<p>&quot;Design Patterns&quot;의 저자는 주로 C ++ 및 Smalltalk (이후 Java) 환경에서 작업했습니다.  해당 언어로 런타임에 객체 관계를 정의하고 변경하는 작업은 JavaScript에서보다 훨씬 복잡하므로 해당 주제를 깊게 다루진 않을 것 입니다.  그러나 JavaScript의 객체 합성에 대해 논의하기 위해 먼저 동적 객체 확장 ( 일명, <em>concatenation</em> )에 대한 논의가 우선되어야 합니다.</p>
+<p>각 용어들은 &quot;Design Patterns&quot;에 나오는 정의와 약간 차이가 있는데, 이는 JavaScript에 적용 하기 위함이며 좀 더 명확하게 일반화된 뜻을 다루기 위함입니다. 예를 들어 집합<sup>Aggregation</sup>이  하위 객체들의 수명주기를 책임져야 함을 뜻하지 않습니다. 동적으로 객체를 확장시킬 수 있는 언어에서는 그렇지 않습니다.</p>
+<p>잘못된 공리 및 정의는 일반화를 힘들게 만들며 같은 개념의 특수한 사례를 다른 이름으로 부르게 만듭니다. 개발자는 불팔요한 반복을 좋아하지 않습니다.</p>
+<ul>
+<li><strong>집합</strong><sup>Aggregation</sup>  객체가 열거 가능한 하위 객체 모음으로 구성되는 경우.  즉, 다른 객체들을  <em>포함</em>  하는 객체입니다.  각 하위 객체는 자신의 레퍼런스를 유지하므로 얼마든지 집합체에서 분리, 해체될 수 있습니다.</li>
+<li><strong>접합</strong><sup>Concatenation</sup> <sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup> 기존 객체에 새 속성을 추가하여 객체를 형성하는 경우.  속성을 한 번에 하나씩 연결하거나 기존 개체를 통채로 복사 할 수도 있습니다. 예를 들어, jQuery 플러그인은 프로토타입으로 연결된  <code>jQuery.fn</code>에 새 메서드를 연결하여 만들어집니다.</li>
+<li><strong>위임</strong><sup>Delegation</sup>  객체를 다른 객체로 전달하거나 특정 기능을 <strong>위임</strong>  하는 경우.  예를 들어  <a href="https://www.youtube.com/watch%3Fv%3DBKM3CmRqK2o" target="_blank" rel="noopener">Ivan Sutherland의 Sketchpad</a>  (1962)에는 공유 속성을 &quot;마스터&quot;에게 위임하는 인스턴스가 있습니다. Photoshop에 포함된 &quot;스마트 오브젝트&quot;는 외부 리소스에게 동작을 위임하는 로컬 프록시가 있습니다. JavaScript의 프로토타입은 위임으로 작동합니다. Array 인스턴스로 배열 메소드를 호출하면 <code>Array.prototype</code>에게 전달되고,  Object 메소드들은 <code>Object.prototype</code>에게 전달됩니다.</li>
+</ul>
+<p>이러한 다른 형태의 구성은  <strong>서로 배타적이지 않습니다.</strong>  접합으로 위임을 구현할 수 있으며 JavaScript에서 클래스 상속은 위임으로 구현됩니다. 많은 소프트웨어 시스템은 객체를 합성할 때 하나 이상의 방법을 사용합니다. 예를 들어, jQuery의 플러그인은 프로토타입 프로퍼티인 <code>jQuery.fn</code>에 다른 메소드들을 접합하는 방식으로 확장합니다. 클라이언트 코드가 플러그인 메소드를 호출하면 프로토타입에 연결된 메소드에 위임됩니다.</p>
+<blockquote>
+<p>앞으로 다룰 코드 예제들은 아래 코드를  계속 사용할 것 입니다.</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> objs = [  </span><br><span class="line">  &#123; <span class="attr">a</span>: <span class="string">'a'</span>, <span class="attr">b</span>: <span class="string">'ab'</span> &#125;,  </span><br><span class="line">  &#123; <span class="attr">b</span>: <span class="string">'b'</span> &#125;,  </span><br><span class="line">  &#123; <span class="attr">c</span>: <span class="string">'c'</span>, <span class="attr">b</span>: <span class="string">'cb'</span> &#125;  </span><br><span class="line">];</span><br></pre></td></tr></table></figure>
+<h2 id="집합-aggregation">집합 Aggregation</h2>
+<p>집합은 객체가 열거 가능한 하위 객체 모음으로 구성되는 경우입니다.  즉, 다른 객체들을  <em>포함</em>  하는 객체입니다.  각 하위 객체는 자신의 레퍼런스를 유지하므로 얼마든지 집합체에서 분리, 해체될 수 있습니다.  다양한 구조로 표현 될 수 있습니다.</p>
+<h3 id="예제들">예제들</h3>
+<ul>
+<li>Array</li>
+<li>Map</li>
+<li>Set</li>
+<li>Graph</li>
+<li>Tree</li>
+<li>DOM node (DOM 노드는 자식 노드를  <em>포함</em>  )</li>
+<li>UI component (컴포넌트는 하위 컴포넌트들을 <em>포함</em> )</li>
+</ul>
+<h3 id="언제-사용-하는가">언제 사용 하는가?</h3>
+<p>스택, 큐, 트리, 그래프, 상태 머신 또는 컴포지트 패턴에서처럼 공통 작업을 공유해야하는 객체 모음이있는 경우 (수많은 아이템들이 동일한 인터페이스를 공유하려는 경우)</p>
+<h3 id="참고사항">참고사항</h3>
+<p>집합을 사용하면 각 멤버에게 함수를 적용하고( e.g.   <code>array.map(fn)</code> ) 단일 값인 것처럼 벡터를 변환하는 등 보편적인 추상화를 적용할 수 있습니다.  그러나 수십, 수백만개의 하위 객체를 다뤄야할 경우 스트림으로 처리하는 것이 더 효율적일 수 있습니다.</p>
+<h3 id="코드-예제">코드 예제</h3>
+<p>Array 집합 :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> collection = <span class="function">(<span class="params">a, e</span>) =&gt;</span> a.concat([e]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> a = objs.reduce(collection, []);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(   </span><br><span class="line">  <span class="string">'collection aggregation'</span>,  </span><br><span class="line">  a,  </span><br><span class="line">  a[<span class="number">1</span>].b,  </span><br><span class="line">  a[<span class="number">2</span>].c,  </span><br><span class="line">  <span class="string">`enumerable keys: <span class="subst">$&#123; <span class="built_in">Object</span>.keys(a) &#125;</span>`</span>  </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>다음과 같이됩니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">collection aggregation   </span><br><span class="line">[&#123;<span class="string">"a"</span>:<span class="string">"a"</span>,<span class="string">"b"</span>:<span class="string">"ab"</span>&#125;,&#123;<span class="string">"b"</span>:<span class="string">"b"</span>&#125;,&#123;<span class="string">"c"</span>:<span class="string">"c"</span>,<span class="string">"b"</span>:<span class="string">"cb"</span>&#125;]   </span><br><span class="line">b c   </span><br><span class="line">enumerable keys: <span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span></span><br></pre></td></tr></table></figure>
+<p>pair를 사용하는 연결리스트<sup>Linked-list</sup> 집합 :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pair = <span class="function">(<span class="params">a, b</span>) =&gt;</span> [b, a];</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> l = objs.reduceRight(pair, []);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(  </span><br><span class="line">  <span class="string">'linked list aggregation'</span>,  </span><br><span class="line">  l,  </span><br><span class="line">  <span class="string">`enumerable keys: <span class="subst">$&#123; <span class="built_in">Object</span>.keys(l) &#125;</span>`</span>  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">/*  </span></span><br><span class="line"><span class="comment">linked list aggregation  </span></span><br><span class="line"><span class="comment">[  </span></span><br><span class="line"><span class="comment">  &#123;"a":"a","b":"ab"&#125;, [  </span></span><br><span class="line"><span class="comment">    &#123;"b":"b"&#125;, [  </span></span><br><span class="line"><span class="comment">      &#123;"c":"c","b":"cb"&#125;,  </span></span><br><span class="line"><span class="comment">      []  </span></span><br><span class="line"><span class="comment">    ]  </span></span><br><span class="line"><span class="comment">  ]  </span></span><br><span class="line"><span class="comment">]  </span></span><br><span class="line"><span class="comment">enumerable keys: 0,1  </span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+<p>연결리스트는 배열, 문자열, 트리 및 다양한 종류의 데이터 구조 및 집합의 기초가 됩니다. 훨씬 많은 예가 있으며 여기서 그것들을 모두 다루진 않겠습니다.</p>
+<h2 id="접합-연결-concatenation">접합, 연결 Concatenation</h2>
+<p>접합이란 기존 객체에 새 속성을 추가하여 객체를 형성하는 것 입니다.</p>
+<h3 id="예제들">예제들</h3>
+<ul>
+<li><code>jQuery.fn</code>에 접합하는 방식으로 플러그인을 추가합니다.</li>
+<li>State reducers, 상태 관리 유틸리티 (예 : Redux)</li>
+<li>함수형 믹스인</li>
+</ul>
+<h3 id="언제-사용하는가">언제 사용하는가?</h3>
+<p>JSON 객체 합치기, 여러 소스에서 애플리케이션 상태를 가져오기, 불변 상태를 업데이트 하기(이전 상태를 새 데이터와 병합)등 런타임에 점진적으로 데이터 구조를 조립하는 것이 필요하다면 언제든지</p>
+<h3 id="참고사항">참고사항</h3>
+<ul>
+<li>기존 객체를 변이시킬 때 주의해야합니다. 변경 가능한 공유 상태는 많은 버그를 일으킬 수 있습니다.</li>
+<li>클래스 계층 구조를 모방하는 것이 가능합니다. 즉,  <em>is-a</em> 관계를 만들 수 있습니다.  같은 문제가 적용됩니다.  “기본” 인스턴스에서 속성들을 상속하고 다중상속을 하는 대신 작고 독립적인 객체들을 &quot;합성&quot;한다는 아이디어로 접근해야합니다.</li>
+<li>구성요소들간의 암시적인 종속성에 주의하십시오.</li>
+<li>속성 이름 충돌은 연결 순서로 해결됩니다.(마지막 값이 적용됨)   이는 기본값을 지정하거나 오버라이딩 할 때 유용하지만 순서가 명확하지 않은 경우 문제가 될 수 있습니다.</li>
+</ul>
+<h3 id="코드-예제">코드 예제</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> c = objs.reduce(concatenate, &#123;&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> concatenate = <span class="function">(<span class="params">a, o</span>) =&gt;</span> (&#123;...a, ...o&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(  </span><br><span class="line">  <span class="string">'concatenation'</span>,  </span><br><span class="line">  c,  </span><br><span class="line">  <span class="string">`enumerable keys: <span class="subst">$&#123; <span class="built_in">Object</span>.keys(c) &#125;</span>`</span>  </span><br><span class="line">);</span><br><span class="line"></span><br><span class="line"><span class="comment">// concatenation &#123; a: 'a', b: 'cb', c: 'c' &#125; enumerable keys: a,b,c</span></span><br></pre></td></tr></table></figure>
+<h2 id="위임-delegation">위임 Delegation</h2>
+<p>위임은 객체를 다른 객체로 전달하거나 특정 기능을 <strong>위임</strong>  하는 경우입니다.</p>
+<h3 id="예제들">예제들</h3>
+<ul>
+<li>JavaScript은 기본적으로 위임을 사용하여 메소드 호출을 프로토타입 체인으로 전달합니다.  e.g.  <code>[].map()</code>  은  <code>Array.prototype.map()</code>으로,  <code>obj.hasOwnProperty()</code>  는  <code>Object.prototype.hasOwnProperty()</code> 으로 호출이 위임됩니다.</li>
+<li>jQuery 플러그인은 위임을 사용해 모든 인스턴스에서 내장 및 플러그인 메소드를 공유합니다.</li>
+<li>Sketchpad의 &quot;마스터&quot;는 동적 위임자였습니다.  마스터의 변경사항은 모든 객체 인스턴스에 즉시 반영됩니다.</li>
+<li>Photoshop에서는 &quot;스마트 객체&quot;라는 위임자를 사용하여 별도의 파일에 정의 된 이미지와 리소스를 나타냅니다.  스마트 오브젝트가 참조하는 오브젝트에 대한 변경 사항은 스마트 오브젝트의 모든 인스턴스에 반영됩니다.</li>
+</ul>
+<h3 id="언제-사용-하는가">언제 사용 하는가?</h3>
+<ol>
+<li>메모리 절약 : 객체의 인스턴스가 매우 많을 경우,  각 인스턴스마다 메모리를 더 많이 할당해하는 대신 인스턴스간에 동일한 속성이나 메소드를 공유하는 것이 유용할 수 있습니다.</li>
+<li>많은 인스턴스를 동적으로 업데이트 : 많은 객체 인스턴스가 동일한 상태를 공유하고 동적으로 업데이트해야 하는 경우 변경사항을 즉석에서 모든 인스턴스에 반영시킬 수 있습니다.(예 : Sketchpad의 &quot;마스터&quot;또는 Photoshop의 “스마트 객체”).</li>
+</ol>
+<h3 id="고려-사항">고려 사항</h3>
+<ul>
+<li>위임은 일반적으로 JavaScript에서 클래스 상속을 모방하는 데 사용되며 (실제로 <code>extends</code>  키워드에 묶여 있음) 실제로는 거의 필요하지 않습니다.</li>
+<li>위임을 사용하여 클래스 상속의 동작 및 제한 사항을 정확하게 모방 할 수 있습니다.  사실 JavaScript의 클래스 상속은 프로토타입 위임 체인으로 구축되어 있습니다.</li>
+<li>위임된 속성은  <code>Object.keys(instanceObj)</code> 와 같은 일반적인 메커니즘을 사용하여 열거 할 수 없습니다.</li>
+<li>위임은 속성 조회 속도를 희생해 메모리를 절약합니다. JS 엔진은 일부 동적 위임자(생성 된 후에 변경되는 위임자)에 대한 최적화를 수행하지 못합니다. 그러나 가장 느린 경우에도 속성 조회 성능은 수백만 ops /초로 측정됩니다. 이벤트 스트림 처리용 혹은 그래픽 프로그래밍용 범용 유틸리티 라이브러리(e.g. RxJS 또는 three.js)가 아닌 이상 병목 현상이 발생하긴 쉽지 않습니다.</li>
+<li>인스턴스의 상태와 위임된 상태를 구별해야합니다.</li>
+<li>동적으로 위임된 공유 상태는 안전하지 않습니다.  변경사항은 모든 인스턴스간에 공유됩니다.  이는 일반적으로 (항상 그런 것은 아님) 버그를 발생시키는 원인입니다.</li>
+<li>ES6에서 클래스의 프로토타입은 재할당될 수 없습니다. 바벨로 컴파일했을 때 작동하는 것처럼 보일지라도 실제 ES6 환경에서는 오류가 발생합니다.</li>
+</ul>
+<h3 id="코드-예제">코드 예제</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> delegate = <span class="function">(<span class="params">a, b</span>) =&gt;</span> <span class="built_in">Object</span>.assign(<span class="built_in">Object</span>.create(a), b);  </span><br><span class="line">  </span><br><span class="line"><span class="keyword">const</span> d = objs.reduceRight(delegate, &#123;&#125;);  </span><br><span class="line">  </span><br><span class="line"><span class="built_in">console</span>.log(  </span><br><span class="line">  <span class="string">'delegation'</span>,  </span><br><span class="line">  d,  </span><br><span class="line">  <span class="string">`enumerable keys: <span class="subst">$&#123; <span class="built_in">Object</span>.keys(d) &#125;</span>`</span>  </span><br><span class="line">);  </span><br><span class="line">  </span><br><span class="line"><span class="comment">// delegation &#123; a: 'a', b: 'ab' &#125; enumerable keys: a,b  </span></span><br><span class="line">  </span><br><span class="line"><span class="built_in">console</span>.log(d.b, d.c); <span class="comment">// ab c</span></span><br></pre></td></tr></table></figure>
+<h2 id="결론">결론</h2>
+<p>지금까지 배운 것들을 요약해보겠습니다.</p>
+<ul>
+<li>원시형 및 다른 객체들로 만들어진 모든 객체는  <em>복합 객체</em>  입니다.</li>
+<li>복합 객체를 만드는 행위를 합성이라고합니다.</li>
+<li>객체 합성에는 여러 종류가 있습니다.</li>
+<li>형성되는 관계와 의존성은 객체가 어떻게 합성되는지에 따라 다릅니다.</li>
+<li>Is-a 관계 (클래스 상속에 의해 형성된 종류)는 OO 디자인의 커플링 중 가장 단단한 형태이며 꼭 필요한 경우가 아니면 일반적으로 피해야합니다.</li>
+<li>Gang of Four는 모놀리틱한 기본 클래스 또는 기본 객체에서 상속하지 말고 작은 기능들을 조합하여 객체를 합성하도록 권장합니다.  “클래스 상속보다는 객체 합성을 우선해라”</li>
+<li>집합은 배열, DOM 트리 등 구성원들이 자신의 참조를 유지하는 열거형 컬렉션으로 객체를 합성합니다.</li>
+<li>위임은 프로토타입 위임 체인을 연결하여 객체를 합성합니다. 이 때 객체는 속성 조회 및 메소드 호출을 프로토타입에게 전달하거나 다른 객체에 위임합니다.  e.g.  <code>[].map()</code>  은  <code>Array.prototype.map()</code>을 호출합니다.</li>
+<li>접합(연결)은  <code>Object.assign(destination, a, b)</code>  ,  <code>{...a, ...b}</code>  와 같은 새 속성으로 기존 객체를 확장하여 객체를 합성합니다.</li>
+<li>객체 합성에 대한 서로 다른 정의들은 상호 배타적인 것이 아닙니다. 위임은 집합의 하위 집합이며, 연결을 사용하여 위임과 집합을 구현하는 등의 작업을 할 수 있습니다.</li>
+</ul>
+<p>단지 세 가지 종류의 객체 합성만 있는 것이 아닙니다.  또한 객체가 다른 객체에게 매개 변수로 전달되는(의존성 삽입) 등의 관계를 통해 객체간에 느슨하고 동적인 관계를 형성 할 수도 있습니다.</p>
+<p>모든 소프트웨어 개발은 합성입니다.  쉽고 유연한 방법도 있고 부서지기 쉬운 관절염도 있습니다.  객체 합성의 일부 형태는 느슨하게 연결된 관계를 형성하고, 다른 형태는 매우 단단한 결합을 형성합니다.</p>
+<p>프로그램 요구사항이 변경되었을 때 코드 구현을 조금만 변경하기 위해선 다양한 합성 형태를 찾아보십시오. 의도를 명확하고 간결하게 표현하고 기억하십시오 : 클래스 상속이 필요하다고 생각이 들 때 사실 더 좋은 방법이 많이 있을 것입니다.</p>
+<p><a href="#"><strong>다음: 삼항연산자의 멋짐을 모르는 당신이 불쌍해 &gt;</strong></a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>monolithic  단일체의, 한 덩어리로 뭉친, 단일 결정으로된 <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>병합, 연결, 결합과 같은 용어로 번역됩니다. 배열, 문자열의 기본 연산에서 등장하는 용어이지만 객체를 합친다는 문맥에서는 접합이 적합하다고 판단했습니다 <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/04/15/abstraction-and-composition/" data-toggle="tooltip" data-placement="top" title="합성과 추상화">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#객체-합성object-composition이란-무엇입니까"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">객체 합성Object Composition이란 무엇입니까?</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#객체-합성의-세-가지-다른-형태"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">객체 합성의 세 가지 다른 형태</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#집합-aggregation"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">집합 Aggregation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#예제들"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">예제들</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#언제-사용-하는가"><span class="toc-nav-number">3.2.</span> <span class="toc-nav-text">언제 사용 하는가?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#참고사항"><span class="toc-nav-number">3.3.</span> <span class="toc-nav-text">참고사항</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#코드-예제"><span class="toc-nav-number">3.4.</span> <span class="toc-nav-text">코드 예제</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#접합-연결-concatenation"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">접합, 연결 Concatenation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#예제들"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">예제들</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#언제-사용하는가"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">언제 사용하는가?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#참고사항"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">참고사항</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#코드-예제"><span class="toc-nav-number">4.4.</span> <span class="toc-nav-text">코드 예제</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#위임-delegation"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">위임 Delegation</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#예제들"><span class="toc-nav-number">5.1.</span> <span class="toc-nav-text">예제들</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#언제-사용-하는가"><span class="toc-nav-number">5.2.</span> <span class="toc-nav-text">언제 사용 하는가?</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#고려-사항"><span class="toc-nav-number">5.3.</span> <span class="toc-nav-text">고려 사항</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#코드-예제"><span class="toc-nav-number">5.4.</span> <span class="toc-nav-text">코드 예제</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#결론"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">결론</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                        
+                          <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "midojeong";
+    var disqus_identifier = "midojeong.github.io/2018/04/17/the-hidden-treasures-of-object-composition/";
+    var disqus_url = "midojeong.github.io/2018/04/17/the-hidden-treasures-of-object-composition/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/midojeong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; mido 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("midojeong.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-116376595-1';
+    var _gaDomain = 'https://midojeong.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
