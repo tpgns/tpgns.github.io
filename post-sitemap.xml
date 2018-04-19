@@ -7,6 +7,14 @@
     </url>
 
     <url>
+        <loc>midojeong.github.io/2018/03/16/composing-software-intro/</loc>
+        <lastmod>2018-04-19T13:19:53.355Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
         <loc>midojeong.github.io/2018/04/17/the-hidden-treasures-of-object-composition/</loc>
         <lastmod>2018-04-17T15:11:48.980Z</lastmod>
         <changefreq>weekly</changefreq>
@@ -105,14 +113,6 @@
     <url>
         <loc>midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/</loc>
         <lastmod>2018-04-06T09:32:58.437Z</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-
-    </url>
-
-    <url>
-        <loc>midojeong.github.io/2018/03/16/composing-software-intro/</loc>
-        <lastmod>2018-04-06T09:32:20.398Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
