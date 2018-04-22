@@ -7,8 +7,8 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/03/16/composing-software-intro/</loc>
-        <lastmod>2018-04-19T13:19:53.355Z</lastmod>
+        <loc>midojeong.github.io/2018/04/21/mocking-is-a-code-smell/</loc>
+        <lastmod>2018-04-22T04:06:34.999Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 
@@ -16,7 +16,15 @@
 
     <url>
         <loc>midojeong.github.io/2018/04/17/the-hidden-treasures-of-object-composition/</loc>
-        <lastmod>2018-04-17T15:11:48.980Z</lastmod>
+        <lastmod>2018-04-22T01:18:31.787Z</lastmod>
+        <changefreq>weekly</changefreq>
+        <priority>0.6</priority>
+
+    </url>
+
+    <url>
+        <loc>midojeong.github.io/2018/03/16/composing-software-intro/</loc>
+        <lastmod>2018-04-21T23:09:45.546Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
 

@@ -266,7 +266,7 @@
 </ul>
 <p>이러한 다른 형태의 구성은  <strong>서로 배타적이지 않습니다.</strong>  접합으로 위임을 구현할 수 있으며 JavaScript에서 클래스 상속은 위임으로 구현됩니다. 많은 소프트웨어 시스템은 객체를 합성할 때 하나 이상의 방법을 사용합니다. 예를 들어, jQuery의 플러그인은 프로토타입 프로퍼티인 <code>jQuery.fn</code>에 다른 메소드들을 접합하는 방식으로 확장합니다. 클라이언트 코드가 플러그인 메소드를 호출하면 프로토타입에 연결된 메소드에 위임됩니다.</p>
 <blockquote>
-<p>앞으로 다룰 코드 예제들은 아래 코드를  계속 사용할 것 입니다.</p>
+<p>앞으로 나올 예제들에서 아래 코드를 계속 사용할 것 입니다.</p>
 </blockquote>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> objs = [  </span><br><span class="line">  &#123; <span class="attr">a</span>: <span class="string">'a'</span>, <span class="attr">b</span>: <span class="string">'ab'</span> &#125;,  </span><br><span class="line">  &#123; <span class="attr">b</span>: <span class="string">'b'</span> &#125;,  </span><br><span class="line">  &#123; <span class="attr">c</span>: <span class="string">'c'</span>, <span class="attr">b</span>: <span class="string">'cb'</span> &#125;  </span><br><span class="line">];</span><br></pre></td></tr></table></figure>
 <h2 id="집합-aggregation">집합 Aggregation</h2>
@@ -371,6 +371,10 @@
                 <hr>
                 <!-- Pager -->
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/04/21/mocking-is-a-code-smell/" data-toggle="tooltip" data-placement="top" title="Mocking은 코드 냄새(Code Smell)입니다">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">
