@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mido&#39;s IT blog github page">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          삼항연산자의 멋짐을 모르는 당신이 불쌍해 - mido
+        
+    </title>
+
+    <link rel="canonical" href="midojeong.github.io/2018/04/14/nested-ternaries-are-great/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116376595-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-116376595-1');
+    </script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                            
+                              <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                            
+                        </div>
+                        <h1>삼항연산자의 멋짐을 모르는 당신이 불쌍해</h1>
+                        <h2 class="subheading">Nested Ternaries are Great</h2>
+                        <span class="meta">
+                            Posted by mido on
+                            2018-04-14
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">mido</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>이 글은  <a href="https://medium.com/@_ericelliott?source=post_header_lockup" target="_blank" rel="noopener">Eric Elliott</a> 이 <strong>medium</strong>에서 연재하는 Composing Software 시리즈를 번역한 것입니다.  <a href="https://medium.com/javascript-scene/nested-ternaries-are-great-361bddd0f340" target="_blank" rel="noopener">[원문보기]</a></p>
+</blockquote>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*uVpU7iruzXafhU2VLeH4lw.jpeg" alt=""></p>
+<p><em>Smoke Art Cubes to Smoke — MattysFlicks — (CC BY 2.0)</em></p>
+<blockquote>
+<p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈의 일부 입니다.  앞으로 계속하여 연재될 것입니다.<br>
+<a href="https://medium.com/javascript-scene/a-functional-programmers-introduction-to-javascript-composing-software-d670d14ede30" target="_blank" rel="noopener">&lt;이전</a>  |  <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea" target="_blank" rel="noopener">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://medium.com/javascript-scene/reduce-composing-software-fe22f0c39a1d" target="_blank" rel="noopener">다음&gt;</a></p>
+</blockquote>
+<p>보통 삼항연산자를 중첩시키는 것은 가독성을 떨어트리기 때문에 피해야 한다고 합니다.</p>
+<blockquote>
+<p>Conventional wisdom is sometimes unwise.</p>
+</blockquote>
+<p>사실,  <em>삼항 연산자는 대개 if 문보다 훨씬 간단합니다.</em>  사람들이 그 반대로 믿게되는 두 가지 이유가 있습니다.</p>
+<ol>
+<li>if 문에 익숙합니다.  친근성 편향<sup>Familiarity</sup> <sup>bias</sup>은 우리가 반대되는 증거를 제시 할지라도 사실이 아닌 것을 믿게합니다.</li>
+<li>사람들은 삼항연산자를 <code>if</code> 문처럼 사용하려고합니다.  삼항연산자는  <em>명령문<sup>statement</sup> 아니라 표현식<sup>expression</sup></em>  이므로 이는 잘못된 용법입니다.</li>
+</ol>
+<p>세부사항에 대해 알아보기 전에 삼항연산자 표현식을 정의해 보겠습니다.</p>
+<p>삼항식은 값으로 평가되는 조건부 표현식입니다.  조건부,  진리 절 (조건부가 참인 경우 평가되는 값), 그리고 거짓 절(조건부가 거짓인 경우 평가되는 값)으로 구성됩니다.</p>
+<p>다음 처럼 표현됩니다 :</p>
+<figure class="highlight ada"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">(conditional)  </span><br><span class="line">  ? truthyClause  </span><br><span class="line">  : <span class="type">falsyClause</span></span><br></pre></td></tr></table></figure>
+<h2 id="표현식-대-명령문">표현식 대 명령문</h2>
+<p>스몰 토크, 하스켈 및 대부분의 함수형 프로그래밍 언어를 포함한 몇 가지 프로그래밍 언어에는 <code>if</code>문이 전혀 없습니다.  대신에  <code>if</code> 표현식이 있습니다.</p>
+<p><code>if</code> 표현식은 값으로 평가되는 조건식입니다.  조건부,  진리 절 (조건부가 참인 경우 평가되는 값), 그리고 거짓 절(조건부가 거짓인 경우 평가되는 값)으로 구성됩니다.</p>
+<p>비슷하지 않습니까?  대부분의 함수형 프로그래밍 언어에서는  <code>if</code>  키워드를 삼항식처럼 사용합니다. 어째서일까요?</p>
+<p>표현식은 단일 값으로 평가되는 코드 덩어리입니다.</p>
+<p>문장은 값으로 평가되지 않는 코드 덩어리입니다.  JavaScript에서는 if문이 값으로 평가되지 않습니다.  if문이 의미있는 일을 하게 하려면 부작용을 발생시키거나 함수 안에서 값을 리턴해야 합니다.</p>
+<p>함수형 프로그래밍에서는 변이와 부작용을 피하려는 경향이 있습니다.  JavaScript의 <code>if</code>는 자연스럽게 변이와 부작용을 발생시키는 경우가 많으므로 저를 포함한 많은 함수형 프로그래머가 중첩 여부에 관계없이 삼항연산자를 사용합니다.</p>
+<p>삼항식의 관점으로 생각하는 것은 if문의 관점으로 생각하는 것과는 조금 다릅니다. 그러나 2주 정도만 의식해서 사용하다보면 자연스럽게 삼항식에 끌리기 시작할 것입니다. 단순히 타이핑할게 적기 때문에라도 말입니다.</p>
+<h2 id="친숙함-편향-familiarity-bias">친숙함 편향 Familiarity Bias</h2>
+<p>제가 본 공통적인 의견중 하나는 중첩된 삼항 표현식은 &quot;읽기가 어렵다&quot;는 것입니다.  몇 가지 코드 예제로 그 미신을 산산조각 내보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withIf = (&#123;  </span><br><span class="line">  conditionA, conditionB  </span><br><span class="line">&#125;) =&gt; &#123;  </span><br><span class="line">  <span class="keyword">if</span> (conditionA) &#123;  </span><br><span class="line">    <span class="keyword">if</span> (conditionB) &#123;  </span><br><span class="line">      <span class="keyword">return</span> valueA;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> valueB;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> valueC;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>이 중첩된 <code>if</code>문 코드는 falsy 절과 truthy 절이 시각적으로 분리되어 매우 단절된 느낌을줍니다.  사실 매우 간단한 코드지만 구문을 분석하려면 살짝 주의깊게 봐야합니다.</p>
+<p>동일한 논리를 삼항 표현식으로 작성해보았습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withTernary = (&#123;  </span><br><span class="line">  conditionA, conditionB  </span><br><span class="line">&#125;) =&gt; (  </span><br><span class="line">  (!conditionA)  </span><br><span class="line">    ? valueC  </span><br><span class="line">    : (conditionB)  </span><br><span class="line">    ? valueA  </span><br><span class="line">    : valueB  </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>여기에 몇 가지 흥미로운 점이 있습니다.</p>
+<h2 id="데이지-체이닝1-vs-네스팅">데이지 체이닝<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> vs 네스팅</h2>
+<p>첫째로, 우리는 중첩을 평평하게 했습니다.  “중첩된” 삼항식은 약간의 잘못된  표현입니다. 삼항식은 직선적으로 쓰기 쉽기 때문에 들여쓰기로 중첩할 필요가 없습니다.  따라서, 단순하게 위에서 아래로 읽으면서 조건에 부합하는 순간 즉시 값을 반환합니다.</p>
+<p>올바르게 작성된 삼항식에는 해석해야될 중첩이 없습니다.  직선도로에서 길을 잃기란 꽤 어렵습니다.</p>
+<p>따라서 우리는 이를  &quot;삼항연산자 체이닝&quot;이라고 부를 것입니다.</p>
+<p>두 번째로 지적하고 싶은 것은 이 직선 연쇄를 단순화하기 위해 논리의 순서를 조금 바꿨다는 것입니다. 삼항 표현식의 끝으로 가서 두 개의 콜론 절 (<code>:</code>) 중, 마지막 절을 위로 이동시키고, 단순화하기 위해 첫 번째 조건의 논리를 역으로 바꿨습니다.  더 이상 복잡해질 이유가 없습니다.</p>
+<p>사실,  <code>if</code> 문을 단순화하기 위해 동일한 트릭을 사용할 수 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withIf = (&#123;  </span><br><span class="line">  conditionA, conditionB  </span><br><span class="line">&#125;) =&gt; &#123;  </span><br><span class="line">  <span class="keyword">if</span> (!conditionA) <span class="keyword">return</span> valueC;  </span><br><span class="line">  <span class="keyword">if</span> (conditionB) &#123;  </span><br><span class="line">    <span class="keyword">return</span> valueA;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> valueB;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>훨씬 나아졌습니다. 그러나 아직도 시각적으로 분리된 <code>conditionB</code>절이 혼란을 야기 할 수 있습니다.  저는 이러한 문제들이 논리적 버그로 이어지는 것을 보았습니다.  논리가 평평 해졌음에도 불구하고이 버전은 삼항연산자 버전보다 여전히 혼란스럽습니다.</p>
+<h2 id="어수선한-구문들">어수선한 구문들</h2>
+<p><code>if</code>  버전에는 잡동사니들이 포함되어 있습니다.  <code>if</code>  키워드 ,  <code>return</code> 키워드, 여분의 세미콜론, 여분의 중괄호 등. 이 예제와 달리 대부분의 if 문장은 외부 상태를 변경하며 여분의 코드<sup>Extra</sup> <sup>Code</sup>와 복잡성이 더해집니다.</p>
+<p><em>여분의 코드</em>  가 좋지 않은 몇 가지 중요한 이유가 있습니다. 이미 몇번씩 언급했었지만, 모든 개발자의 뇌에 화상을 입힐 때까지 반복 할 가치가 있습니다.</p>
+<h3 id="단기-기억">단기 기억</h3>
+<p>인간 두뇌의  <a href="http://www.nature.com/neuro/journal/v17/n3/fig_tab/nn.3655_F2.html" target="_blank" rel="noopener">단기 기억력</a>은 서로 다른 항목을 저장하기 위한 공간이 한정되어있으며, 함수의 인자와 변수는 잠재적으로 그 공간 중 하나를 소비합니다.  변수가 늘어날 수록 각 변수의 의미를 기억하기 힘들어 집니다. 단기 기억 모형에 따르면 우리의 두뇌는 일반적으로 4-7 개의 항목을 단기 기억 공간에 저장할 수 있으며 이 보다 크면 오류율이 급격히 증가합니다.</p>
+<p>우리는 함수 파이프라이닝을 사용해 변수 3개를 소거하였고 다른 변수를 기억하는데 사용할 수  있게 됐습니다.  단기 기억 공간의 거의 절반을 확보한 것입니다. 이는 인지 부하를 상당히 줄여줍니다.  소프트웨어 개발자는 데이터를 묶어 기억하는 경향이 있지만 그렇다고 이 개념의 중요성이 약해지는 것은 아닙니다.</p>
+<h3 id="신호-대-잡음비">신호 대 잡음비</h3>
+<p>간결함은 코드의 신호 대 잡음 비율<sup>Signal</sup> <sup>to</sup> <sup>Noise</sup> <sup>Ratio</sup>을 향상시킵니다.  라디오를 듣는 것과 같습니다. 라디오의 주파수가 제대로 맞춰져 있지 않으면 소음이 발생하며 음악을 듣기가 어려워집니다.  방송국 주파수로 정확하게 튜닝하면 소음이 사라지고 음악 신호가 강해집니다.</p>
+<p>코드도 마찬가지입니다.  간결한 표현은 이해력을 향상시킵니다. 일부 코드는 유용한 정보를 제공하고 일부 코드는 공간을 차지합니다.  전달되어야 할 의미를 변화시키지 않는 선에서 코드의 양을 줄이면 코드를 읽고 이해해야하는 다른 사람들이 더 쉽게 이해할 수 있습니다.<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup></p>
+<h3 id="코드의-면적과-버그">코드의 면적과 버그</h3>
+<p>함수형으로 작성된 코드를 살펴보면 마치 코드가 살을 빼 다이어트 한 것처럼 보입니다. 이 비유가 중요한 이유는 여분의 코드가 버그를 숨길 수있는 추가 표면적을 의미하기 때문입니다 . 즉 더 많은 버그가 숨어 버릴 수 있음을 의미합니다.</p>
+<blockquote>
+<p><em>적은 코드 = 버그가 적은 표면 = 버그가 적습니다.</em></p>
+</blockquote>
+<h2 id="부작용-및-가변적인-공유변수">부작용 및 가변적인 공유변수</h2>
+<p>대부분의 경우 if 문은 값으로 평가되는 것 이상을 수행합니다.  이들은 부작용을 발생시키고 변수를 변경합니다. 부작용의 영향과 가변적인 공유변수를 다루는 제어 흐름을 완전히 파악하지 못한다면 if 문이 작동하는 모든 그림을 볼 수 없습니다.</p>
+<p>언제나 값이 리턴 되도록 하는 것은 일련의 규율을 만듭니다. 즉, 프로그램을 이해하고 디버그하고 리팩토링하고 유지 관리하기가 쉽도록 종속성을 끊어내는 실천입니다.</p>
+<p>그리고 이 부분이 바로 삼항연산자의 이점 중 제가 가장 좋아하는 것입니다.</p>
+<blockquote>
+<p><em>삼항연산자를 사용하면 더 나은 개발자가 될 것입니다.</em></p>
+</blockquote>
+<h2 id="결론">결론</h2>
+<p>모든 삼항식은 위에서 아래로 일직선으로 배열하기 쉽기 때문에 &quot;중첩 삼항식&quot;이라고 하는 것은 잘못된 표현입니다.  대신, 이들을 &quot;삼항식 체이닝&quot;라고 부르겠습니다.</p>
+<p>체인된 삼항연산자는 if 문과 비교해 몇 가지 장점이 있습니다.</p>
+<ul>
+<li>항상 위에서 아래로 일직선으로 읽을 수 있도록 작성하는 것이 좋습니다. 직선을 따라 읽으면 체인된 삼항식을 무리없이 읽을 수 있습니다.</li>
+<li>삼항 연산자는 구문의 혼란을 줄입니다.  적은 코드 = 버그가 적은 표면 = 버그가 적습니다.</li>
+<li>삼항 연산자는 임시 변수를 필요로하지 않으므로 단기기억력의 부하가 줄어 듭니다.</li>
+<li>삼항식은 신호 대 잡음비가 더 좋습니다.</li>
+<li><code>if</code>문은  부작용과 변이를 권장하지만,  삼항연산자는 순수한 코드를 권장합니다.</li>
+<li>순수한 코드는 표현과 기능을 서로 분리시킴으로써 우리가 더 나은 개발자가 될 수 있도록 합니다.</li>
+</ul>
+<p><a href="https://medium.com/javascript-scene/javascript-monads-made-simple-7856be57bfe8" target="_blank" rel="noopener"><strong>다음: 합성과 추상화 &gt;</strong></a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>전자공학에서 사용하는 용어로 연속적으로 연결되어 있는 하드웨어 장치들의 구성을 뜻합니다 <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>개발자가 코드를 작성하고 다른 개발자가 이를 이해한다는 것을 라디오의 방송국과 청취자들의 관계에 비유했 습니다. 이 때 신호란 전달되어야하는 의미이고 잡음이란 공간만 차지하는 코드입니다. 즉 더 적은 코드로 같은 의미를 전달하는 것이 좋다는 말이 됩니다. <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/04/15/abstraction-and-composition/" data-toggle="tooltip" data-placement="top" title="합성과 추상화">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/04/14/composable-datatype-with-functions/" data-toggle="tooltip" data-placement="top" title="함수형 자료구조">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#표현식-대-명령문"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">표현식 대 명령문</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#친숙함-편향-familiarity-bias"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">친숙함 편향 Familiarity Bias</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#데이지-체이닝1-vs-네스팅"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">데이지 체이닝[1] vs 네스팅</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#어수선한-구문들"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">어수선한 구문들</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#단기-기억"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">단기 기억</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#신호-대-잡음비"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">신호 대 잡음비</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#코드의-면적과-버그"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">코드의 면적과 버그</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#부작용-및-가변적인-공유변수"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">부작용 및 가변적인 공유변수</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#결론"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">결론</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                        
+                          <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "midojeong";
+    var disqus_identifier = "midojeong.github.io/2018/04/14/nested-ternaries-are-great/";
+    var disqus_url = "midojeong.github.io/2018/04/14/nested-ternaries-are-great/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/midojeong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; mido 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("midojeong.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-116376595-1';
+    var _gaDomain = 'https://midojeong.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

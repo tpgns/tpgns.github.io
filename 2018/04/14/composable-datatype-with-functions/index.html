@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mido&#39;s IT blog github page">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          함수형 자료구조 - mido
+        
+    </title>
+
+    <link rel="canonical" href="midojeong.github.io/2018/04/14/composable-datatype-with-functions/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116376595-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-116376595-1');
+    </script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                            
+                              <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                            
+                        </div>
+                        <h1>함수형 자료구조</h1>
+                        <h2 class="subheading">Composable Datatypes with Functions</h2>
+                        <span class="meta">
+                            Posted by mido on
+                            2018-04-14
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">mido</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>이 글은  <a href="https://medium.com/@_ericelliott?source=post_header_lockup" target="_blank" rel="noopener">Eric Elliott</a> 이 <strong>medium</strong>에서 연재하는 Composing Software 시리즈를 번역한 것입니다.  <a href="https://medium.com/javascript-scene/composable-datatypes-with-functions-aec72db3b093" target="_blank" rel="noopener">[원문보기]</a></p>
+</blockquote>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*uVpU7iruzXafhU2VLeH4lw.jpeg" alt=""></p>
+<p><em>Smoke Art Cubes to Smoke — MattysFlicks — (CC BY 2.0)</em></p>
+<blockquote>
+<p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈의 일부 입니다.  앞으로 계속하여 연재될 것입니다.<br>
+<a href="https://medium.com/javascript-scene/a-functional-programmers-introduction-to-javascript-composing-software-d670d14ede30" target="_blank" rel="noopener">&lt;이전</a>  |  <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea" target="_blank" rel="noopener">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://medium.com/javascript-scene/reduce-composing-software-fe22f0c39a1d" target="_blank" rel="noopener">다음&gt;</a></p>
+</blockquote>
+<h2 id="함수형-자료구조">함수형 자료구조</h2>
+<p>JavaScript에서 무언가를 합성<sup>compose</sup>하는 가장 쉬운 방법은 함수 합성이며 함수는 객체이기 때문에 메소드가 추가 될 수 있습니다 :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> t = <span class="function"><span class="params">value</span> =&gt;</span> &#123;  </span><br><span class="line">  <span class="keyword">const</span> fn = <span class="function"><span class="params">()</span> =&gt;</span> value;</span><br><span class="line"></span><br><span class="line">  fn.toString = <span class="function"><span class="params">()</span> =&gt;</span> <span class="string">`t(<span class="subst">$&#123; value &#125;</span>)`</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> fn;  </span><br><span class="line">&#125;;  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> someValue = t(<span class="number">2</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(  </span><br><span class="line">  someValue.toString() <span class="comment">// "t(2)"  </span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p><code>t</code>는 숫자형 인스턴스를 생성하는 팩토리입니다.  그러나 <code>t</code>의 인스턴스는 단순한 객체가 아닙니다.  <strong>함수</strong>입니다. 즉, 일반적인 함수와 마찬가지로 합성할 수 있습니다.  기본적으로 멤버를 더하는 함수라고 가정 해 봅시다.  어쩌면 합성될 때 더해지는 것이 합리적 일 수 있습니다.</p>
+<p>먼저 몇 가지 규칙을 세우겠습니다. ( <code>====</code>는  &quot;동등한&quot;을 의미).</p>
+<ul>
+<li><code>t(x)(t(0)) ==== t(x)</code></li>
+<li><code>t(x)(t(1)) ==== t(x + 1)</code></li>
+</ul>
+<p><code>.toString()</code>  메소드를 사용하면 다음과 같습니다.</p>
+<ul>
+<li><code>t(x)(t(0)).toString() === t(x).toString()</code></li>
+<li><code>t(x)(t(1)).toString() === t(x + 1).toString()</code></li>
+</ul>
+<p>이 규칙들을 바탕으로 간단한 유닛 테스트를 작성해보겠습니다 :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> assert = &#123;  </span><br><span class="line">  same: <span class="function">(<span class="params">actual, expected, msg</span>) =&gt;</span> &#123;  </span><br><span class="line">    <span class="keyword">if</span> (actual.toString() !== expected.toString()) &#123;  </span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">`NOT OK: <span class="subst">$&#123; msg &#125;</span>  </span></span><br><span class="line"><span class="string">        Expected: <span class="subst">$&#123; expected &#125;</span>  </span></span><br><span class="line"><span class="string">        Actual:   <span class="subst">$&#123; actual &#125;</span>  </span></span><br><span class="line"><span class="string">      `</span>);  </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`OK: <span class="subst">$&#123; msg &#125;</span>`</span>);  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;;  </span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">&#123;  </span><br><span class="line">  <span class="keyword">const</span> msg = <span class="string">'a value t(x) composed with t(0) ==== t(x)'</span>;  </span><br><span class="line">  <span class="keyword">const</span> x = <span class="number">20</span>;  </span><br><span class="line">  <span class="keyword">const</span> a = t(x)(t(<span class="number">0</span>));  </span><br><span class="line">  <span class="keyword">const</span> b = t(x);  </span><br><span class="line">  assert.same(a, b, msg);  </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#123;  </span><br><span class="line">  <span class="keyword">const</span> msg = <span class="string">'a value t(x) composed with t(1) ==== t(x + 1)'</span>;  </span><br><span class="line">  <span class="keyword">const</span> x = <span class="number">20</span>;  </span><br><span class="line">  <span class="keyword">const</span> a = t(x)(t(<span class="number">1</span>));  </span><br><span class="line">  <span class="keyword">const</span> b = t(x + <span class="number">1</span>);  </span><br><span class="line">  assert.same(a, b, msg);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>처음에는 실패합니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">NOT OK: a value t(x) composed <span class="keyword">with</span> t(<span class="number">0</span>) ==== t(x)   </span><br><span class="line">	 Expected: t(<span class="number">20</span>)   </span><br><span class="line">	 Actual: <span class="number">20</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>이는 <code>fn</code>이 <code>t</code> 인스턴스가 아니라 실제 값인 <code>value</code>를 리턴하기 때문입니다.  flatten되는 것이지요. 계속되는 논의에서 저자는 이를 monoid 형태로 만들어갑니다 -역자</p>
+</blockquote>
+<p>그러나 다음 세가지 단계를 거쳐 간단하게 통과시킬 수 있습니다.</p>
+<ol>
+<li><code>fn</code>  함수를  <code>t(value + n)</code>를 리턴하는  <code>add</code>  함수로 변경합니다. 여기서  <code>n</code>은 전달 된 인수입니다.</li>
+<li>새로운  <code>add()</code>함수가  <code>t()</code> 인스턴스를 인수로 취할 수 있도록 하겠습니다.   이를 위해 <code>.valueOf()</code>메소드가  <code>t</code> 타입을 풀어줄 수 있게합니다. 그리고 <code>+</code>  연산자는 두 번째 피연산자로  <code>n.valueOf()</code>의 결과를 사용합니다.</li>
+<li><code>Object.assign()</code>  을 사용하여  <code>add()</code>  함수에 메소드들을 추가합니다.</li>
+</ol>
+<p>새로 작성한 코드입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> t = <span class="function"><span class="params">value</span> =&gt;</span> &#123;  </span><br><span class="line">  <span class="keyword">const</span> add = <span class="function"><span class="params">n</span> =&gt;</span> t(value + n);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.assign(add, &#123;  </span><br><span class="line">    toString: <span class="function"><span class="params">()</span> =&gt;</span> <span class="string">`t(<span class="subst">$&#123; value &#125;</span>)`</span>,  </span><br><span class="line">    valueOf: <span class="function"><span class="params">()</span> =&gt;</span> value  </span><br><span class="line">  &#125;);  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>이번에는 테스트가 통과합니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"OK: a value t(x) composed with t(0) ==== t(x)"</span>  </span><br><span class="line"><span class="string">"OK: a value t(x) composed with t(1) ==== t(x + 1)"</span></span><br></pre></td></tr></table></figure>
+<p>이제  <code>t()</code>값을 함수 합성으로 연산할 수 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Compose functions from top to bottom:  </span></span><br><span class="line"><span class="keyword">const</span> pipe = <span class="function">(<span class="params">...fns</span>) =&gt;</span> x =&gt; fns.reduce(<span class="function">(<span class="params">y, f</span>) =&gt;</span> f(y), x);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Sugar to kick off the pipeline with an initial value:  </span></span><br><span class="line"><span class="keyword">const</span> sumT = <span class="function">(<span class="params">...fns</span>) =&gt;</span> pipe(...fns)(t(<span class="number">0</span>));</span><br><span class="line"></span><br><span class="line">sumT(  </span><br><span class="line">  t(<span class="number">2</span>),  </span><br><span class="line">  t(<span class="number">4</span>),  </span><br><span class="line">  t(<span class="number">-1</span>)  </span><br><span class="line">).valueOf(); <span class="comment">// 5</span></span><br></pre></td></tr></table></figure>
+<h2 id="모든-데이터-유형에-대해-가능합니다">모든 데이터 유형에 대해 가능합니다</h2>
+<p>합성 자체에 특정한 의미를 부여할 수 있는 한 데이터가 어떤 모양을 하고있는지는 중요하지 않습니다.  배열 또는 문자열의 경우 연결<sup>concatenation</sup> 일 수 있습니다.  DSP의 경우 신호 합계가 될 수 있습니다.  수많은 예들이 있을 겁니다.  어떤 연산 혹은 작업이 합성이란 개념과 잘 맞는가라는 질문이 핵심이 됩니다. 즉, 어떤 작업이 다음처럼 표현하기 좋을까요?</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> result = compose(  </span><br><span class="line">  value1,  </span><br><span class="line">  value2,  </span><br><span class="line">  value3  </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<h2 id="composable-currency-예제">Composable Currency 예제</h2>
+<p><a href="https://github.com/ericelliott/moneysafe" target="_blank" rel="noopener">Moneysafe</a>는 함수형 자료구조로 구현된 오픈 소스 라이브러리입니다.  JavaScript의  <code>Number</code>는 소숫점 자리의 달러를 정확하게 나타낼 수 없습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">.1</span> + <span class="number">.2</span> === <span class="number">.3</span> <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>Moneysafe는 달러를 센트로 변환해 문제를 해결합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save moneysafe</span><br></pre></td></tr></table></figure>
+<p>사용법은 다음과 같습니다:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; $ &#125; <span class="keyword">from</span> <span class="string">'moneysafe'</span>;</span><br><span class="line"></span><br><span class="line">$(<span class="number">.1</span>) + $(<span class="number">.2</span>) === $(<span class="number">.3</span>).cents; <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<p>렛저<sup>ledger</sup>(장부)라는 간단한 함수 합성 유틸리티가 있습니다. 렛저 구문은 Moneysafe가 값을 승급<sup>lift</sup>하여 함수처럼 다룰 수 있다는 사실을 이용합니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; $ &#125; <span class="keyword">from</span> <span class="string">'moneysafe'</span>;  </span><br><span class="line"><span class="keyword">import</span> &#123; $$, subtractPercent, addPercent &#125; <span class="keyword">from</span> <span class="string">'moneysafe/ledger'</span>;</span><br><span class="line"></span><br><span class="line">$$(  </span><br><span class="line">  $(<span class="number">40</span>),  </span><br><span class="line">  $(<span class="number">60</span>),  </span><br><span class="line">  <span class="comment">// subtract discount  </span></span><br><span class="line">  subtractPercent(<span class="number">20</span>),  </span><br><span class="line">  <span class="comment">// add tax  </span></span><br><span class="line">  addPercent(<span class="number">10</span>)  </span><br><span class="line">).$; <span class="comment">// 88</span></span><br></pre></td></tr></table></figure>
+<p>리턴 값은 처음에 승급된 화폐 값입니다.  내부적으로  부동 소수점 센트 값을 달러로 변환하여 가장 가까운 센트로 반올림하며 이를 <code>.$</code>라는 getter를 사용해 받을 수 있습니다.</p>
+<p>즉, 장부처럼 금전계산을 할 수있는 직관적인 인터페이스입니다.</p>
+<h3 id="실습해보기">실습해보기</h3>
+<p>Moneysafe를 git에서 받아옵니다 :</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git <span class="built_in">clone</span> git@github.com:ericelliott/moneysafe.git</span><br></pre></td></tr></table></figure>
+<p>디펜던시들을 설치 합니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install</span><br></pre></td></tr></table></figure>
+<p>watch 콘솔을 사용하여 단위 테스트를 실행하십시오.  모두 통과해야합니다 :</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm run watch</span><br></pre></td></tr></table></figure>
+<p>새 터미널을 열고 구현된 코드들을 삭제하겠습니다.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ rm <span class="built_in">source</span>/moneysafe.js &amp;&amp; touch <span class="built_in">source</span>/moneysafe.js</span><br></pre></td></tr></table></figure>
+<p>watch 콘솔 테스트를 다시 한 번 살펴보십시오.  이제는 오류가 표시되어야합니다.</p>
+<p>여러분의 임무는 unit test와 documentation을 참고해서 <code>moneysafe.js</code>를 처음부터 다시 구현하는 것입니다.</p>
+<p>회원들을 위해 7개의 파트로 구성된 튜토리얼 시리즈를 녹화했습니다.  여기 첫 번째 에피소드가 있습니다.</p>
+<p>Moneysafe 튜토리얼은  <a href="https://ericelliottjs.com/premium-content/shotgun-the-moneysafe-series/" target="_blank" rel="noopener">Shotgun 시리즈</a>에서 볼 수 있습니다.</p>
+<p>회원이 아니십니까?  <a href="https://ericelliottjs.com/product/lifetime-access-pass/" target="_blank" rel="noopener">지금 가입하세요</a>.</p>
+<p><a href="https://medium.com/javascript-scene/javascript-monads-made-simple-7856be57bfe8" target="_blank" rel="noopener"><strong>다음: JavaScript 모나드 &gt;</strong></a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/04/14/nested-ternaries-are-great/" data-toggle="tooltip" data-placement="top" title="삼항연산자의 멋짐을 모르는 당신이 불쌍해">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/04/12/Why-Composition-is-Harder-with-Classes/" data-toggle="tooltip" data-placement="top" title="클래스로 합성하기가 까다로운 이유">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#함수형-자료구조"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">함수형 자료구조</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#모든-데이터-유형에-대해-가능합니다"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">모든 데이터 유형에 대해 가능합니다</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#composable-currency-예제"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">Composable Currency 예제</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#실습해보기"><span class="toc-nav-number">3.1.</span> <span class="toc-nav-text">실습해보기</span></a></li></ol></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                        
+                          <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "midojeong";
+    var disqus_identifier = "midojeong.github.io/2018/04/14/composable-datatype-with-functions/";
+    var disqus_url = "midojeong.github.io/2018/04/14/composable-datatype-with-functions/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/midojeong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; mido 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("midojeong.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-116376595-1';
+    var _gaDomain = 'https://midojeong.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>

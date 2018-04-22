@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mido&#39;s IT blog github page">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          왜 JavaScript로 함수형 프로그래밍을 배우는가? - mido
+        
+    </title>
+
+    <link rel="canonical" href="midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116376595-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-116376595-1');
+    </script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                            
+                              <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                            
+                        </div>
+                        <h1>왜 JavaScript로 함수형 프로그래밍을 배우는가?</h1>
+                        <h2 class="subheading">Why learn functional programming in JavaScript?</h2>
+                        <span class="meta">
+                            Posted by mido on
+                            2018-03-24
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">mido</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>이 글은  <a href="https://medium.com/@_ericelliott?source=post_header_lockup" target="_blank" rel="noopener">Eric Elliott</a> 이 <strong>medium</strong>에서 연재하는 Composing Software 시리즈를 번역한  것입니다.  <a href="https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257" target="_blank" rel="noopener">[원문보기]</a></p>
+</blockquote>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*uVpU7iruzXafhU2VLeH4lw.jpeg" alt=""><br>
+<em>Smoke Art Cubes to Smoke — MattysFlicks — (CC BY 2.0)</em></p>
+<blockquote>
+<p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈의 일부 입니다.  앞으로 계속하여 연재될 것입니다.<br>
+<a href="https://midojeong.github.io/2018/03/20/the-rise-and-fall-and-rise-of-functional-programming-composable-software/"><em>&lt;이전</em></a>  <em>|</em>  <a href="https://midojeong.github.io/2018/03/16/composing-software-intro/"><em>&lt;&lt; Part 1에서 다시 시작</em></a>  <em>|</em>  <a href="https://midojeong.github.io/2018/03/28/a-functional-programmers-introduction-to-javascript/"><em>다음&gt;</em></a></p>
+</blockquote>
+<p>그동안 JavaScript에 대해 가지고 있었던 생각들은 모두 잊어 버리고 초심자의 마음으로 이 글을 읽어주세요. JavaScript를 사용해 본 적 없는 이들을 위해 JavaScript의 기본 사항을 처음부터 다룰 것입니다.  당신이 초보자라면 행운입니다.  드디어 ES6 및 함수형 프로그래밍을 처음부터 다루는 글이 나왔습니다!  모든 새로운 개념에 대해 하나씩 알아볼 예정입니다. 그러나 너무 모든 것을 다 이해하려고 노력하지는 않아도 됩니다.</p>
+<p>JavaScript나 순수 함수 언어에 익숙한 노련한 개발자라면 어쩌면 JavaScript가 함수 프로그래밍을 탐구하기위한 재미있는 선택이라고 생각할 수도 있습니다.  그러한 생각을 잠깐 옆으로 두고 열린 마음으로 글을 읽어주세요.  JavaScript 프로그래밍에 또 다른 레벨이 있다는 것을 알 수 있습니다.  당신이 결코 알지 못했던 것이 있습니다.</p>
+<p>이 글은 &quot;소프트웨어 합성&quot;이라고 불리며, 함수형 프로그래밍이란 함수 합성, 고차 함수 등을 사용하여 소프트웨어를 작성하는 방법입니다. 왜 내가 하스켈, ClojureScript 또는 Elm 대신에 JavaScript를 택했는지 궁금해 할 수 있습니다.</p>
+<p>JavaScript는 함수형 프로그래밍에 필요한 가장 중요한 기능을 가지고 있습니다.</p>
+<ol>
+<li><strong>first class 함수 :</strong>  함수를 값으로 사용하는 기능 : 함수를 인수로 전달하고, 함수를 반환하고, 함수를 변수 및 객체 속성에 할당합니다. 이는 고차 함수<sup>high-order-function</sup>를 허용하여 부분 적용 <sup>partial</sup> <sup>application</sup>, currying 및 합성을 가능하게합니다.</li>
+<li><strong>익명 함수와 간결한 람다 구문 :</strong>  <code>x =&gt; x * 2</code>  는 JavaScript에서 유효한 함수 표현식입니다.  간결한 람다<sup>lambda</sup>는 고차원 함수로 작업하기가 더 쉽습니다.</li>
+<li><strong>클로저<sup>closure</sup> :</strong>  클로저는 어휘 스코프과 함수의 묶음입니다.  클로저는 함수가 만들어질 때 함께 만들어집니다.  함수가 다른 함수 내부에서 정의되면 외부 함수가 종료 된 후에도 외부 함수의 변수 바인딩에 액세스 할 수 있습니다.  클로저는 부분 적용에서 고정 된 인수를 얻는 방법입니다.  고정 인수는 반환된 함수의 클로저 범위에 바인딩 된 인수입니다.  <code>add2(1)(2)</code>  에서  <code>1</code>  은  <code>add2(1)</code>의해 리턴된 함수의 고정 인수입니다.</li>
+</ol>
+<h2 id="javascript가-놓치고-있는-것들">JavaScript가 놓치고 있는 것들</h2>
+<p>JavaScript는여러 가지 스타일로 프로그래밍 할 수 있는 멀티 패러다임 언어입니다.  우리는 JavaScript로 절차적(명령형) 프로그래밍(C와 같은)을 할 수 있으며 이 때 함수란 반복적으로 호출 할 수있는 명령어의 서브 루틴을 나타냅니다. 함수가 아닌 객체가 기본 빌딩 블록인 객체지향 프로그래밍을 할 수 도 있으며 물론 당연히 함수형 프로그래밍도 가능합니다.  멀티 패러다임 언어의 단점은 절차적 및 객체 지향 방식의 프로그래밍으로 접근 할 경우 거의 모든 것이 변경 가능해야한다는 것을 암시하는 경향이 있다는 것입니다.</p>
+<p>변이<sup>mutation</sup>는 내부에서 일어나는 데이터 변화입니다.  예를 들자면 :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> foo = &#123;  </span><br><span class="line">  bar: <span class="string">'baz'</span>  </span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">foo.bar = <span class="string">'qux'</span>; <span class="comment">// mutation</span></span><br></pre></td></tr></table></figure>
+<p>메소드는 객체의 속성을 업데이트하기 때문에 객체는 일반적으로 변경 가능해야 합니다. 명령형 프로그래밍에서 대부분의 자료 구조는 객체 및 배열을 효율적으로 조작 하기 위해 변경가능합니다.</p>
+<p>다음은 JavaScript에 없는 일부 함수형 언어의 특징입니다.</p>
+<ol>
+<li><strong>순수<sup>Purity</sup> :</strong>  일부 FP 언어에서는 순수성이 언어에 의해 시행됩니다.  부작용이있는 표현식은 허용되지 않습니다.</li>
+<li><strong>불변성<sup>Immutability</sup> :</strong>  일부 FP 언어는 변이를 금지합니다.  기존 데이터 구조 (예 : 배열 또는 객체)를 변경하는 대신 표현식은 새로운 데이터 구조를 생성합니다.  이것을 비효율적이라고 생각할 수 있지만 대부분의 함수형 언어의 기저에는 트라이<sup>trie</sup> 기반 데이터 구조가 있습니다. 즉, 이전 객체와 새 객체가 동일한 데이터에 대한 참조를 공유한다는 의미입니다.</li>
+<li><strong>재귀<sup>recursion</sup> :</strong>  재귀는 반복을 목적으로 함수를 참조하는 기능입니다.  많은 FP 언어에서 재귀는 반복작업을 수행 할 수있는 유일한 방법입니다.  <code>for</code>  ,  <code>while</code>  또는  <code>do</code>  루프와 같은 루프 문은 없습니다.<sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup></li>
+</ol>
+<p><strong>순수 :</strong>  JavaScript에서는 코딩 컨벤션으로 순수함을 달성해야합니다.  순수 함수로 응용 프로그램의 대부분을 작성하지 않으면 함수형 스타일로 프로그래밍했다고 할 수 없습니다. 유감스럽게도 JavaScript에서는 의도치 않게 불순한 함수를 작성하기 쉽습니다.</p>
+<p><strong>불변성 :</strong>  순수 함수형 언어에서 불변성이 종종 강요됩니다.  JavaScript는 대부분의 함수 언어에서 사용되는 효율적이고 불변의 트라이 기반 데이터 구조가 부족하지만  <a href="https://facebook.github.io/immutable-js/" target="_blank" rel="noopener">Immutable.js</a>  와  <a href="https://github.com/swannodette/mori" target="_blank" rel="noopener">Mori</a>등 이를 도와주는 라이브러리가 있습니다.  저는 향후 ECMAScript 스펙이 불변 데이터 구조를 지원해주길 바라고 있습니다.</p>
+<p>ES6에서  <code>const</code>  키워드를 추가한 것을 보면 가능성 있는 이야기 입니다.  <code>const</code>  로 선언된 변수에 다른 값을 재 할당 할 수 없습니다.  그러나 <code>const</code>  가 불변값을 뜻하는 것은 아닙니다.</p>
+<p><code>const</code> 로 선언된 변수에 완전히 다른 객체를 참조하기 위해 다시 할당 할 수는 없지만 참조하는 <em>객체의 속성</em> 이 변경 될 수 있습니다.  JavaScript는 또한 객체를  <code>freeze()</code>  수 있지만 그 객체는 루트 수준에서만 고정되어 있습니다. 즉, 중첩 된 객체의 속성은 변형 될 수 있습니다.  다시 말하자면 JavaScript에서 진정한 불변성을 보기 까지는 아직 갈 길이 멉니다.</p>
+<p><strong>재귀 :</strong>  JavaScript는 재귀를 지원하지만 대부분의 함수형 언어에는 꼬리 호출 최적화<sup>tail</sup> <sup>call</sup> <sup>optimization</sup>라는 기능이 있습니다.  꼬리 호출 최적화는 재귀 함수가 스택 프레임을 재사용하여 재귀호출을 할 수 있게 해주는 기능입니다.</p>
+<p>꼬리 호출 최적화가 없으면 스택이 계속 증가하여 스택 오버플로를 일으킬 수 있습니다.  JavaScript는 ES6 명세에서 꼬리 호출 최적화를 명시했습니다.  불행하게도 아직까지는 주요 브라우저 엔진 중 하나만이 이를 구현했으며, 최적화가 부분적으로 구현 된 후 Babel (구 브라우저에서 사용하기 위해 ES6에서 ES5로 컴파일하는 데 사용되는 가장 보편적 인 표준 JavaScript 컴파일러)에서 제거되었습니다.</p>
+<p>결론 : 꼬리 위치에서 함수를 주의해서 호출하더라도 대용량 반복에 대해 재귀를 사용하는 것은 여전히 ​​안전하지 않습니다.</p>
+<h2 id="javascript가-순수한-함수형-언어로서-부족한-점">JavaScript가 순수한 함수형 언어로서 부족한 점</h2>
+<p>순수 주의자들은 자바 스크립트의 변이 가능성이 가장 큰 단점이라고 말합니다. 그러나 부수효과와 변이가 도움이 되는 경우가 있습니다.  사실, 부수효과 없이 쓸모있는 최신 응용 프로그램을 만드는 것은 불가능합니다.<sup class="footnote-ref"><a href="#fn2" id="fnref2">[2]</a></sup>  Haskell과 같은 순수 함수형 언어에서는 모나드<sup>monad</sup>라는 상자를 사용하여 부수효과를 순수 함수로 감쌉니다. 따라서 모나드가 나타내는 부수효과가 불명확하더라도 프로그램을 순수하게 유지할 수 있습니다.</p>
+<p>모나드의 사용법이 간단하더라도 모나드가 많은 사람들에게 익숙하지 않다는 문제점이 있습니다. 이를 처음 보는 사람에게 모나드가 무엇인지 설명하는 것은 색맹인 사람에게 &quot;푸른 색&quot;이 어떻게 보이는지 설명하는 것과 비슷합니다.</p>
+<blockquote>
+<p><em>“모나드는 endofunctor라는 범주에 속한 한 monoid에 불과해. 뭐가 문제야?” 제임스 아이리 (James Iry)는 필립 와들러 (Phillip Wadler)의 의역을 들먹이며 손더스 맥 레인 (Shanders Mac Lane)을 인용했다.</em>  <a href="http://james-iry.blogspot.com/2009/05/brief-incomplete-and-mostly-wrong.html" target="_blank" rel="noopener">“A Brief, Incomplete, and Mostly Wrong History of Programming Languages”</a></p>
+</blockquote>
+<p>일반적으로 패러디란 재미있는 부분을 더 재미있게 만들기 위해 과장하는 경향이 있습니다. 위의 인용문에서 모나드에 대한 설명은 실제로  <em>다음</em>  에 나오는 원래의 인용구에서  <em>단순화</em>  된 것 입니다.</p>
+<blockquote>
+<p><em>&quot;</em>  <code>x</code>  <em>의 모나드는</em><code>x</code>의 endofunctor라는 범주에 속한 한 monoid이다.  <code>×</code>의 연산은 endofunctor들의 조합과 항등 endofunctor의 단위로 구성된 일련의 연산 집합들로 치환 가능하다&quot;~ Saunders Mac Lane._  <a href="https://www.amazon.com/Categories-Working-Mathematician-Graduate-Mathematics/dp/0387984038//ref=as_li_ss_tl?ie=UTF8&amp;linkCode=ll1&amp;tag=eejs-20&amp;linkId=de6f23899da4b5892f562413173be4f0" target="_blank" rel="noopener"><em>“Categories for the Working Mathematician”</em></a></p>
+</blockquote>
+<p>그럼에도 불구하고, 전 모나드에 대한 두려움이 과장되어 있다고 생각합니다. 모나드를 배우는 가장 좋은 방법은 그 주제에 관한 책과 블로그 글을 읽지 않고, 바로 사용해 보는 것입니다. 함수형 프로그래밍의 다른 주제들과 마찬가지로, 학문적 어휘는 그것의 개념과 사용법보다 이해하기가 훨씬 어렵습니다. 믿어주세요. 함수형 프로그래밍을 하기 위해 손더스 맥 레인(Saunders Mac Lane)을 이해할 필요는 없습니다.</p>
+<p>모든 프로그래밍 스타일에 완전히 적합하다고 할 수는 없지만 JavaScript는 다양한 프로그래밍 스타일과 배경을 가진 사람들이 사용할 수 있도록 고안된 범용 언어입니다.</p>
+<p>이는 처음부터 의도된 것이라고 <a href="https://brendaneich.com/2008/04/popularity/" target="_blank" rel="noopener">브랜던 아이크(Brendan Eich)</a>가 말했습니다. <sup class="footnote-ref"><a href="#fn3" id="fnref3">[3]</a></sup>   Netscape는 두 종류의 프로그래머를 지원해야했습니다.</p>
+<blockquote>
+<p><em>&quot;… C ++ 또는 (우리가 희망하는) Java로 컴포넌트를 작성하는 프로그래머.</em>  <em>HTML에 직접 삽입 된 코드를 작성하는 ‘스크립터’, 아마추어 또는 프로. &quot;</em></p>
+</blockquote>
+<p>원래 Netscape는 두 가지 언어를 지원할 것이고 스크립트 언어는 아마도 Scheme (Lisp의 방언)과 비슷할 예정이었습니다.  브랜던 아이크 :</p>
+<blockquote>
+<p><em>“저는 넷플릭스에 채용될 때 브라우저에서 Scheme을 구현하는 계획을 맡게 됐습니다.”</em></p>
+</blockquote>
+<p>JavaScript는 새로운 언어여야 했습니다.</p>
+<blockquote>
+<p><em>&quot;엔지니어링 경영진의 요구사항은 '자바처럼 보일 것’이었습니다.  이는 Scheme과 함께 Perl, Python, Tcl을 배제하는 결과로 이어졌습니다. &quot;</em></p>
+</blockquote>
+<p>그 때 브랜던의 머리에서 나온 아이디어는 다음과 같습니다.</p>
+<ol>
+<li>브라우저에서 돌아가는 Scheme.</li>
+<li>자바처럼 보일 것.</li>
+</ol>
+<p>결국 잿더미가 되고 말았습니다.</p>
+<blockquote>
+<p><em>&quot;나는 자랑스럽지 않지만 Scheme스러운 first class 함수와 Self-ish (단 하나 임에도 불구하고) 프로토 타입을 이 언어의 특징으로 채택하게되어 기쁩니다. 자바의 영향, 특히 y2k 날짜 버그뿐만 아니라 원시타입와 객체의 구분 (예 : string 대 String)은 불행했습니다. &quot;</em></p>
+</blockquote>
+<p>여기에 Java와 유사한 &quot;불행한&quot;기능들을 추가하여 마침내 JavaScript가 됐습니다.</p>
+<p>불행한 기능들:</p>
+<ul>
+<li>생성자 함수 및 <code>new</code> 키워드는 팩토리 함수와 동일한 일을 하기 위해 다른 호출 방식과 문법을 사용하게 합니다.</li>
+<li><code>class</code>  키워드는 단일 조상으로부터 <code>extend</code> 하는 기본 상속 메커니즘입니다.</li>
+<li>많은 이들이  <code>class</code>  를 정적 타입인 것처럼 생각하는 경향이 있습니다 (그렇지 않습니다).</li>
+</ul>
+<p>충고를 드리자면: 가능한 사용하지 마세요.</p>
+<p>오늘날 Java, Flash 및 ActiveX 확장 프로그램은 대부분의 브라우저에서 더이상 지원되지 않습니다. 즉 스크립팅 방식이 &quot;컴포넌트&quot;접근 방식 보다 우위를 점하는 것으로 밝혀 졌고 JavaScript는 유연한 언어가 되었습니다.</p>
+<p>결국 JavaScript는 브라우저에서 직접 지원하는 유일한 언어가 되었습니다.</p>
+<p>브라우저는 JavaScript라는 단일 언어 바인딩 만 지원하기 때문에 덜 비대해지고 버그가 적어졌습니다.  WebAssembly가 예외라고 생각할 수도 있지만 WebAssembly의 디자인 목표 중 하나는 호환 가능한 추상 구문 트리 (AST)를 사용하여 JavaScript의 언어 바인딩을 공유하는 것입니다.  실제로 첫 번째 데모에서는 WebAssembly를 ASM.js라는 JavaScript의 하위 집합으로 컴파일했습니다.</p>
+<p>웹 플랫폼을 위한 유일한 표준 범용 프로그래밍 언어로서의 위치는 JavaScript가 소프트웨어 역사상 가장 큰 인기의 물결을 탈 수 있게 해 주었습니다.</p>
+<p><strong>앱은 세상을 먹었고 웹은 앱을 먹었고 JavaScript는 웹을 먹었습니다.</strong></p>
+<blockquote>
+<p>Apps ate the world, the web ate apps, and JavaScript ate the web.</p>
+</blockquote>
+<p><a href="http://redmonk.com/sogrady/2016/07/20/language-rankings-6-16/" target="_blank" rel="noopener">많은</a>  <a href="http://stackoverflow.com/research/developer-survey-2016" target="_blank" rel="noopener">통계에</a>  따르면  <a href="https://octoverse.github.com/" target="_blank" rel="noopener">JavaScript</a>  는 현재 세계에서 가장 인기있는 프로그래밍 언어입니다.</p>
+<p>자바 스크립트는 함수형 프로그래밍을위한 이상적인 도구는 아니지만 규모가 크고 분산 된 팀에서 대규모 응용 프로그램을 작성하기 위한 훌륭한 도구입니다. 서로 다른 팀에서는 응용 프로그램을 작성하는 방법에 대한 아이디어가 다를 수 있습니다.</p>
+<p>스크립팅을 주로 하는 팀은 명령형 프로그래밍을 사용해 모듈을 붙이는데 집중할 수 있습니다.  다른 사람들은 아키텍처 추상화에 집중할 수 있습니다. 이 때는 (신중한) 객체 지향적 접근방식이 괜찮은 방법일 수도 있습니다.  또 다른 사람들은 함수형 프로그래밍을 채택해 순수 함수를 사용하여 응용 프로그램 상태를 결정적인 동시에 테스트 가능하도록 관리하고 사용자의 작업을 줄입니다.  이러한 팀들의 구성원은 모두 같은 언어를 사용하므로 서로 쉽게 아이디어를 교환하고 서로에게서 배우며 서로의 작업을 도와줄 수 있습니다.</p>
+<p>JavaScript에서는 이러한 모든 아이디어가 공존 할 수 있습니다. 따라서 더 많은 사람들이 JavaScript를 채택 하게 되었고 이는 <a href="http://www.modulecounts.com/" target="_blank" rel="noopener">세계에서 가장 큰 오픈 소스 패키지 저장소</a>  (2017년 2월),  <a href="https://www.npmjs.com/" target="_blank" rel="noopener">npm</a>의 등장으로 이어졌습니다 .</p>
+<p>JavaScript의 진정한 강점은 다양한 사고방식을 가진 사용자가 함께 있는 생태계입니다.  순수 함수형 프로그래밍주의자들을 위한 이상적인 언어는 아닐지라도 Java, Lisp, C와 같은 대중적인 언어에서 온 사람들이 모든 플랫폼에서 작동하는 동일한 문법을 사용하여 함께 작업하기에 이상적인 언어일 수 있습니다. JavaScript는 그러한 배경을 가진 사람들에게 이상적일 만큼 편하지는 않지만 언어를 배우고 빠르게 생산적이 될  만큼 편합니다.</p>
+<p>저는 JavaScript가 함수형 프로그래머를위한 최고의 언어가 아니라는 것에 동의합니다.  그러나 다른 모든 함수형 언어는 누구나 이해하고 사용할 수 있다고 말할 수 없으며 JavaScript는 ES6에서 함수형 프로그래밍에 관심이있는 사용자의 요구에 부응 할 수 있음을 보여줬고 점차 나아질 것입니다. 전 세계의 거의 모든 회사에서 사용하는 JavaScript와 놀라운 생태계를 포기하지 마십시오, 이를 포용해서 소프트웨어 구성을 위한 더 나은 언어를 만들어 가는게 좋지 않을까요?</p>
+<p>JavaScript는 이미 함수형 프로그래밍 언어로  <em>충분</em>  합니다. 즉, 사람들은 함수형 프로그래밍 기술을 사용하여 JavaScript에서 유용하고 흥미로운 모든 것을 구축하고 있습니다.  Netflix (및 Angular 2+로 작성된 모든 앱)는 RxJS 기반의 함수형 유틸리티를 사용합니다.  <a href="https://github.com/facebook/react/wiki/sites-using-react" target="_blank" rel="noopener">Facebook</a>  은 React의 순수 함수, 고차 함수 및 고차원 컴포넌트의 개념을 사용하여 Facebook 및 Instagram을 구축합니다.<a href="https://github.com/reactjs/redux/issues/310" target="_blank" rel="noopener">PayPal, KhanAcademy 및 Flipkart</a>  는 상태 관리를 위해 Redux를 사용합니다.</p>
+<p>Angular, React, Redux 및 Lodash는 JavaScript 생태계의 주요 프레임 워크이자 라이브러리이며, 모두 함수형 프로그래밍의 직접적인 영향을 받았습니다. Lodash 및 Redux의 경우 실제 JavaScript 애플리케이션에서 함수형 프로그래밍 패턴을 가능하게하는 목적을 가지고 제작되었습니다.</p>
+<p>“어째서 JavaScript인가?” JavaScript는 실제로 회사가 실제 소프트웨어를 만드는 데 사용하는 언어이기 때문에.  좋아하든 싫어하든, JavaScript는 수십 년 동안 지속되었던 Lisp의 &quot;가장 인기있는 함수형 프로그래밍 언어&quot;라는 타이틀을 빼앗았습니다.  사실, Haskell이 오늘날의 함수형 프로그래밍 개념에 훨씬 더 적합한 표준 무기이지만, 사람들은 하스켈로 실제 응용 프로그램을 거의 구축하지 않고 있습니다.</p>
+<p>언제나 미국에는 수십만 개의 JavaScript 일자리가 있으며, 전 세계적으로 수십만 가지가 있습니다.  하스켈을 배우는 것은 함수 프로그래밍에 대해 많은 것을 가르쳐 주지만, JavaScript를 배우는 것은 실제 직업을 위한 프로덕션 애플리케이션을 구축하는 것에 대해 가르쳐 줄 것입니다.</p>
+<blockquote>
+<p><strong>앱은 세상을 먹었고 웹은 앱을 먹었고 JavaScript는 웹을 먹었습니다.</strong></p>
+</blockquote>
+<p><a href="https://midojeong.github.io/2018/03/28/a-functional-programmers-introduction-to-javascript/"><strong>다음: 함수형 프로그래머를 위한 JavaScript 개요 &gt;</strong></a></p>
+<hr class="footnotes-sep">
+<section class="footnotes">
+<ol class="footnotes-list">
+<li id="fn1" class="footnote-item"><p>JavaScript로 재귀적 코드를 작성할 수 없다는 것이 아닌 재귀만을 사용해 반복적인 작업을 수행해야 하는 제약이 없다는 뜻입니다. <a href="#fnref1" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn2" class="footnote-item"><p>입출력이 가장 근본적인 부수효과이기 때문입니다 <a href="#fnref2" class="footnote-backref">↩</a></p>
+</li>
+<li id="fn3" class="footnote-item"><p>브랜던 아이크는 자바스크립트를 만든 프로그래머입니다 <a href="#fnref3" class="footnote-backref">↩</a></p>
+</li>
+</ol>
+</section>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/03/28/a-functional-programmers-introduction-to-javascript/" data-toggle="tooltip" data-placement="top" title="함수형 프로그래머를 위한 JavaScript 개요">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/03/20/the-rise-and-fall-and-rise-of-functional-programming-composable-software/" data-toggle="tooltip" data-placement="top" title="함수형 프로그래밍의 역사">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#javascript가-놓치고-있는-것들"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">JavaScript가 놓치고 있는 것들</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#javascript가-순수한-함수형-언어로서-부족한-점"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">JavaScript가 순수한 함수형 언어로서 부족한 점</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                        
+                          <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "midojeong";
+    var disqus_identifier = "midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/";
+    var disqus_url = "midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/midojeong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; mido 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("midojeong.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-116376595-1';
+    var _gaDomain = 'https://midojeong.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
