@@ -234,7 +234,7 @@
 <p>사실,  <em>삼항 연산자는 대개 if 문보다 훨씬 간단합니다.</em>  사람들이 그 반대로 믿게되는 두 가지 이유가 있습니다.</p>
 <ol>
 <li>if 문에 익숙합니다.  친근성 편향<sup>Familiarity</sup> <sup>bias</sup>은 우리가 반대되는 증거를 제시 할지라도 사실이 아닌 것을 믿게합니다.</li>
-<li>사람들은 삼항연산자를 <code>if</code> 문처럼 사용하려고합니다.  삼항연산자는  <em>명령문<sup>statement</sup> 아니라 표현식<sup>expression</sup></em>  이므로 이는 잘못된 용법입니다.</li>
+<li>사람들은 삼항연산자를 <code>if</code> 문처럼 사용하려고합니다.  삼항연산자는  <em>구문<sup>statement</sup> 아니라 표현식<sup>expression</sup></em>  이므로 이는 잘못된 용법입니다.</li>
 </ol>
 <p>세부사항에 대해 알아보기 전에 삼항연산자 표현식을 정의해 보겠습니다.</p>
 <p>삼항식은 값으로 평가되는 조건부 표현식입니다.  조건부,  진리 절 (조건부가 참인 경우 평가되는 값), 그리고 거짓 절(조건부가 거짓인 경우 평가되는 값)으로 구성됩니다.</p>
@@ -245,12 +245,12 @@
 <p><code>if</code> 표현식은 값으로 평가되는 조건식입니다.  조건부,  진리 절 (조건부가 참인 경우 평가되는 값), 그리고 거짓 절(조건부가 거짓인 경우 평가되는 값)으로 구성됩니다.</p>
 <p>비슷하지 않습니까?  대부분의 함수형 프로그래밍 언어에서는  <code>if</code>  키워드를 삼항식처럼 사용합니다. 어째서일까요?</p>
 <p>표현식은 단일 값으로 평가되는 코드 덩어리입니다.</p>
-<p>문장은 값으로 평가되지 않는 코드 덩어리입니다.  JavaScript에서는 if문이 값으로 평가되지 않습니다.  if문이 의미있는 일을 하게 하려면 부작용을 발생시키거나 함수 안에서 값을 리턴해야 합니다.</p>
-<p>함수형 프로그래밍에서는 변이와 부작용을 피하려는 경향이 있습니다.  JavaScript의 <code>if</code>는 자연스럽게 변이와 부작용을 발생시키는 경우가 많으므로 저를 포함한 많은 함수형 프로그래머가 중첩 여부에 관계없이 삼항연산자를 사용합니다.</p>
+<p>구문은 값으로 평가되지 않는 코드 덩어리입니다.  JavaScript에서는 if문이 값으로 평가되지 않습니다.  if문이 의미있는 일을 하게 하려면 부수효과를 발생시키거나 함수 안에서 값을 리턴해야 합니다.</p>
+<p>함수형 프로그래밍에서는 변이와 부수효과를 피하려는 경향이 있습니다.  JavaScript의 <code>if</code>는 자연스럽게 변이와 부수효과를 발생시키는 경우가 많으므로 저를 포함한 많은 함수형 프로그래머가 중첩 여부에 관계없이 삼항연산자를 사용합니다.</p>
 <p>삼항식의 관점으로 생각하는 것은 if문의 관점으로 생각하는 것과는 조금 다릅니다. 그러나 2주 정도만 의식해서 사용하다보면 자연스럽게 삼항식에 끌리기 시작할 것입니다. 단순히 타이핑할게 적기 때문에라도 말입니다.</p>
 <h2 id="친숙함-편향-familiarity-bias">친숙함 편향 Familiarity Bias</h2>
 <p>제가 본 공통적인 의견중 하나는 중첩된 삼항 표현식은 &quot;읽기가 어렵다&quot;는 것입니다.  몇 가지 코드 예제로 그 미신을 산산조각 내보겠습니다.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withIf = (&#123;  </span><br><span class="line">  conditionA, conditionB  </span><br><span class="line">&#125;) =&gt; &#123;  </span><br><span class="line">  <span class="keyword">if</span> (conditionA) &#123;  </span><br><span class="line">    <span class="keyword">if</span> (conditionB) &#123;  </span><br><span class="line">      <span class="keyword">return</span> valueA;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> valueB;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> valueC;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"> <span class="keyword">const</span> withIf = (&#123;  </span><br><span class="line">  conditionA, conditionB  </span><br><span class="line">&#125;) =&gt; &#123;  </span><br><span class="line">  <span class="keyword">if</span> (conditionA) &#123;  </span><br><span class="line">    <span class="keyword">if</span> (conditionB) &#123;  </span><br><span class="line">      <span class="keyword">return</span> valueA;  </span><br><span class="line">    &#125;  </span><br><span class="line">    <span class="keyword">return</span> valueB;  </span><br><span class="line">  &#125;  </span><br><span class="line">  <span class="keyword">return</span> valueC;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 <p>이 중첩된 <code>if</code>문 코드는 falsy 절과 truthy 절이 시각적으로 분리되어 매우 단절된 느낌을줍니다.  사실 매우 간단한 코드지만 구문을 분석하려면 살짝 주의깊게 봐야합니다.</p>
 <p>동일한 논리를 삼항 표현식으로 작성해보았습니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> withTernary = (&#123;  </span><br><span class="line">  conditionA, conditionB  </span><br><span class="line">&#125;) =&gt; (  </span><br><span class="line">  (!conditionA)  </span><br><span class="line">    ? valueC  </span><br><span class="line">    : (conditionB)  </span><br><span class="line">    ? valueA  </span><br><span class="line">    : valueB  </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
@@ -277,8 +277,8 @@
 <blockquote>
 <p><em>적은 코드 = 버그가 적은 표면 = 버그가 적습니다.</em></p>
 </blockquote>
-<h2 id="부작용-및-가변적인-공유변수">부작용 및 가변적인 공유변수</h2>
-<p>대부분의 경우 if 문은 값으로 평가되는 것 이상을 수행합니다.  이들은 부작용을 발생시키고 변수를 변경합니다. 부작용의 영향과 가변적인 공유변수를 다루는 제어 흐름을 완전히 파악하지 못한다면 if 문이 작동하는 모든 그림을 볼 수 없습니다.</p>
+<h2 id="부수효과-및-바뀔-수-있는-공유변수">부수효과 및 바뀔 수 있는 공유변수</h2>
+<p>대부분의 경우 if 문은 값으로 평가되는 것 이상을 수행합니다.  이들은 부수효과를 발생시키고 변수를 변경합니다. 부수효과의 영향과 가변적인 공유변수를 다루는 제어 흐름을 완전히 파악하지 못한다면 if 문이 작동하는 모든 그림을 볼 수 없습니다.</p>
 <p>언제나 값이 리턴 되도록 하는 것은 일련의 규율을 만듭니다. 즉, 프로그램을 이해하고 디버그하고 리팩토링하고 유지 관리하기가 쉽도록 종속성을 끊어내는 실천입니다.</p>
 <p>그리고 이 부분이 바로 삼항연산자의 이점 중 제가 가장 좋아하는 것입니다.</p>
 <blockquote>
@@ -292,7 +292,7 @@
 <li>삼항 연산자는 구문의 혼란을 줄입니다.  적은 코드 = 버그가 적은 표면 = 버그가 적습니다.</li>
 <li>삼항 연산자는 임시 변수를 필요로하지 않으므로 단기기억력의 부하가 줄어 듭니다.</li>
 <li>삼항식은 신호 대 잡음비가 더 좋습니다.</li>
-<li><code>if</code>문은  부작용과 변이를 권장하지만,  삼항연산자는 순수한 코드를 권장합니다.</li>
+<li><code>if</code>문은  부수작용과 변이를 권장하지만,  삼항연산자는 순수한 코드를 권장합니다.</li>
 <li>순수한 코드는 표현과 기능을 서로 분리시킴으로써 우리가 더 나은 개발자가 될 수 있도록 합니다.</li>
 </ul>
 <p><a href="https://medium.com/javascript-scene/javascript-monads-made-simple-7856be57bfe8" target="_blank" rel="noopener"><strong>다음: 합성과 추상화 &gt;</strong></a></p>
@@ -348,7 +348,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#표현식-대-명령문"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">표현식 대 명령문</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#친숙함-편향-familiarity-bias"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">친숙함 편향 Familiarity Bias</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#데이지-체이닝1-vs-네스팅"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">데이지 체이닝[1] vs 네스팅</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#어수선한-구문들"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">어수선한 구문들</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#단기-기억"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">단기 기억</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#신호-대-잡음비"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">신호 대 잡음비</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#코드의-면적과-버그"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">코드의 면적과 버그</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#부작용-및-가변적인-공유변수"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">부작용 및 가변적인 공유변수</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#결론"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">결론</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#표현식-대-명령문"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">표현식 대 명령문</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#친숙함-편향-familiarity-bias"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">친숙함 편향 Familiarity Bias</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#데이지-체이닝1-vs-네스팅"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">데이지 체이닝[1] vs 네스팅</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#어수선한-구문들"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">어수선한 구문들</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#단기-기억"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">단기 기억</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#신호-대-잡음비"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">신호 대 잡음비</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#코드의-면적과-버그"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">코드의 면적과 버그</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#부수효과-및-바뀔-수-있는-공유변수"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">부수효과 및 바뀔 수 있는 공유변수</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#결론"><span class="toc-nav-number">6.</span> <span class="toc-nav-text">결론</span></a></li></ol>
         
         </div>
       </aside>
