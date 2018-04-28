@@ -328,7 +328,7 @@
 <p>프라미스의  <code>.then()</code>은 <code>.chain()</code>과  <em>거의</em>  동일합니다.</p>
 <p>엄격하게 따졌을 때 프라미스는 모나드가 아니라는 말을 들은적 있을 겁니다.  값이 프라미스일 경우에만 언래핑하며 그렇지 않은 경우  <code>.then()</code>은  <code>.map()</code>처럼 동작합니다.</p>
 <p>즉, 프라미스 값과 다른 값에 대해 다르게 동작하는  <code>.then()</code>은 Functor 및  모나드가 충족시켜야 하는  수학 법칙을 엄격하게 따르는 것이 아닙니다.  현실적으로는 여러분이 이러한 원칙과 실제 작동방식을 알고있는 한, 그것들을 둘 중 하나로 취급 할 수 있습니다.  단지 일부 합성 유틸리티들로 프라미스를 합성했을 때 예상대로 작동하지 않을 수 있습니다.</p>
-<h3 id="모나드-합성하기클레이슬리kleisli-합성">모나드 합성하기(클레이슬리<sup>Kleisli</sup> 합성)</h3>
+<h2 id="모나드-합성하기클레이슬리kleisli-합성">모나드 합성하기(클레이슬리<sup>Kleisli</sup> 합성)</h2>
 <p>promise-lifting 함수를 작성하는 데 사용한  <code>composeM</code>  함수에 대해 자세히 살펴 보겠습니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> composeM = <span class="function"><span class="params">method</span> =&gt;</span> (...ms) =&gt; (  </span><br><span class="line">  ms.reduce(<span class="function">(<span class="params">f, g</span>) =&gt;</span> x =&gt; g(x)[method](f))  </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p>이 이상한 reducer가 의미하는 것은 함수 합성의 대수적 정의입니다 :  <code>f(g(x))</code>. 더 쉽게 알아보겠습니다.</p>
@@ -363,7 +363,7 @@
 <li>Right identity :  <code>m.chain(unit) ==== m</code></li>
 <li>결합법칙<sup>Associativity</sup> :  <code>m.chain(f).chain(g) ==== m.chain(x =&gt; f(x).chain(g))</code></li>
 </ol>
-<h2 id="identity-laws">Identity laws</h2>
+<h3 id="identity-laws">Identity laws</h3>
 <p><img src="https://cdn-images-1.medium.com/max/1600/1*X_bUJJYudP8MlhN0FLEGKg.png" alt=""></p>
 <p>Left and right identity</p>
 <p>모나드는 Functor입니다.  Functor는  <code>A -&gt; B</code>라는  카테고리 사이의 사상입니다.  사상은 화살표로 표시됩니다.  객체들 간에 명시적으로 표시된 화살표들 외에도 카테고리의 각 객체에 화살표가 있습니다.  즉, 카테고리의 모든 객체  <code>X</code>  에 대해 화살표  <code>X -&gt; X</code>가  있습니다.  이 화살표는 ID 화살표로 알려져 있으며 일반적으로 객체 자신을 가리키는 작은 원형 화살표로 그려집니다.</p>
@@ -449,7 +449,7 @@
         <div id="toc" class="toc-article">
         <strong class="toc-title">Contents</strong>
         
-          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#여러분은-이미-모나드를-사용하고-있습니다"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">여러분은 이미 모나드를 사용하고 있습니다.</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#모나드의-구성요소"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">모나드의 구성요소</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#모나드-합성하기클레이슬리kleisli-합성"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">모나드 합성하기(클레이슬리Kleisli 합성)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#모나드의-법칙"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">모나드의 법칙</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#identity-laws"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Identity laws</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#결합법칙"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">결합법칙</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#모나드-법칙-증명하기"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">모나드 법칙 증명하기</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#결론"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">결론</span></a></li></ol>
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#여러분은-이미-모나드를-사용하고-있습니다"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">여러분은 이미 모나드를 사용하고 있습니다.</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#모나드의-구성요소"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">모나드의 구성요소</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#모나드-합성하기클레이슬리kleisli-합성"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">모나드 합성하기(클레이슬리Kleisli 합성)</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#모나드의-법칙"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">모나드의 법칙</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#identity-laws"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">Identity laws</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#결합법칙"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">결합법칙</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#모나드-법칙-증명하기"><span class="toc-nav-number">4.3.</span> <span class="toc-nav-text">모나드 법칙 증명하기</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#결론"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">결론</span></a></li></ol>
         
         </div>
       </aside>
