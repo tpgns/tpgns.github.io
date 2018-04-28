@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="mido&#39;s IT blog github page">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/ironman-draw.png">
+    <!-- Place this tag in your head or just before your close body tag. -->
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+    <title>
+        
+          간단한 JavaScript 모나드 - mido
+        
+    </title>
+
+    <link rel="canonical" href="midojeong.github.io/2018/04/28/javascript-monads-made-simple/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS --> 
+    <link rel="stylesheet" href="/css/beantech.min.css">
+    
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <link rel="stylesheet" href="/css/widget.css">
+
+    <link rel="stylesheet" href="/css/signature.css">
+
+    <link rel="stylesheet" href="/css/toc.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="https://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-116376595-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-116376595-1');
+    </script>
+
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+	<!-- Modified by Yu-Hsuan Yen -->
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        
+            background-image: url('bg.jpg')
+            /*post*/
+        
+    }
+    
+</style>
+
+<header class="intro-header" >
+    <!-- Signature -->
+    <div id="signature">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                
+                    <div class="post-heading">
+                        <div class="tags">
+                            
+                              <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                            
+                              <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                            
+                        </div>
+                        <h1>간단한 JavaScript 모나드</h1>
+                        <h2 class="subheading">JavaScript Monads Made Simple</h2>
+                        <span class="meta">
+                            Posted by mido on
+                            2018-04-28
+                        </span>
+                    </div>
+                
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+	
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">mido</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+
+                    
+
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/about/">About</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/archive/">Archives</a>
+                        </li>
+                        
+                    
+
+                        
+                        <li>
+                            <a href="/tags/">Tags</a>
+                        </li>
+                        
+                    
+                    
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Modify by Yu-Hsuan Yen -->
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+            <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <blockquote>
+<p>이 글은  <a href="https://medium.com/@_ericelliott?source=post_header_lockup" target="_blank" rel="noopener">Eric Elliott</a> 이 <strong>medium</strong>에서 연재하는 Composing Software 시리즈를 번역한 것입니다.  <a href="https://medium.com/javascript-scene/javascript-monads-made-simple-7856be57bfe8" target="_blank" rel="noopener">[원문보기]</a></p>
+</blockquote>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*uVpU7iruzXafhU2VLeH4lw.jpeg" alt=""></p>
+<p><em>Smoke Art Cubes to Smoke — MattysFlicks — (CC BY 2.0)</em></p>
+<blockquote>
+<p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈의 일부 입니다.  앞으로 계속하여 연재될 것입니다.<br>
+<a href="https://medium.com/javascript-scene/a-functional-programmers-introduction-to-javascript-composing-software-d670d14ede30" target="_blank" rel="noopener">&lt;이전</a>  |  <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea" target="_blank" rel="noopener">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://medium.com/javascript-scene/reduce-composing-software-fe22f0c39a1d" target="_blank" rel="noopener">다음&gt;</a></p>
+</blockquote>
+<p>모나드를 이해하기 위해선 다음을 이미 알고 있어야 합니다.</p>
+<ul>
+<li>함수 합성 :  <code>compose(f, g)(x) = (f ∘ g)(x) = f(g(x))</code></li>
+<li>Functor의 기본 :  <code>Array.map()</code>에 대한 이해.</li>
+</ul>
+<hr>
+<blockquote>
+<p>&quot;모나드를 이해하고 나면 갑자기 설명할 방법이 떠오르지 않습니다.&quot;Lady Monadgreen’s curse ~ Gilad Bracha (used famously by Douglas Crockford)</p>
+</blockquote>
+<hr>
+<blockquote>
+<p>“Hoenikker 박사가 말했습니다. 8살짜리 아이에게 자신이 하고있는 일을 설명 할 수 없는 과학자는 돌팔이입니다.”~ Kurt Vonnegut의 소설 Cat 's Cradle</p>
+</blockquote>
+<p>인터넷에서 &quot;모나드&quot;를 검색하면 불가사의한 카테고리 이론 문서들의 포격을 받게 되며,  그 후 부리토와 우주복을 예로 들어 모나드를 “정말 쉽게” 설명하고 있는 글들을 마주치게 됩니다.</p>
+<p>모나드는 간단합니다.  그러나 이를 설명하고 있는 용어들은 어렵습니다. 우리는 본질을 파고들어야 합니다.</p>
+<p><strong>모나드</strong>는 특정 컨텍스트에 속한 함수를 합성하는 도구입니다. 특정 컨텍스트란  계산, 분기, I/O, 값을 반환하는 과정 등을 예로 들 수 있습니다.  모나드 타입은 리프팅 함수<code>a =&gt; M(b)</code>를 합성할 수 있도록 lift, flat, map을 활용해 타입을 정렬합니다.  이 과정은 결국 임의의 타입  <code>a</code>를  <code>b</code>로 맵핑하는 것이며 계산 컨텍스트 속에 lift, flatten 및 map이 숨겨져 있습니다.</p>
+<ul>
+<li>함수 맵:  <code>a =&gt; b</code></li>
+<li>컨텍스트가 있는 Functor 맵:   <code>Functor(a) =&gt; Functor(b)</code></li>
+<li>컨텍스트와 Flatten을 사용하는 모나드 맵:   <code>Monad(Monad(a)) =&gt; Monad(b)</code></li>
+</ul>
+<p><strong>컨텍스트</strong>와 <strong>flatten</strong> 그리고 <strong>map</strong>이 과연 무엇일까요?</p>
+<ul>
+<li><strong>Map</strong>이란 &quot;<code>a</code>에 특정 함수를 적용해  <code>b</code>를 리턴합니다&quot;라는 의미입니다. 특정 입력을 받아 특정 출력을 반환합니다.</li>
+<li><strong>컨텍스트</strong>는 모나드 합성에 관련된 구현 세부 사항입니다.  Functor/모나드 API와 동작방식은 모나드를 앱의 나머지 부분과 합성할 수 있게 하는 컨텍스트를 제공합니다.  Functor와 모나드의 핵심은 이 컨텍스트를 추상화하여 어떤 것을 합성하고 연산하는 동안 문제가 생기지 않게 만드는데 있습니다.  컨텍스트 내에서 맵핑한다는 것은  <code>a =&gt; b</code>라는 함수를 컨텍스트 내부에 있는 값 <code>a</code>에 적용해서 새로운 값 <code>b</code>을  동일한 컨텍스트로 리턴한다는 의미입니다.  Observable이 왼쪽에 있으면 오른쪽에도 있어야 합니다. <code>Observable(a) =&gt; Observable(b)</code>   왼쪽에 배열이 있으면 오른쪽에도 있어야 합니다.  <code>Array(a) =&gt; Array(b)</code></li>
+<li><strong>Type lift</strong>는 값을 컨텍스트로 감싸는 것 입니다. 해당 값을 가지고 할 수 있는 동작, 연산들을 정의해놓은 API가 바로 컨텍스트이며, 컨텍스트 자체와 관련된 연산들도 포함되어있습니다.   <code>a =&gt; F(a)</code>(모나드는 일종의 펑터입니다).</li>
+<li><strong>Flatten</strong>은 컨텍스트 속에 있는 값을 빼내는 것을 의미 합니다 .  <code>F(a) =&gt; a</code></li>
+</ul>
+<p>예:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> x = <span class="number">20</span>;             <span class="comment">// Some data of type `a`  </span></span><br><span class="line"><span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> n * <span class="number">2</span>;     <span class="comment">// A function from `a` to `b`  </span></span><br><span class="line"><span class="keyword">const</span> arr = <span class="built_in">Array</span>.of(x);  <span class="comment">// The type lift.  </span></span><br><span class="line"><span class="comment">// JS has type lift sugar for arrays: [x]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// .map() applies the function f to the value x  </span></span><br><span class="line"><span class="comment">// in the context of the array.  </span></span><br><span class="line"><span class="keyword">const</span> result = arr.map(f); <span class="comment">// [40]</span></span><br></pre></td></tr></table></figure>
+<p>이 경우  컨텍스트는 <code>Array</code>가 되고 <code>x</code>는 컨텍스트에 담겨 맵핑되는 값입니다.</p>
+<p>이 예제는 이중배열을 다루진 않지만,  <code>.concat()</code>로 배열을 flatten할 수 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[].concat.apply([], [[<span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>]]); <span class="comment">// [1, 2, 3, 4]</span></span><br></pre></td></tr></table></figure>
+<h2 id="여러분은-이미-모나드를-사용하고-있습니다">여러분은 이미 모나드를 사용하고 있습니다.</h2>
+<p>기술 수준이나 카테고리 이론에 대한 이해도와 상관없이 모나드를 사용하면 코드를 더 쉽게 짤 수 있습니다. 모나드를 활용하지 못한다면 코드가 더 어려워질 것입니다. (e.g., 콜백 지옥, 중첩 된 조건문, 스파게티 코드)</p>
+<p>소프트웨어 개발의 본질은 합성이고 모나드는 합성을 쉽게 할 수 있도록 도와주는 역할을 합니다.</p>
+<ul>
+<li>함수 맵:  <code>a =&gt; b</code>,  특정 타입의 함수를 합성할 수 있습니다.</li>
+<li>컨텍스트가 있는 Functor 맵: <code>Functor(a) =&gt; Functor(b)</code>,  함수를 합성 할 수 있습니다.  <code>F(a) =&gt; F(b)</code></li>
+<li>컨텍스트와 flatten을 사용하는 모나드 맵:  <code>Monad(Monad(a)) =&gt; Monad(b)</code>, lift 함수를 합성할 수 있습니다.  <code>a =&gt; F(b)</code></li>
+</ul>
+<p>이들은 모두  <strong>함수 합성</strong>을 표현하는 다른 방식입니다.  함수는 합성되기 위해 존재합니다. 함수는 복잡한 문제를 쉽게 풀 수 있는 간단한 문제로 분해하고 솔루션들을 여러 가지 방법으로 합성하여 애플리케이션을 만들 수 있도록 도와줍니다.</p>
+<p>함수를 이해하고 올바르게 사용하려면 합성을 더 깊이 이해해야 합니다.</p>
+<p>함수를 합성한다는 것은 데이터가 흐르는 파이프라인을 만드는 것과 같습니다. 파이프라인의 첫 단계에 특정 값을 넣으면 마지막 단계에서 변환된 값이 출력됩니다.  그러나 이것이 작동하려면 파이프 라인의 각 단계에서 이전 단계에서 반환하는 데이터 형식이 필요합니다.</p>
+<p>일반 함수를 합성하는 것은 간단합니다. 타입을 쉽게 정렬시킬 수 있기 때문이죠. 리턴 타입  <code>b</code>를 인풋 타입  <code>b</code>와 일치 시키면 됩니다.</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g:           <span class="selector-tag">a</span> =&gt; <span class="selector-tag">b</span>  </span><br><span class="line">f:                <span class="selector-tag">b</span> =&gt; c  </span><br><span class="line">h = f(g(a)): <span class="selector-tag">a</span>    =&gt;   c</span><br></pre></td></tr></table></figure>
+<p>Functor를 합성하는 것도 간단합니다.  타입을 정렬시킬 수 있기 때문이죠.</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g:             F<span class="comment">(a)</span> =&gt; F<span class="comment">(b)</span>  </span><br><span class="line">f:                     F<span class="comment">(b)</span> =&gt; F<span class="comment">(c)</span>  </span><br><span class="line">h = f<span class="comment">(g(Fa)</span>):  F<span class="comment">(a)</span>    =&gt;      F<span class="comment">(c)</span></span><br></pre></td></tr></table></figure>
+<p>그러나  <code>a =&gt; F(b)</code>,  <code>b =&gt; F(c)</code>라는 함수를 합성하려면 모나드가 필요합니다.  모나드와 Functor를 구분하기 위해 <code>F()</code> 대신  <code>M()</code>이라고 쓰겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">g:                  <span class="function"><span class="params">a</span> =&gt;</span> M(b)  </span><br><span class="line">f:                       <span class="function"><span class="params">b</span> =&gt;</span> M(c)  </span><br><span class="line">h = composeM(f, g): <span class="function"><span class="params">a</span>    =&gt;</span>   M(c)</span><br></pre></td></tr></table></figure>
+<p>잠깐. 이 예제에서는  <em>함수 타입들이  정렬되지 않았습니다!</em>   <code>f</code>의 입력으로 <code>b</code>라는 타입이 필요하지만 실제로 전달받은 타입은  <code>M(b)</code>(monad of <code>b</code>)였고 결국<code>composeM()</code>에는  <code>g</code>가 리턴한 <code>M(b)</code>에서 <code>b</code>를 빼내는 과정이 필요합니다.   이 프로세스(<code>.bind()</code>  또는  <code>.chain()</code>)속에  flatten과 mapping이 숨겨져있습니다.</p>
+<p>다음 함수로 전달하기 전에  <code>M(b)</code>에서 <code>b</code>를 추출(unwrapping, flatten)합니다.</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">g:             <span class="selector-tag">a</span> =&gt; M(b) flattens to =&gt; <span class="selector-tag">b</span>  </span><br><span class="line">f:                                      <span class="selector-tag">b</span>           maps to =&gt; M(c)  </span><br><span class="line">h composeM(f, g):  </span><br><span class="line">               <span class="selector-tag">a</span>       flatten(M(b)) =&gt; <span class="selector-tag">b</span> =&gt; map(<span class="selector-tag">b</span> =&gt; M(c)) =&gt; M(c)</span><br></pre></td></tr></table></figure>
+<p>모나드는  <code>a =&gt; M(b)</code>형식의 함수들을 합성할 수 있도록 타입을 정렬시킵니다.</p>
+<p><code>M(b) =&gt; b</code>로의 <code>flatten</code>과   <code>b =&gt; M(c)</code>로의 <code>map</code>은    <code>chain</code> 연산 내부에서 호출되며 <code>chain</code>은  <code>composeM()</code> 내부에서 호출됩니다.  이러한 세부 구현은 추상화되어있기 때문에 사용자가 걱정할 필요가 없습니다.  따라서 일반 함수를 합성하는 것과 같은 방식으로 모나드 타입 함수를 합성할 수 있습니다.</p>
+<p>모나드가 필요한 이유는 실제로 프로그램의 여러 모듈에서 단지  <code>a =&gt; b</code>와 같은  간단한 맵핑만 처리하는 것이 아니기 때문입니다.  일부 함수는 부수작용(프라미스, 스트림)이나 분기(Maybe), 예외 (Either) 등을 처리해야합니다.</p>
+<p>다음은 좀 더 구체적인 예입니다.  비동기 API에서 User 데이터를 가져온 뒤 해당 데이터를 다른 비동기 API에 전달하여 계산을 수행해야하는 경우를 알아보겠습니다.</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">getUserById(<span class="name">id</span>: String) =&gt; Promise(<span class="name">User</span>)  </span><br><span class="line">hasPermision(<span class="name">User</span>) =&gt; Promise(<span class="name">Boolean</span>)</span><br></pre></td></tr></table></figure>
+<p>함수를 몇 개 정의하겠습니다.  우선 유틸리티 함수입니다.  <code>compose()</code>  및  <code>trace()</code>  :</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> compose = <span class="function">(<span class="params">...fns</span>) =&gt;</span> x =&gt; fns.reduceRight(<span class="function">(<span class="params">y, f</span>) =&gt;</span> f(y), x);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> trace = <span class="function"><span class="params">label</span> =&gt;</span> value =&gt; &#123;  </span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">`<span class="subst">$&#123; label &#125;</span>: <span class="subst">$&#123; value &#125;</span>`</span>);  </span><br><span class="line">  <span class="keyword">return</span> value;  </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>함수들을 합성해보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">  <span class="keyword">const</span> label = <span class="string">'API call composition'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// a =&gt; Promise(b)  </span></span><br><span class="line">  <span class="keyword">const</span> getUserById = <span class="function"><span class="params">id</span> =&gt;</span> id === <span class="number">3</span> ?  </span><br><span class="line">    <span class="built_in">Promise</span>.resolve(&#123; <span class="attr">name</span>: <span class="string">'Kurt'</span>, <span class="attr">role</span>: <span class="string">'Author'</span> &#125;) :  </span><br><span class="line">    <span class="literal">undefined</span>  </span><br><span class="line">  ;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// b =&gt; Promise(c)  </span></span><br><span class="line">  <span class="keyword">const</span> hasPermission = <span class="function">(<span class="params">&#123; role &#125;</span>) =&gt;</span> (  </span><br><span class="line">    <span class="built_in">Promise</span>.resolve(role === <span class="string">'Author'</span>)  </span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Try to compose them. Warning: this will fail.  </span></span><br><span class="line">  <span class="keyword">const</span> authUser = compose(hasPermission, getUserById);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Oops! Always false!  </span></span><br><span class="line">  authUser(<span class="number">3</span>).then(trace(label));  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>hasPermission()</code>과  <code>getUserById()</code>를 합성하여  <code>authUser()</code>를 만드려고 합니다. 그러나  <code>hasPermission()</code>이  <code>User</code>타입 대신  <code>Promise(User)</code>를 받게되는 문제가 발생합니다.  이 문제를 해결하려면 <code>compose()</code>  대신    <code>composePromises()</code>를 사용해야 합니다.  이는 <code>.then()</code>을 사용해 함수를 합성하는 특수한 유틸리티입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">  <span class="keyword">const</span> composeM = <span class="function"><span class="params">chainMethod</span> =&gt;</span> (...ms) =&gt; (  </span><br><span class="line">    ms.reduce(<span class="function">(<span class="params">f, g</span>) =&gt;</span> x =&gt; g(x)[chainMethod](f))  </span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> composePromises = composeM(<span class="string">'then'</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> label = <span class="string">'API call composition'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// a =&gt; Promise(b)  </span></span><br><span class="line">  <span class="keyword">const</span> getUserById = <span class="function"><span class="params">id</span> =&gt;</span> id === <span class="number">3</span> ?  </span><br><span class="line">    <span class="built_in">Promise</span>.resolve(&#123; <span class="attr">name</span>: <span class="string">'Kurt'</span>, <span class="attr">role</span>: <span class="string">'Author'</span> &#125;) :  </span><br><span class="line">    <span class="literal">undefined</span>  </span><br><span class="line">  ;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// b =&gt; Promise(c)  </span></span><br><span class="line">  <span class="keyword">const</span> hasPermission = <span class="function">(<span class="params">&#123; role &#125;</span>) =&gt;</span> (  </span><br><span class="line">    <span class="built_in">Promise</span>.resolve(role === <span class="string">'Author'</span>)  </span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Compose the functions (this works!)  </span></span><br><span class="line">  <span class="keyword">const</span> authUser = composePromises(hasPermission, getUserById);</span><br><span class="line"></span><br><span class="line">  authUser(<span class="number">3</span>).then(trace(label)); <span class="comment">// true  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>composeM()</code>에 대해서는 나중에 다시 알아볼 것 입니다.</p>
+<p>모나드의 핵심을 기억하십니까? :</p>
+<ul>
+<li>함수 맵:  <code>a =&gt; b</code></li>
+<li>컨텍스트가 있는 Functor 맵:   <code>Functor(a) =&gt; Functor(b)</code></li>
+<li>컨텍스트와 Flatten을 사용하는 모나드 맵:   <code>Monad(Monad(a)) =&gt; Monad(b)</code></li>
+</ul>
+<p>이 경우, 프라미스가 곧 모나드이기 때문에,  프라미스을 반환하는 함수들을 합성할 때  <code>hasPermission()</code>은 <code>User</code>타입  대신에  <code>Promise(User)</code>를 받게됩니다. 모나드 연산의 왼쪽 항 <code>Monad(Monad(a))</code>에서 바깥 쪽  <code>Monad()</code>  래퍼를 벗겨낼 경우 <code>Monad(a) =&gt; Monad(b)</code>가 됩니다.  이는 일반적인 functor <code>.map()</code>과 동일합니다. 즉, <code>Monad(x) =&gt; x</code> 처럼 래퍼를 벗겨낼 수 있다면 모나드 연산을 만들 수 있습니다.</p>
+<h2 id="모나드의-구성요소">모나드의 구성요소</h2>
+<p>모나드는 간단한 대칭을 기반으로합니다. 즉, 값을 컨텍스트로 래핑하는 방법과 컨텍스트에서 값의 랩핑을 해제하는 방법입니다.</p>
+<ul>
+<li><strong>Lift / Unit :</strong>  어떤 타입을 모나드 컨텍스트로 리프트 :  <code>a =&gt; M(a)</code></li>
+<li><strong>Flatten / Join :</strong>  컨텍스트에서 타입을 추출 :  <code>M(a) =&gt; a</code></li>
+</ul>
+<p>그리고 모나드는 펑터에 속하기 때문에 다음과 같이 맵핑 할 수도 있습니다.</p>
+<ul>
+<li><strong>Map :</strong>  컨텍스트가 유지되는 맵핑 :  <code>M(a) -&gt; M(b)</code></li>
+</ul>
+<p>Flatten과 Map을 결합하면  <a href="https://en.wikipedia.org/wiki/Heinrich_Kleisli" target="_blank" rel="noopener">하인리히 클레이슬리</a>의  이름을 딴 모나드 리프팅 함수들을 합성하는 <strong>Chain</strong>, 일명 클레이슬리 컴포지션을 만들 수 있습니다.</p>
+<ul>
+<li><strong>FlatMap / Chain :</strong> Flatten + Map :  <code>M(M(a)) =&gt; M(b)</code></li>
+</ul>
+<p>모나드의 경우  <code>.map()</code>  메소드는 퍼블릭 API에서 생략되는 경우가 많습니다. Lift + flatten을 명시적으로  <code>.map()</code>이라고 부르지는 않습니다. 그러나 이를 만드는 일은 간단합니다.  리프트 (aka of/unit)를 한뒤 체인 (aka bind/flatMap)을 하면 <code>.map()</code>이 됩니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> MyMonad = <span class="function"><span class="params">value</span> =&gt;</span> (&#123;  </span><br><span class="line">  <span class="comment">// &lt;... insert arbitrary chain and of here ...&gt;  </span></span><br><span class="line">  map (f) &#123;  </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.chain(<span class="function"><span class="params">a</span> =&gt;</span> <span class="keyword">this</span>.constructor.of(f(a)));  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>따라서   <code>.of()</code>  및  <code>.chain()</code>/<code>.join()</code>을 정의하면  <code>.map()</code>을 정의할 수 있습니다.</p>
+<p>리프트는 factory/constructor 이며 <code>constructor.of()</code>  메서드입니다.  카테고리 이론에서 &quot;단위<sup>unit</sup>&quot;라고 불립니다.  타입을 모나드의 컨텍스트로 감싸는 일입니다.  a를  <code>Monad</code>  of  <code>a</code>  로 바꿉니다.</p>
+<p>Haskell에서는 리프트를 (매우 헷갈리게)<code>return</code>이라고 부르며 거의 모든 사람들이 그것을 함수의 리턴과 혼동합니다. 따라서 저는 말할 때  “들어 올리기, 승격, 리프트” 또는 &quot;타입 리프트&quot;라고 부르며 코드에서는  <code>.of()</code>라고 부릅니다.</p>
+<p>값을 빼내는 프로세스 (<code>.chain()</code>에서 map이 빠진 것)는 일반적으로  <code>flatten()</code>  또는  <code>join()</code> 이라고 합니다.  <code>flatten()</code>/<code>join()</code>은  <code>.chain()/.flatMap()</code>에 포함되어 있기 때문에 완전히 생략되는 경우가 많습니다.  flattening은 합성과 관련되어 있으므로 매핑과 결합되는 경우가 많습니다.  기억하세요, unwrapping + map은  <code>a =&gt; M(a)</code> 형식의 함수들을 합성하는데 필요합니다.</p>
+<p>어떤 종류의 모나드를 사용 하느냐에 따라 unwrapping 프로세스가 매우 간단해질 수 있습니다.  Identity 모나드의 경우, 결과 값을 다시 모나드 컨텍스트로 가져 오지 않는다는 점을 제외하고는  <code>.map()</code>과 같습니다.  래핑의 한 레이어를 버리는 효과가 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="comment">// Identity monad  </span></span><br><span class="line"><span class="keyword">const</span> Id = <span class="function"><span class="params">value</span> =&gt;</span> (&#123;  </span><br><span class="line">  <span class="comment">// Functor mapping  </span></span><br><span class="line">  <span class="comment">// Preserve the wrapping for .map() by   </span></span><br><span class="line">  <span class="comment">// passing the mapped value into the type  </span></span><br><span class="line">  <span class="comment">// lift:  </span></span><br><span class="line">  map: <span class="function"><span class="params">f</span> =&gt;</span> Id.of(f(value)),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Monad chaining  </span></span><br><span class="line">  <span class="comment">// Discard one level of wrapping  </span></span><br><span class="line">  <span class="comment">// by omitting the .of() type lift:  </span></span><br><span class="line">  chain: <span class="function"><span class="params">f</span> =&gt;</span> f(value),</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Just a convenient way to inspect  </span></span><br><span class="line">  <span class="comment">// the values:  </span></span><br><span class="line">  toString: <span class="function"><span class="params">()</span> =&gt;</span> <span class="string">`Id(<span class="subst">$&#123; value &#125;</span>)`</span>  </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// The type lift for this monad is just  </span></span><br><span class="line"><span class="comment">// a reference to the factory.  </span></span><br><span class="line">Id.of = Id;</span><br></pre></td></tr></table></figure>
+<p>그러나 unwrapping 프로세스는 일반적으로 부수효과, 오류,  분기 또는 비동기 I/O와 같은 불순한 요소가 숨겨지는 부분이기도합니다.  합성은 모든 소프트웨어 개발에서 실제로 흥미로운 일들이 일어나는 곳입니다.</p>
+<p>예를 들어 프라미스에서 <code>.chain()</code>은  <code>.then()</code>이라 불립니다. <code>promise.then(f)</code>를 호출하면  <code>f()</code>가  즉시 실행되지 않습니다.  대신 프라미스을 기다린 뒤  <code>f()</code>를  호출합니다.</p>
+<p>예:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">  <span class="keyword">const</span> x = <span class="number">20</span>;                 <span class="comment">// The value  </span></span><br><span class="line">  <span class="keyword">const</span> p = <span class="built_in">Promise</span>.resolve(x); <span class="comment">// The context  </span></span><br><span class="line">  <span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span>   </span><br><span class="line">    <span class="built_in">Promise</span>.resolve(n * <span class="number">2</span>);     <span class="comment">// The function</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> result = p.then(f);     <span class="comment">// The application</span></span><br><span class="line"></span><br><span class="line">  result.then(  </span><br><span class="line">    r =&gt; <span class="built_in">console</span>.log(r)         <span class="comment">// 40  </span></span><br><span class="line">  );  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>프라미스의  <code>.then()</code>은 <code>.chain()</code>과  <em>거의</em>  동일합니다.</p>
+<p>엄격하게 따졌을 때 프라미스는 모나드가 아니라는 말을 들은적 있을 겁니다.  값이 프라미스일 경우에만 언래핑하며 그렇지 않은 경우  <code>.then()</code>은  <code>.map()</code>처럼 동작합니다.</p>
+<p>즉, 프라미스 값과 다른 값에 대해 다르게 동작하는  <code>.then()</code>은 Functor 및  모나드가 충족시켜야 하는  수학 법칙을 엄격하게 따르는 것이 아닙니다.  현실적으로는 여러분이 이러한 원칙과 실제 작동방식을 알고있는 한, 그것들을 둘 중 하나로 취급 할 수 있습니다.  단지 일부 합성 유틸리티들로 프라미스를 합성했을 때 예상대로 작동하지 않을 수 있습니다.</p>
+<h3 id="모나드-합성하기클레이슬리kleisli-합성">모나드 합성하기(클레이슬리<sup>Kleisli</sup> 합성)</h3>
+<p>promise-lifting 함수를 작성하는 데 사용한  <code>composeM</code>  함수에 대해 자세히 살펴 보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> composeM = <span class="function"><span class="params">method</span> =&gt;</span> (...ms) =&gt; (  </span><br><span class="line">  ms.reduce(<span class="function">(<span class="params">f, g</span>) =&gt;</span> x =&gt; g(x)[method](f))  </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>이 이상한 reducer가 의미하는 것은 함수 합성의 대수적 정의입니다 :  <code>f(g(x))</code>. 더 쉽게 알아보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">  <span class="comment">// The algebraic definition of function composition:  </span></span><br><span class="line">  <span class="comment">// (f ∘ g)(x) = f(g(x))  </span></span><br><span class="line">  <span class="keyword">const</span> compose = <span class="function">(<span class="params">f, g</span>) =&gt;</span> x =&gt; f(g(x));</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> x = <span class="number">20</span>;    <span class="comment">// The value  </span></span><br><span class="line">  <span class="keyword">const</span> arr = [x]; <span class="comment">// The container</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Some functions to compose  </span></span><br><span class="line">  <span class="keyword">const</span> g = <span class="function"><span class="params">n</span> =&gt;</span> n + <span class="number">1</span>;  </span><br><span class="line">  <span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> n * <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Proof that .map() accomplishes function composition.  </span></span><br><span class="line">  <span class="comment">// Chaining calls to map is function composition.  </span></span><br><span class="line">  trace(<span class="string">'map composes'</span>)([  </span><br><span class="line">    arr.map(g).map(f),  </span><br><span class="line">    arr.map(compose(f, g))  </span><br><span class="line">  ]);  </span><br><span class="line">  <span class="comment">// =&gt; [42], [42]  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>이는  <code>.map()</code>  메소드를 제공하는 모든 Functor(e.g., Array)에 대해 작동하는 합성 유틸리티를 작성할 수 있다는 것입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> composeMap = <span class="function">(<span class="params">...ms</span>) =&gt;</span> (  </span><br><span class="line">  ms.reduce(<span class="function">(<span class="params">f, g</span>) =&gt;</span> x =&gt; g(x).map(f))  </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>이것은 일반적인  <code>f(g(x))</code>를 약간 재구성한 것 입니다.  <code>a -&gt; Functor(b)</code>  유형의 함수가 여러 개 있으면 각 함수를 반복하여 값  <code>x</code>를 적용  합니다. <code>.reduce()</code>  메소드는 두가지 인자, reducer(이 경우  <code>f</code>  )와 배열의 아이템 (<code>g</code>)을 받는 함수를 사용합니다.</p>
+<p>각 반복에서 다음의  <code>f</code>가 되는 새로운 함수  ( <code>x =&gt; g(x).map(f)</code> )를 반환합니다.  우리는 이미  <code>x =&gt; g(x).map(f)</code>가  <code>compose(f, g)(x)</code>를 functor의 컨텍스트로 들어 올리는 것과 같음을 증명했습니다.  즉, 컨테이너의 값에  <code>f(g(x))</code>를 적용하는 것과 같습니다. 이 경우 배열 내의 값에 합성함수를 적용하는 것입니다.</p>
+<blockquote>
+<p>성능 경고 : 배열에 대해서는 권장하지 않습니다.  이런 방식으로 함수를 합성하려면 전체 배열(수십만개의 항목이 있을지도 모르는)을 여러번 반복해야 합니다.  배열을 맵핑해야할 경우 간단한  <code>a -&gt; b</code>  함수를 먼저 합성한 다음 한 번 매핑하거나  <code>.reduce()</code>  또는 트랜스듀서를 사용하여 반복을 최적화하십시오.</p>
+</blockquote>
+<p>배열에 이런식의 동기, 느긋하지 않은<sup>eager</sup> 방식으로 함수를 적용하는 것은 과합니다.  그러나 많은 비동기, 느긋한 방식들에 대해서 예외 나 null 값을 분기하는 것과 같은 지저분한 작업을 처리해야합니다.</p>
+<p>바로 그럴때 모나드가 필요해집니다. 모나드는 합성 체인에서 이전의 비동기 또는 분기 동작에 의존하는 값을 처리할 수 있습니다.  이 경우 일반적인 함수 합성으로는 값을 얻을 수 없습니다.  모나드를 반환하는 작업은  <code>a =&gt; b</code> 대신  <code>a =&gt; Monad(b)</code>  형식을 하고 있습니다.</p>
+<p>데이터를 받아 API를 실행하고 값을 리턴받아 다시 다른 API를 실행하고 해당 데이터에 대한 계산 결과를 반환하는 함수가 있다면 <code>a =&gt; Monad(b)</code>  타입의 함수들을 합성해야 합니다.  API 호출은 비동기식이므로 프라미스나 Observable과 같은 값으로 반환 값을 래핑해야합니다.  달리 말하면, 함수들의 서명은 각각  <code>a -&gt; Monad(b)</code>6과  <code>b -&gt; Monad(c)</code>가 됩니다.</p>
+<p><code>g: a -&gt; b</code>  ,  <code>f: b -&gt; c</code>타입의 함수들을 합성하는 것은 쉽습니다. 타입들이 정렬된 이상 <code>h: a -&gt; c</code>는 단지  <code>a =&gt; f(g(a))</code>일  뿐이기 때문입니다.</p>
+<p><code>g: a -&gt; Monad(b)</code>  ,  <code>f: b -&gt; Monad(c)</code> 타입의 함수들을 합성하는 것은 조금 더 어렵습니다. 타입들이 정렬되지 않았고 <code>f</code>는  <code>Monad(b)</code>가  아닌  <code>b</code>를  기대하고 있기 때문에 <code>h: a -&gt; Monad(c)</code>  는  <code>a =&gt; f(g(a))</code>로 표현될 수 없습니다.</p>
+<p>좀 더 구체적으로 접근하기 위해 프라미스를 리턴하는 한쌍의 비동기 함수를 합성해 보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">  <span class="keyword">const</span> label = <span class="string">'Promise composition'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> g = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Promise</span>.resolve(n + <span class="number">1</span>);  </span><br><span class="line">  <span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Promise</span>.resolve(n * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> h = composePromises(f, g);</span><br><span class="line"></span><br><span class="line">  h(<span class="number">20</span>)  </span><br><span class="line">    .then(trace(label))  </span><br><span class="line">  ;  </span><br><span class="line">  <span class="comment">// Promise composition: 42  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>올바른 결과가 나오도록 하려면<code>composePromises()</code>를  어떻게 만들어야야할까요?  <em>힌트 : 이미 본 적이 있습니다.</em></p>
+<p><code>composeMap()</code>  함수를 기억하십니까?  <code>.map()</code>을  <code>.then()</code>으로 바꾸면됩니다.  <code>Promise.then()</code>은 기본적으로 비동기  <code>.map()</code>  입니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&#123;  </span><br><span class="line">  <span class="keyword">const</span> composePromises = <span class="function">(<span class="params">...ms</span>) =&gt;</span> (  </span><br><span class="line">    ms.reduce(<span class="function">(<span class="params">f, g</span>) =&gt;</span> x =&gt; g(x).then(f))  </span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> label = <span class="string">'Promise composition'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> g = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Promise</span>.resolve(n + <span class="number">1</span>);  </span><br><span class="line">  <span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> <span class="built_in">Promise</span>.resolve(n * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> h = composePromises(f, g);</span><br><span class="line"></span><br><span class="line">  h(<span class="number">20</span>)  </span><br><span class="line">    .then(trace(label))  </span><br><span class="line">  ;  </span><br><span class="line">  <span class="comment">// Promise composition: 42  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>두 번째 함수  <code>f</code>(  <code>g</code>  다음에 오는)가 받게되는 입력 값은 프라미스입니다. 하지만 <code>f</code>가 원하는 타입은 <code>Promise(b)</code>가 아니라 <code>b</code>였습니다.  무슨 일이 일어난걸까요?</p>
+<p><code>.then()</code>  내부에는  <code>Promise(b) -&gt; b</code>  를 하는 언래핑 프로세스가 있습니다.  이 작업이 바로  <code>join</code>  또는  <code>flatten</code>입니다.</p>
+<p>즉, <code>composeMap()</code>  및  <code>composePromises()</code>가 거의 동일한 함수임을 알 수 있습니다.  이 두 가지를 모두 처리 할 수있는 고차 함수를 만들어 보겠습니다.  chain 메서드를 커링하기 위해 대괄호 표기법을 사용하겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> composeM = <span class="function"><span class="params">method</span> =&gt;</span> (...ms) =&gt; (  </span><br><span class="line">  ms.reduce(<span class="function">(<span class="params">f, g</span>) =&gt;</span> x =&gt; g(x)[method](f))  </span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>이제 다음과 같은 특수한 구현들을 만들 수 있습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> composePromises = composeM(<span class="string">'then'</span>);  </span><br><span class="line"><span class="keyword">const</span> composeMap = composeM(<span class="string">'map'</span>);  </span><br><span class="line"><span class="keyword">const</span> composeFlatMap = composeM(<span class="string">'flatMap'</span>);</span><br></pre></td></tr></table></figure>
+<h2 id="모나드의-법칙">모나드의 법칙</h2>
+<p>여러분이 어떤 모나드를 만들기 전에 모든 모나드가 충족시켜야 할 세가지 법칙을 알아보겠습니다.</p>
+<ol>
+<li>Left identity :  <code>unit(x).chain(f) ==== f(x)</code></li>
+<li>Right identity :  <code>m.chain(unit) ==== m</code></li>
+<li>결합법칙<sup>Associativity</sup> :  <code>m.chain(f).chain(g) ==== m.chain(x =&gt; f(x).chain(g))</code></li>
+</ol>
+<h2 id="identity-laws">Identity laws</h2>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*X_bUJJYudP8MlhN0FLEGKg.png" alt=""></p>
+<p>Left and right identity</p>
+<p>모나드는 Functor입니다.  Functor는  <code>A -&gt; B</code>라는  카테고리 사이의 사상입니다.  사상은 화살표로 표시됩니다.  객체들 간에 명시적으로 표시된 화살표들 외에도 카테고리의 각 객체에 화살표가 있습니다.  즉, 카테고리의 모든 객체  <code>X</code>  에 대해 화살표  <code>X -&gt; X</code>가  있습니다.  이 화살표는 ID 화살표로 알려져 있으며 일반적으로 객체 자신을 가리키는 작은 원형 화살표로 그려집니다.</p>
+<p><img src="https://cdn-images-1.medium.com/max/1600/1*3jcLj7wdwWaUJ22X2iT7OA.png" alt=""></p>
+<p>항등 사상</p>
+<h3 id="결합법칙">결합법칙</h3>
+<p>연산을 할 때 괄호를 어디에 두어도 상관이 없다는 의미입니다.  덧셈의 경우  <code>a + (b + c)</code>는  <code>(a + b) + c</code>와 결과가 같습니다.  함수 합성에 대해서도 마찬가지입니다.  <code>(f ∘ g) ∘ h = f ∘ (g ∘ h)</code>  .</p>
+<p>Kleisli 합성에서도 마찬가지입니다. 대신 거꾸로 읽어야합니다.  합성 연산자( <code>chain</code> )를 보게되면 다음을 떠올리세요.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">h(x).chain(<span class="function"><span class="params">x</span> =&gt;</span> g(x).chain(f)) ==== (h(x).chain(g)).chain(f)</span><br></pre></td></tr></table></figure>
+<h3 id="모나드-법칙-증명하기">모나드 법칙 증명하기</h3>
+<p>Identity 모나드가 모나드 법칙을 충족시킨다는 것을 증명해보겠습니다.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="comment">// Identity monad  </span></span><br><span class="line">  <span class="keyword">const</span> Id = <span class="function"><span class="params">value</span> =&gt;</span> (&#123;  </span><br><span class="line">    <span class="comment">// Functor mapping  </span></span><br><span class="line">    <span class="comment">// Preserve the wrapping for .map() by   </span></span><br><span class="line">    <span class="comment">// passing the mapped value into the type  </span></span><br><span class="line">    <span class="comment">// lift:  </span></span><br><span class="line">    map: <span class="function"><span class="params">f</span> =&gt;</span> Id.of(f(value)),</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Monad chaining  </span></span><br><span class="line">    <span class="comment">// Discard one level of wrapping  </span></span><br><span class="line">    <span class="comment">// by omitting the .of() type lift:  </span></span><br><span class="line">    chain: <span class="function"><span class="params">f</span> =&gt;</span> f(value),</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Just a convenient way to inspect  </span></span><br><span class="line">    <span class="comment">// the values:  </span></span><br><span class="line">    toString: <span class="function"><span class="params">()</span> =&gt;</span> <span class="string">`Id(<span class="subst">$&#123; value &#125;</span>)`</span>  </span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The type lift for this monad is just  </span></span><br><span class="line">  <span class="comment">// a reference to the factory.  </span></span><br><span class="line">  Id.of = Id;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> g = <span class="function"><span class="params">n</span> =&gt;</span> Id(n + <span class="number">1</span>);  </span><br><span class="line">  <span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> Id(n * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Left identity  </span></span><br><span class="line">  <span class="comment">// unit(x).chain(f) ==== f(x)  </span></span><br><span class="line">  trace(<span class="string">'Id monad left identity'</span>)([  </span><br><span class="line">    Id(x).chain(f),  </span><br><span class="line">    f(x)  </span><br><span class="line">  ]);  </span><br><span class="line">  <span class="comment">// Id monad left identity: Id(40), Id(40)  </span></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  <span class="comment">// Right identity  </span></span><br><span class="line">  <span class="comment">// m.chain(unit) ==== m  </span></span><br><span class="line">  trace(<span class="string">'Id monad right identity'</span>)([  </span><br><span class="line">    Id(x).chain(Id.of),  </span><br><span class="line">    Id(x)  </span><br><span class="line">  ]);  </span><br><span class="line">  <span class="comment">// Id monad right identity: Id(20), Id(20)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Associativity  </span></span><br><span class="line">  <span class="comment">// m.chain(f).chain(g) ====  </span></span><br><span class="line">  <span class="comment">// m.chain(x =&gt; f(x).chain(g)    </span></span><br><span class="line">  trace(<span class="string">'Id monad associativity'</span>)([  </span><br><span class="line">    Id(x).chain(g).chain(f),  </span><br><span class="line">    Id(x).chain(<span class="function"><span class="params">x</span> =&gt;</span> g(x).chain(f))  </span><br><span class="line">  ]);  </span><br><span class="line">  <span class="comment">// Id monad associativity: Id(42), Id(42)  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="결론">결론</h2>
+<p>모나드는 타입 리프팅 함수( <code>g: a =&gt; M(b)</code>  ,  <code>f: b =&gt; M(c)</code>  )를 합성하는 방법을 기술한 인터페이스입니다.  이를 위해 모나드는  <code>f()</code>를 적용하기 전  <code>M(b)</code>를  <code>b</code>로  flatten합니다.  즉, funtor는 맵핑 할  수 있는 것이며 모나드는 flatten한 뒤 맵핑할 수있는 것들입니다. :</p>
+<ul>
+<li>함수 맵:  <code>a =&gt; b</code></li>
+<li>컨텍스트가 있는 Functor 맵:   <code>Functor(a) =&gt; Functor(b)</code></li>
+<li>컨텍스트와 Flatten을 사용하는 모나드 맵:   <code>Monad(Monad(a)) =&gt; Monad(b)</code></li>
+</ul>
+<p>모나드는 간단한 대칭성을 기반으로합니다. 즉, 값을 컨텍스트로 래핑하는 방법과 컨텍스트에서 래핑을 해제하는 방법입니다.</p>
+<ul>
+<li>Lift / Unit : 어떤 값을 모나드 컨텍스트로 타입 리프트 :  <code>a =&gt; M(a)</code></li>
+<li>Flatten / Join : 컨텍스트에서 값을 언래핑 :  <code>M(a) =&gt; a</code></li>
+</ul>
+<p>그리고 모나드는 Functor이기 때문에 다음과 같이 맵핑 할 수도 있습니다.</p>
+<ul>
+<li>Map : 컨텍스트가 유지되는 맵핑 :  <code>M(a) -&gt; M(b)</code></li>
+</ul>
+<p>Flatten과 map을 결합하면 리프팅 함수들을 합성하기위한 chain, 일명 Kleisli 합성을 만들 수 있습니다.</p>
+<ul>
+<li>FlatMap / Chain : Flatten + map :  <code>M(M(a)) =&gt; M(b)</code></li>
+</ul>
+<p>모나드는 3 개의 법칙(공리)을 만족해야하며 이는 모나드 법칙으로 불립니다.</p>
+<ul>
+<li>Left identity :  <code>unit(x).chain(f) ==== f(x)</code></li>
+<li>Right identity :  <code>m.chain(unit) ==== m</code></li>
+<li>결합법칙 :  <code>m.chain(f).chain(g) ==== m.chain(x =&gt; f(x).chain(g)</code></li>
+</ul>
+<p>프라미스, 옵저버블 등 여러분은 매일매일 JavaScript에서 모나드를 사용하고 있습니다.  Kleisli 합성을 사용하면 데이터 타입 API의 세부 사항을 신경쓰지 않고 데이터가 흘러가는 로직을 만들 수 있습니다.</p>
+<p>따라서 모나드는 코드를 단순화하는 매우 강력한 도구입니다.  모나드를 사용하기 위해 내부에서 무슨 일이 벌어지고 있는지 이해하거나 걱정할 필요는 없습니다. 다만, 이제는 모나드에 대해 더 많이 알게었고, 그 속에서 무슨일이 일어나는지 더이상 두려워하지 않게 되었습니다.</p>
+<p>레이디 모나드린의 저주를 두려워 할 필요가 없습니다.</p>
+<p><a href="https://medium.com/javascript-scene/javascript-monads-made-simple-7856be57bfe8" target="_blank" rel="noopener"><strong>다음: Mocking은 코드의 냄새입니다 &gt;</strong></a></p>
+
+                
+
+                <hr>
+                <!-- Pager -->
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/04/21/mocking-is-a-code-smell/" data-toggle="tooltip" data-placement="top" title="Mocking은 코드 냄새(Code Smell)입니다">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                </ul>
+
+                <!-- duoshuo Share start -->
+                
+                <!-- 多说 Share end-->
+
+                <!-- 多说评论框 start -->
+                
+                <!-- 多说评论框 end -->
+
+                <!-- disqus comment start -->
+                
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                
+                <!-- disqus comment end -->
+            </div>
+            
+            <!-- Tabe of Content -->
+            <!-- Table of Contents -->
+
+    
+      <aside id="sidebar">
+        <div id="toc" class="toc-article">
+        <strong class="toc-title">Contents</strong>
+        
+          <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#여러분은-이미-모나드를-사용하고-있습니다"><span class="toc-nav-number">1.</span> <span class="toc-nav-text">여러분은 이미 모나드를 사용하고 있습니다.</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#모나드의-구성요소"><span class="toc-nav-number">2.</span> <span class="toc-nav-text">모나드의 구성요소</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#모나드-합성하기클레이슬리kleisli-합성"><span class="toc-nav-number">2.1.</span> <span class="toc-nav-text">모나드 합성하기(클레이슬리Kleisli 합성)</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#모나드의-법칙"><span class="toc-nav-number">3.</span> <span class="toc-nav-text">모나드의 법칙</span></a></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#identity-laws"><span class="toc-nav-number">4.</span> <span class="toc-nav-text">Identity laws</span></a><ol class="toc-nav-child"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#결합법칙"><span class="toc-nav-number">4.1.</span> <span class="toc-nav-text">결합법칙</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#모나드-법칙-증명하기"><span class="toc-nav-number">4.2.</span> <span class="toc-nav-text">모나드 법칙 증명하기</span></a></li></ol></li><li class="toc-nav-item toc-nav-level-2"><a class="toc-nav-link" href="#결론"><span class="toc-nav-number">5.</span> <span class="toc-nav-text">결론</span></a></li></ol>
+        
+        </div>
+      </aside>
+    
+
+                
+            <!-- Sidebar Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                       
+                          <a class="tag" href="/tags/#자바스크립트" title="자바스크립트">자바스크립트</a>
+                        
+                          <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+    </div>
+</article>
+
+
+
+<!-- disqus embedded js code start (one page only need to embed once) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "midojeong";
+    var disqus_identifier = "midojeong.github.io/2018/04/28/javascript-monads-made-simple/";
+    var disqus_url = "midojeong.github.io/2018/04/28/javascript-monads-made-simple/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus embedded js code start end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("https://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'hover',
+          placement: 'left',
+          icon: 'ℬ'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/midojeong">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; mido 2018 
+                    <br>
+                    Powered by <a href="https://hexo.io/">Hexo</a>
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span> 
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- 
+     Because of the native support for backtick-style fenced code blocks 
+     right within the Markdown is landed in Github Pages, 
+     From V1.6, There is no need for Highlight.js, 
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("midojeong.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("https://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+<script>
+    // dynamic User by Hux
+    var _gaId = 'UA-116376595-1';
+    var _gaDomain = 'https://midojeong.github.io';
+
+    // Originial
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+    ga('create', _gaId, _gaDomain);
+    ga('send', 'pageview');
+</script>
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+
+
+
+
+	<script type="text/javascript" src="/js/totop.js?v=1.0.0" async=""></script>
+    <script type="text/javascript" src="/js/toc.js?v=1.0.0" async=""></script>
+
+<!-- Migrate from head to bottom, no longer block render and still work -->
+
+</body>
+
+</html>
