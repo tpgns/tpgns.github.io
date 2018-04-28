@@ -14,7 +14,7 @@
     <script async defer src="https://buttons.github.io/buttons.js"></script>
     <title>
         
-          간단한 JavaScript 모나드 - mido
+          JavaScript 모나드 - mido
         
     </title>
 
@@ -97,7 +97,7 @@
                               <a class="tag" href="/tags/#함수형" title="함수형">함수형</a>
                             
                         </div>
-                        <h1>간단한 JavaScript 모나드</h1>
+                        <h1>JavaScript 모나드</h1>
                         <h2 class="subheading">JavaScript Monads Made Simple</h2>
                         <span class="meta">
                             Posted by mido on
@@ -225,7 +225,7 @@
 <p><em>Smoke Art Cubes to Smoke — MattysFlicks — (CC BY 2.0)</em></p>
 <blockquote>
 <p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈의 일부 입니다.  앞으로 계속하여 연재될 것입니다.<br>
-<a href="https://medium.com/javascript-scene/a-functional-programmers-introduction-to-javascript-composing-software-d670d14ede30" target="_blank" rel="noopener">&lt;이전</a>  |  <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea" target="_blank" rel="noopener">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://medium.com/javascript-scene/reduce-composing-software-fe22f0c39a1d" target="_blank" rel="noopener">다음&gt;</a></p>
+<a href="https://midojeong.github.io/2018/04/14/composable-datatype-with-functions/">&lt;이전</a>  |  <a href="https://midojeong.github.io/2018/03/16/composing-software-intro/">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://midojeong.github.io/2018/04/19/mocking-is-a-code-smell/">다음&gt;</a></p>
 </blockquote>
 <p>모나드를 이해하기 위해선 다음을 이미 알고 있어야 합니다.</p>
 <ul>
@@ -377,7 +377,7 @@
 <p>Identity 모나드가 모나드 법칙을 충족시킨다는 것을 증명해보겠습니다.</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line">&#123; <span class="comment">// Identity monad  </span></span><br><span class="line">  <span class="keyword">const</span> Id = <span class="function"><span class="params">value</span> =&gt;</span> (&#123;  </span><br><span class="line">    <span class="comment">// Functor mapping  </span></span><br><span class="line">    <span class="comment">// Preserve the wrapping for .map() by   </span></span><br><span class="line">    <span class="comment">// passing the mapped value into the type  </span></span><br><span class="line">    <span class="comment">// lift:  </span></span><br><span class="line">    map: <span class="function"><span class="params">f</span> =&gt;</span> Id.of(f(value)),</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Monad chaining  </span></span><br><span class="line">    <span class="comment">// Discard one level of wrapping  </span></span><br><span class="line">    <span class="comment">// by omitting the .of() type lift:  </span></span><br><span class="line">    chain: <span class="function"><span class="params">f</span> =&gt;</span> f(value),</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Just a convenient way to inspect  </span></span><br><span class="line">    <span class="comment">// the values:  </span></span><br><span class="line">    toString: <span class="function"><span class="params">()</span> =&gt;</span> <span class="string">`Id(<span class="subst">$&#123; value &#125;</span>)`</span>  </span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// The type lift for this monad is just  </span></span><br><span class="line">  <span class="comment">// a reference to the factory.  </span></span><br><span class="line">  Id.of = Id;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">const</span> g = <span class="function"><span class="params">n</span> =&gt;</span> Id(n + <span class="number">1</span>);  </span><br><span class="line">  <span class="keyword">const</span> f = <span class="function"><span class="params">n</span> =&gt;</span> Id(n * <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// Left identity  </span></span><br><span class="line">  <span class="comment">// unit(x).chain(f) ==== f(x)  </span></span><br><span class="line">  trace(<span class="string">'Id monad left identity'</span>)([  </span><br><span class="line">    Id(x).chain(f),  </span><br><span class="line">    f(x)  </span><br><span class="line">  ]);  </span><br><span class="line">  <span class="comment">// Id monad left identity: Id(40), Id(40)  </span></span><br><span class="line">  </span><br><span class="line"></span><br><span class="line">  <span class="comment">// Right identity  </span></span><br><span class="line">  <span class="comment">// m.chain(unit) ==== m  </span></span><br><span class="line">  trace(<span class="string">'Id monad right identity'</span>)([  </span><br><span class="line">    Id(x).chain(Id.of),  </span><br><span class="line">    Id(x)  </span><br><span class="line">  ]);  </span><br><span class="line">  <span class="comment">// Id monad right identity: Id(20), Id(20)</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// Associativity  </span></span><br><span class="line">  <span class="comment">// m.chain(f).chain(g) ====  </span></span><br><span class="line">  <span class="comment">// m.chain(x =&gt; f(x).chain(g)    </span></span><br><span class="line">  trace(<span class="string">'Id monad associativity'</span>)([  </span><br><span class="line">    Id(x).chain(g).chain(f),  </span><br><span class="line">    Id(x).chain(<span class="function"><span class="params">x</span> =&gt;</span> g(x).chain(f))  </span><br><span class="line">  ]);  </span><br><span class="line">  <span class="comment">// Id monad associativity: Id(42), Id(42)  </span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="결론">결론</h2>
-<p>모나드는 타입 리프팅 함수( <code>g: a =&gt; M(b)</code>  ,  <code>f: b =&gt; M(c)</code>  )를 합성하는 방법을 기술한 인터페이스입니다.  이를 위해 모나드는  <code>f()</code>를 적용하기 전  <code>M(b)</code>를  <code>b</code>로  flatten합니다.  즉, funtor는 맵핑 할  수 있는 것이며 모나드는 flatten한 뒤 맵핑할 수있는 것들입니다. :</p>
+<p>모나드는 타입 리프팅 함수( <code>g: a =&gt; M(b)</code>  ,  <code>f: b =&gt; M(c)</code>  )를 합성하는 방법을 기술한 인터페이스입니다.  이를 위해 모나드는  <code>f()</code>를 적용하기 전  <code>M(b)</code>를  <code>b</code>로  flatten합니다.  즉, funtor는 맵핑할  수 있는 것이며 모나드는 flatten한 뒤 맵핑할 수 있는 것입니다. :</p>
 <ul>
 <li>함수 맵:  <code>a =&gt; b</code></li>
 <li>컨텍스트가 있는 Functor 맵:   <code>Functor(a) =&gt; Functor(b)</code></li>
@@ -405,7 +405,7 @@
 <p>프라미스, 옵저버블 등 여러분은 매일매일 JavaScript에서 모나드를 사용하고 있습니다.  Kleisli 합성을 사용하면 데이터 타입 API의 세부 사항을 신경쓰지 않고 데이터가 흘러가는 로직을 만들 수 있습니다.</p>
 <p>따라서 모나드는 코드를 단순화하는 매우 강력한 도구입니다.  모나드를 사용하기 위해 내부에서 무슨 일이 벌어지고 있는지 이해하거나 걱정할 필요는 없습니다. 다만, 이제는 모나드에 대해 더 많이 알게었고, 그 속에서 무슨일이 일어나는지 더이상 두려워하지 않게 되었습니다.</p>
 <p>레이디 모나드린의 저주를 두려워 할 필요가 없습니다.</p>
-<p><a href="https://medium.com/javascript-scene/javascript-monads-made-simple-7856be57bfe8" target="_blank" rel="noopener"><strong>다음: Mocking은 코드의 냄새입니다 &gt;</strong></a></p>
+<p><a href="https://midojeong.github.io/2018/04/19/mocking-is-a-code-smell/"><strong>다음: Mocking은 코드 냄새(Code Smell)입니다 &gt;</strong></a></p>
 
                 
 

@@ -225,7 +225,7 @@
 <p><em>Smoke Art Cubes to Smoke — MattysFlicks — (CC BY 2.0)</em></p>
 <blockquote>
 <p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈의 일부 입니다.  앞으로 계속하여 연재될 것입니다.<br>
-<a href="https://medium.com/javascript-scene/a-functional-programmers-introduction-to-javascript-composing-software-d670d14ede30" target="_blank" rel="noopener">&lt;이전</a>  |  <a href="https://medium.com/javascript-scene/composing-software-an-introduction-27b72500d6ea" target="_blank" rel="noopener">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://medium.com/javascript-scene/reduce-composing-software-fe22f0c39a1d" target="_blank" rel="noopener">다음&gt;</a></p>
+<a href="https://midojeong.github.io/2018/04/18/javascript-monads-made-simple/">&lt;이전</a>  |  <a href="https://midojeong.github.io/2018/03/16/composing-software-intro/">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://midojeong.github.io/2018/04/23/the-hidden-treasures-of-object-composition/">다음&gt;</a></p>
 </blockquote>
 <p>TDD와 유닛 테스트를 할 때 가장 손이 많이 가는 부분은 테스트할 유닛을 분리하는 과정에서 필요한 <strong>mocking</strong>을 만드는 일 입니다. 몇몇 사람들은 유닛 테스트가 정말로 의미있는 일인지 의심스러워 하기도 합니다.  실제로, 저는 개발자들이 mock, fake, stub을 만들다 길을 잃고  <em>실제 코드가 전혀 실행되지 않는</em>  유닛 테스트를 작성하는걸 보았습니다. 아이고…</p>
 <p>다른 한편으로는 개발자가 TDD에 스스로를 너무 옭아매는 모습이 자주 보입니다. 이 경우 개발자는 코드베이스를 더 복잡하게 만들어버릴지라도 무조건 100% 코드 커버리지를 달성해야 한다고 생각합니다.</p>
@@ -476,7 +476,7 @@
 <p>때로는 유닛이 타사 API와 통신하는 것을 테스트해야 하며 때로는 이러한 API가 실제로 테스트하려면 엄청나게 비쌉니다.  실제 서비스에 대한 워크 플로우 트랜잭션을 기록한 후 fake 서버에서 이를 다시 재생하면 유닛이 별도의 네트워크 프로세스에서 실행중인 타사 서비스와 얼마나 잘 통합되어 있는지 테스트할 수 있습니다.  &quot;이 메시지 헤더가 올바른 형식입니까?&quot;같은 상황을 테스트하는 가장 좋은 방법입니다.</p>
 <p>네트워크 대역폭을 제한하고, 네트워크 지연을 연출하고, 네트워크 오류를 생성하고, 통신 레이어를 mocking하는 등 유닛 테스트가 할 수 없는 많은 다른 조건을 테스트하는 통합 테스트 도구들이 많이 있습니다.</p>
 <p>통합 테스트없이 100% 케이스 커버리지를 달성하는 것은 불가능합니다.  100% 유닛 테스트 커버리지를 달성하더라도 이를 건너 뛰면 안됩니다. 100%가 100%가 아닙니다.</p>
-<p><a href="#"><strong>다음: 객체 합성이라는 숨겨진 보물 &gt;</strong></a></p>
+<p><a href="https://midojeong.github.io/2018/04/23/the-hidden-treasures-of-object-composition/"><strong>다음: 객체 합성이라는 숨겨진 보물 &gt;</strong></a></p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
@@ -496,7 +496,7 @@
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2018/04/18/javascript-monads-made-simple/" data-toggle="tooltip" data-placement="top" title="간단한 JavaScript 모나드">&larr; Previous Post</a>
+                            <a href="/2018/04/18/javascript-monads-made-simple/" data-toggle="tooltip" data-placement="top" title="JavaScript 모나드">&larr; Previous Post</a>
                         </li>
                     
                     
