@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>midojeong.github.io</loc>
+        <loc>tpgns.github.io</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/03/16/composing-software-intro/</loc>
+        <loc>tpgns.github.io/2018/03/16/composing-software-intro/</loc>
         <lastmod>2018-05-05T14:47:03.261Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -15,7 +15,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/28/composing-software-translation-epilogue/</loc>
+        <loc>tpgns.github.io/2018/04/28/composing-software-translation-epilogue/</loc>
         <lastmod>2018-04-28T14:33:26.680Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -23,7 +23,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/26/abstraction-and-composition/</loc>
+        <loc>tpgns.github.io/2018/04/26/abstraction-and-composition/</loc>
         <lastmod>2018-04-28T13:48:50.927Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -31,7 +31,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/23/the-hidden-treasures-of-object-composition/</loc>
+        <loc>tpgns.github.io/2018/04/23/the-hidden-treasures-of-object-composition/</loc>
         <lastmod>2018-04-28T13:48:50.915Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -39,7 +39,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/24/nested-ternaries-are-great/</loc>
+        <loc>tpgns.github.io/2018/04/24/nested-ternaries-are-great/</loc>
         <lastmod>2018-04-28T13:41:14.296Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -47,7 +47,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/19/mocking-is-a-code-smell/</loc>
+        <loc>tpgns.github.io/2018/04/19/mocking-is-a-code-smell/</loc>
         <lastmod>2018-04-28T13:40:06.787Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -55,7 +55,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/18/javascript-monads-made-simple/</loc>
+        <loc>tpgns.github.io/2018/04/18/javascript-monads-made-simple/</loc>
         <lastmod>2018-04-28T13:39:06.075Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -63,7 +63,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/14/composable-datatype-with-functions/</loc>
+        <loc>tpgns.github.io/2018/04/14/composable-datatype-with-functions/</loc>
         <lastmod>2018-04-28T13:38:21.487Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -71,7 +71,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/12/Why-Composition-is-Harder-with-Classes/</loc>
+        <loc>tpgns.github.io/2018/04/12/Why-Composition-is-Harder-with-Classes/</loc>
         <lastmod>2018-04-28T13:37:14.911Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -79,7 +79,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/08/javaScript-factory-function-with-es6/</loc>
+        <loc>tpgns.github.io/2018/04/08/javaScript-factory-function-with-es6/</loc>
         <lastmod>2018-04-28T13:36:38.694Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -87,7 +87,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/07/functional-mixins/</loc>
+        <loc>tpgns.github.io/2018/04/07/functional-mixins/</loc>
         <lastmod>2018-04-28T13:35:59.870Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -95,7 +95,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/04/07/functors-and-categories/</loc>
+        <loc>tpgns.github.io/2018/04/07/functors-and-categories/</loc>
         <lastmod>2018-04-28T13:35:13.634Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -103,7 +103,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/03/31/reduce/</loc>
+        <loc>tpgns.github.io/2018/03/31/reduce/</loc>
         <lastmod>2018-04-28T13:33:42.438Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -111,7 +111,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/</loc>
+        <loc>tpgns.github.io/2018/03/24/why-learn-functional-programming-in-javascript/</loc>
         <lastmod>2018-04-23T14:46:12.036Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -119,7 +119,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/03/29/higher-order-functions/</loc>
+        <loc>tpgns.github.io/2018/03/29/higher-order-functions/</loc>
         <lastmod>2018-04-06T10:37:13.043Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -127,7 +127,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/03/20/the-rise-and-fall-and-rise-of-functional-programming-composable-software/</loc>
+        <loc>tpgns.github.io/2018/03/20/the-rise-and-fall-and-rise-of-functional-programming-composable-software/</loc>
         <lastmod>2018-04-06T10:29:46.614Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>
@@ -135,7 +135,7 @@
     </url>
 
     <url>
-        <loc>midojeong.github.io/2018/03/28/a-functional-programmers-introduction-to-javascript/</loc>
+        <loc>tpgns.github.io/2018/03/28/a-functional-programmers-introduction-to-javascript/</loc>
         <lastmod>2018-04-06T09:33:13.338Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.6</priority>

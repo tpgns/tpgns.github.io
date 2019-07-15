@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="sitemap.xsl"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>midojeong.github.io</loc>
+        <loc>tpgns.github.io</loc>
         <changefreq>daily</changefreq>
         <priority>1</priority>
     </url>
     
     <url>
-        <loc>midojeong.github.io/tags/</loc>
+        <loc>tpgns.github.io/tags/</loc>
         <lastmod>2018-03-24T06:37:39.571Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>midojeong.github.io/about/</loc>
+        <loc>tpgns.github.io/about/</loc>
         <lastmod>2018-03-24T06:00:20.941Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>midojeong.github.io/404.html</loc>
+        <loc>tpgns.github.io/404.html</loc>
         <lastmod>2018-03-24T05:59:46.292Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
-        <loc>midojeong.github.io/archive/</loc>
+        <loc>tpgns.github.io/archive/</loc>
         <lastmod>2018-03-24T05:56:19.885Z</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.8</priority>

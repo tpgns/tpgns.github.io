@@ -18,7 +18,7 @@
         
     </title>
 
-    <link rel="canonical" href="midojeong.github.io/2018/04/07/functors-and-categories/">
+    <link rel="canonical" href="tpgns.github.io/2018/04/07/functors-and-categories/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -225,7 +225,7 @@
 <p><em>Smoke Art Cubes to Smoke — MattysFlicks — (CC BY 2.0)</em></p>
 <blockquote>
 <p>참고 : 이 글은 JavaScript ES6+의 함수형 프로그래밍 및 소프트웨어 합성 방법론을 기초부터 다루는 &quot;소프트웨어 합성&quot;시리즈의 일부 입니다.  앞으로 계속하여 연재될 것입니다.<br>
-<a href="https://midojeong.github.io/2018/03/31/reduce/">&lt;이전</a>  |  <a href="https://midojeong.github.io/2018/03/16/composing-software-intro/">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://midojeong.github.io/2018/04/07/functional-mixins/">다음&gt;</a></p>
+<a href="https://tpgns.github.io/2018/03/31/reduce/">&lt;이전</a>  |  <a href="https://tpgns.github.io/2018/03/16/composing-software-intro/">&lt;&lt; Part 1에서 다시 시작</a>  |  <a href="https://tpgns.github.io/2018/04/07/functional-mixins/">다음&gt;</a></p>
 </blockquote>
 <p><strong>Functor는</strong><sup class="footnote-ref"><a href="#fn1" id="fnref1">[1]</a></sup> 사용자가 맵핑 할 수있는 <strong>데이터 타입</strong>입니다.  내부의 값에 함수를 적용하는 인터페이스가 있는 <strong>컨테이너</strong>입니다.  functor를 발견하면  <em>“mappable”</em> 한 무언가라고 생각하면 됩니다. functor 타입은 일반적으로 객체처럼 구현되며 구조를 유지한채 입력에서 출력으로 맵핑하는  <code>.map()</code>  메소드를 가집니다.  이 때 &quot;구조 유지&quot;란 동일한 유형의 functor를 리턴한다는 것을 의미합니다 (컨테이너 내부의 값은 다른 유형 일 수 있음).</p>
 <p>functor는 무언가를 담을 수 있는 상자<sup>box</sup>와 맵핑<sup>mapping</sup> 인터페이스를 제공합니다.  배열<sup>Array</sup>은 functor의 좋은 예이며 promise, 스트림, 트리 등 다양한 종류의 객체 또한 <em>“mappable”</em> 한 것들입니다. JavaScript에 내장 된 배열 및 promise 객체는 functor처럼 작동합니다. 콜렉션(배열, 스트림 등)은 일반적으로  <code>.map()</code>을 사용해서 원소들을 순회하며 주어진 함수를 각 값에 적용하지만 모든 functor가 콜렉션처럼 순회하지는 않습니다. 사실 functor란 특정 문맥<sup>context</sup>에서 함수를 적용하는 것에 관한 개념입니다.</p>
@@ -318,7 +318,7 @@
 <p>Functor는 우리가 맵핑할 수 있는 것들 입니다. 형식적으로 말하자면, functor는 카테고리에서 카테고리로의 맵핑입니다.  어떤 functor는 카테고리에서 다시 같은 카테고리로 맵핑 될 수 있습니다. (<em>endofunctor</em>)</p>
 <p>카테고리는 객체의 집합이며 객체를 연결하는 화살표가 있습니다.  화살표는 morphisms(혹은 함수 또는 조합<sup class="footnote-ref"><a href="#fn7" id="fnref7">[7]</a></sup>)을 뜻합니다. 카테고리의 각 객체는 항등 morphism(<code>x =&gt; x</code>)을 가집니다.  <code>A -&gt; B -&gt; C</code>로 객체가 사상될 경우,  <code>A -&gt; C</code>로의 연결이 있어야합니다.</p>
 <p>functor는 모든 데이터 유형에서 작동하는 다양한 공용 함수를 만들 수있는 훌륭한 고차원 추상화입니다.</p>
-<p><a href="https://midojeong.github.io/2018/04/07/functional-mixins/"><strong>다음: 함수형 믹스인 &gt;</strong></a></p>
+<p><a href="https://tpgns.github.io/2018/04/07/functional-mixins/"><strong>다음: 함수형 믹스인 &gt;</strong></a></p>
 <hr class="footnotes-sep">
 <section class="footnotes">
 <ol class="footnotes-list">
@@ -332,7 +332,7 @@
 </li>
 <li id="fn5" class="footnote-item"><p>functor에 붙은 접두사 endo-는 &quot;inside, within, internal,&quot;라는 뜻을 가지고 있습니다. 즉, 닫힌계라고 생각하시면 됩니다. 엔도펑터라고 발음합니다. -역자 <a href="#fnref5" class="footnote-backref">↩</a></p>
 </li>
-<li id="fn6" class="footnote-item"><p>전 글 <a href="https://midojeong.github.io/2018/03/24/why-learn-functional-programming-in-javascript/">왜 자바스크립트로 함수형 프로그래밍을 배우는가</a>에 나옵니다 <a href="#fnref6" class="footnote-backref">↩</a></p>
+<li id="fn6" class="footnote-item"><p>전 글 <a href="https://tpgns.github.io/2018/03/24/why-learn-functional-programming-in-javascript/">왜 자바스크립트로 함수형 프로그래밍을 배우는가</a>에 나옵니다 <a href="#fnref6" class="footnote-backref">↩</a></p>
 </li>
 <li id="fn7" class="footnote-item"><p>composition을 여기서는 조합이라 번역했습니다 <a href="#fnref7" class="footnote-backref">↩</a></p>
 </li>
@@ -421,9 +421,9 @@
 <!-- disqus embedded js code start (one page only need to embed once) -->
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "midojeong";
-    var disqus_identifier = "midojeong.github.io/2018/04/07/functors-and-categories/";
-    var disqus_url = "midojeong.github.io/2018/04/07/functors-and-categories/";
+    var disqus_shortname = "tpgns";
+    var disqus_identifier = "tpgns.github.io/2018/04/07/functors-and-categories/";
+    var disqus_url = "tpgns.github.io/2018/04/07/functors-and-categories/";
 
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -489,7 +489,7 @@
 
                 
                     <li>
-                        <a target="_blank"  href="https://github.com/midojeong">
+                        <a target="_blank"  href="https://github.com/tpgns">
                             <span class="fa-stack fa-lg">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -559,7 +559,7 @@
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("midojeong.github.io/js/jquery.tagcloud.js",function(){
+        async("tpgns.github.io/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},
@@ -584,7 +584,7 @@
 <script>
     // dynamic User by Hux
     var _gaId = 'UA-116376595-1';
-    var _gaDomain = 'https://midojeong.github.io';
+    var _gaDomain = 'https://tpgns.github.io';
 
     // Originial
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
